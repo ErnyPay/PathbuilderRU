@@ -7,19 +7,18 @@ console.log(
 
 
 
-
-
 window.PathbuilderObserver = {
 
 
 
-    observer:null,
+    observer: null,
 
 
-    timer:null,
+    timer: null,
 
 
-    translating:false,
+    translating: false,
+
 
 
 
@@ -34,8 +33,6 @@ window.PathbuilderObserver = {
 
 
 
-
-
         if(this.observer){
 
             this.observer.disconnect();
@@ -47,51 +44,59 @@ window.PathbuilderObserver = {
 
 
 
-        this.observer =
-            new MutationObserver(
-                mutations=>{
-
-
-                    if(this.translating)
-                        return;
+        this.observer = new MutationObserver(
+            
+            mutations => {
 
 
 
-                    let hasChanges=false;
+                if(this.translating)
+                    return;
 
 
 
-                    for(
-                        const mutation of mutations
+
+                let hasChanges = false;
+
+
+
+
+                for(
+                    const mutation of mutations
+                ){
+
+
+
+                    if(
+                        mutation.addedNodes &&
+                        mutation.addedNodes.length > 0
                     ){
 
-
-                        if(
-                            mutation.addedNodes.length
-                        ){
-
-                            hasChanges=true;
-                            break;
-
-                        }
-
+                        hasChanges = true;
+                        break;
 
                     }
-
-
-
-
-
-                    if(hasChanges){
-
-                        this.schedule();
-
-                    }
-
 
 
                 }
-            );
+
+
+
+
+
+                if(hasChanges){
+
+                    this.schedule();
+
+                }
+
+
+
+            }
+
+        );
+
+
 
 
 
@@ -104,9 +109,9 @@ window.PathbuilderObserver = {
 
             {
 
-                childList:true,
+                childList: true,
 
-                subtree:true
+                subtree: true
 
             }
 
@@ -144,26 +149,29 @@ window.PathbuilderObserver = {
 
 
 
-        this.timer =
-            setTimeout(
-                ()=>{
 
 
-                    console.log(
-                        "[PathbuilderRU] Dynamic translation"
-                    );
+        this.timer = setTimeout(
+
+            () => {
 
 
-
-                    this.translate();
+                console.log(
+                    "[PathbuilderRU] Dynamic translation"
+                );
 
 
 
-                },
+                this.translate();
 
-                700
 
-            );
+
+            },
+
+
+            700
+
+        );
 
 
 
@@ -189,12 +197,16 @@ window.PathbuilderObserver = {
 
 
 
-        this.translating=true;
+
+
+        this.translating = true;
 
 
 
 
-        try{
+
+        try {
+
 
 
             if(
@@ -202,7 +214,9 @@ window.PathbuilderObserver = {
             ){
 
 
+
                 window.Translator.translatePage();
+
 
 
             }
@@ -211,13 +225,18 @@ window.PathbuilderObserver = {
 
         }
 
-        catch(e){
+        catch(error){
+
 
 
             console.error(
+
                 "[PathbuilderRU] Observer translate error",
-                e
+
+                error
+
             );
+
 
 
         }
@@ -226,7 +245,8 @@ window.PathbuilderObserver = {
 
 
 
-        this.translating=false;
+
+        this.translating = false;
 
 
 
@@ -239,7 +259,22 @@ window.PathbuilderObserver = {
 
 
 
+
+
+// совместимость с content.js
+
+window.Observer =
+    window.PathbuilderObserver;
+
+
+
+
+
+
 console.log(
+
     "[PathbuilderRU] observer object:",
+
     window.PathbuilderObserver
+
 );
