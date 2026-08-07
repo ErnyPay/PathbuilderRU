@@ -9,19 +9,37 @@ window.Dictionary = {
     ready:false,
 
 
-    files:[
-        "ui",
-        "classes",
-        "ancestries",
-        "heritages",
-        "backgrounds",
-        "feats",
-        "spells",
-        "items",
-        "traits",
-        "skills",
-        "actions",
-        "conditions"
+    const files = [
+
+    "ui",
+
+    "classes",
+
+    "ancestries",
+
+    "heritages",
+
+    "backgrounds",
+
+    "feats",
+
+    "feat_descriptions",
+
+    "spells",
+
+    "spell_descriptions",
+
+    "items",
+
+    "item_descriptions",
+
+    "traits",
+
+    "skills",
+
+    "actions",
+
+    "condition"
     ],
 
 
