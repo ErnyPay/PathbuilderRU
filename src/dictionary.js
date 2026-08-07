@@ -1,6 +1,5 @@
 'use strict';
 
-
 console.log(
     "[PathbuilderRU] dictionary.js loaded"
 );
@@ -12,11 +11,11 @@ window.Dictionary = {
 
     data:{},
 
-    phrases:{},
 
     loaded:false,
 
 
+    _translating:null,
 
 
 
@@ -32,35 +31,20 @@ window.Dictionary = {
         const files = [
 
             "ui",
-
             "classes",
-
             "ancestries",
-
             "heritages",
-
             "backgrounds",
-
             "feats",
-
             "feat_descriptions",
-
             "spells",
-
             "spell_descriptions",
-
             "items",
-
             "item_descriptions",
-
             "traits",
-
             "skills",
-
             "actions",
-
             "condition",
-
             "phrases"
 
         ];
@@ -70,8 +54,6 @@ window.Dictionary = {
 
 
         let total = 0;
-
-
 
 
 
@@ -99,19 +81,21 @@ window.Dictionary = {
 
 
 
+
                 const response =
                     await fetch(url);
 
 
 
-                if(
-                    !response.ok
-                ){
+
+                if(!response.ok){
 
                     console.warn(
                         "[Dictionary] Missing:",
                         file
                     );
+
+                    this.data[file] = {};
 
                     continue;
 
@@ -126,70 +110,46 @@ window.Dictionary = {
 
 
 
-
-                if(
-                    file === "phrases"
-                ){
-
-
-                    this.phrases =
-                        json;
-
-
-                    console.log(
-                        "[Dictionary] phrases",
-                        Object.keys(json).length
-                    );
-
-
-                }
-
-                else{
-
-
-                    this.data[file] =
-                        json;
-
-
-                    total +=
-                        Object.keys(json).length;
+                this.data[file] = json;
 
 
 
-                    console.log(
-                        "[Dictionary]",
-                        file,
-                        Object.keys(json).length,
-                        "entries"
-                    );
+                const count =
+                    Object.keys(json).length;
 
 
-                }
 
+                total += count;
+
+
+
+                console.log(
+                    "[Dictionary]",
+                    file,
+                    count,
+                    "entries"
+                );
 
 
 
             }
-
             catch(error){
 
 
                 console.error(
-
                     "[Dictionary] Error:",
                     file,
                     error
-
                 );
+
+
+                this.data[file] = {};
 
 
             }
 
 
-
         }
-
-
 
 
 
@@ -205,11 +165,9 @@ window.Dictionary = {
         );
 
 
-
         console.log(
             "[PathbuilderRU] Dictionary ready"
         );
-
 
 
     },
@@ -220,10 +178,7 @@ window.Dictionary = {
 
 
 
-
-
     translate(text){
-
 
 
         if(
@@ -233,164 +188,219 @@ window.Dictionary = {
 
 
 
-
-
-        let result =
-            text;
-
+        const original =
+            String(text).trim();
 
 
 
 
-        /*
-            1. точное совпадение
-        */
-
-
-
-        for(
-            const group in this.data
-        ){
-
-
-            let dict =
-                this.data[group];
-
-
-
-            if(
-                dict[result]
-            ){
-
-                return dict[result];
-
-            }
-
-
-        }
-
-
-
-
-
+        if(
+            !original
+        )
+            return text;
 
 
 
 
         /*
-            2. перевод фраз внутри текста
-        */
-
-
-
-        const phraseKeys =
-            Object.keys(
-                this.phrases
-            )
-            .sort(
-                (a,b)=>
-                b.length-a.length
-            );
-
-
-
-
-
-        for(
-            const phrase of phraseKeys
-        ){
-
-
-            if(
-                result.includes(
-                    phrase
-                )
-            ){
-
-
-                result =
-                    result.replaceAll(
-
-                        phrase,
-
-                        this.phrases[phrase]
-
-                    );
-
-
-            }
-
-
-        }
-
-
-
-
-
-
-
-
-
-        /*
-            3. перевод предложений
+            защита от бесконечного вызова
         */
 
 
         if(
-            result === text &&
-            text.length > 60
+            this._translating === original
         ){
 
-
-            const sentences =
-                text.split(
-                    /(?<=[.!?])\s+/
-                );
-
-
-
-            let translated = [];
-
-
-
-            for(
-                const sentence of sentences
-            ){
-
-
-                let s =
-                    this.translate(sentence);
-
-
-
-                translated.push(
-                    s
-                );
-
-
-            }
-
-
-
-            result =
-                translated.join(
-                    " "
-                );
-
+            return original;
 
         }
 
 
 
 
+        this._translating = original;
 
 
 
-        return result;
+        try{
+
+
+            const dictionaries = [
+
+
+                this.data.ui,
+
+
+                this.data.classes,
+
+
+                this.data.ancestries,
+
+
+                this.data.heritages,
+
+
+                this.data.backgrounds,
+
+
+                this.data.feats,
+
+
+                this.data.feat_descriptions,
+
+
+                this.data.spells,
+
+
+                this.data.spell_descriptions,
+
+
+                this.data.items,
+
+
+                this.data.item_descriptions,
+
+
+                this.data.traits,
+
+
+                this.data.skills,
+
+
+                this.data.actions,
+
+
+                this.data.condition,
+
+
+                this.data.phrases
+
+
+            ];
+
+
+
+
+
+
+            for(
+                const dict of dictionaries
+            ){
+
+
+
+                if(
+                    !dict
+                )
+                    continue;
+
+
+
+
+
+                if(
+                    Object.prototype.hasOwnProperty.call(
+                        dict,
+                        original
+                    )
+                ){
+
+
+
+                    return dict[original];
+
+
+
+                }
+
+
+
+            }
+
+
+
+
+
+
+            /*
+                поиск без учёта пробелов
+            */
+
+
+            const normalized =
+                original
+                .replace(/\s+/g," ")
+                .trim();
+
+
+
+
+
+            if(
+                normalized !== original
+            ){
+
+
+
+                for(
+                    const dict of dictionaries
+                ){
+
+
+                    if(
+                        !dict
+                    )
+                        continue;
+
+
+
+
+                    if(
+                        Object.prototype.hasOwnProperty.call(
+                            dict,
+                            normalized
+                        )
+                    ){
+
+
+                        return dict[normalized];
+
+
+                    }
+
+
+                }
+
+
+            }
+
+
+
+
+
+
+
+            return original;
+
+
+
+
+        }
+        finally{
+
+
+            this._translating = null;
+
+
+        }
 
 
 
     }
+
+
+
+
 
 
 
