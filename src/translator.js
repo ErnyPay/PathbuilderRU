@@ -1,7 +1,4 @@
-console.log(
-    "[PathbuilderRU] translator.js loaded"
-);
-
+console.log("[PathbuilderRU] translator.js loaded");
 
 
 const Translator = {
@@ -10,8 +7,7 @@ const Translator = {
     initialized:false,
 
 
-
-    async init(){
+    init(){
 
 
         this.initialized = true;
@@ -29,24 +25,35 @@ const Translator = {
     translateText(text){
 
 
-        if(!text)
-            return text;
+        if (!text) return text;
 
 
-
-        if(
-            window.PathbuilderDictionary &&
-            typeof window.PathbuilderDictionary.translate === "function"
+        if (
+            window.Dictionary &&
+            typeof window.Dictionary.translate === "function"
         ){
 
-            return window.PathbuilderDictionary.translate(text);
+            const result =
+                window.Dictionary.translate(text);
+
+
+            if(result && result !== text){
+
+                console.log(
+                    "[RU]",
+                    text,
+                    "→",
+                    result
+                );
+
+                return result;
+
+            }
 
         }
 
 
-
         return text;
-
 
     },
 
@@ -55,43 +62,63 @@ const Translator = {
     translateElement(element){
 
 
-        if (!element) return;
+        if(!element) return;
 
 
-        const walker = document.createTreeWalker(
-        element,
-        NodeFilter.SHOW_TEXT
-        );
+
+        const walker =
+            document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT
+            );
+
 
 
         const nodes = [];
 
 
-        while (walker.nextNode()) {
 
-        nodes.push(walker.currentNode);
+        while(walker.nextNode()){
+
+            nodes.push(
+                walker.currentNode
+            );
 
         }
 
 
 
-        for (const node of nodes) {
+        for(const node of nodes){
 
 
-        const text = node.nodeValue.trim();
+            let text =
+                node.nodeValue.trim();
 
 
-        if (!text) continue;
+
+            if(!text) continue;
 
 
-        if (text.length < 2) continue;
+
+            const translated =
+                this.translateText(text);
 
 
-        if (
-            node.parentElement &&
-            node.parentElement.dataset.ruTranslated === "true"
-        ) {
-            continue;
+
+            if(translated !== text){
+
+
+                node.nodeValue =
+                    node.nodeValue.replace(
+                        text,
+                        translated
+                    );
+
+
+            }
+
+
+        }
 
 
     },
@@ -106,24 +133,8 @@ const Translator = {
         );
 
 
-
-        document
-        .querySelectorAll("*")
-        .forEach(
-            element=>{
-
-
-                element.childNodes
-                .forEach(
-                    node=>{
-
-                        this.translateElement(node);
-
-                    }
-                );
-
-
-            }
+        this.translateElement(
+            document.body
         );
 
 
@@ -133,9 +144,6 @@ const Translator = {
 };
 
 
-
-// ГЛАВНОЕ
-// экспортируем именно так
 
 window.Translator = Translator;
 
