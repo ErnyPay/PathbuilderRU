@@ -9,20 +9,17 @@ console.log(
 
 
 
-window.Observer = {
+window.PathbuilderObserver = {
 
 
 
-    observer: null,
+    observer:null,
 
 
-    timer: null,
+    timer:null,
 
 
-    translating: false,
-
-
-
+    translating:false,
 
 
 
@@ -41,11 +38,7 @@ window.Observer = {
 
         if(this.observer){
 
-            console.warn(
-                "[PathbuilderRU] Observer already running"
-            );
-
-            return;
+            this.observer.disconnect();
 
         }
 
@@ -54,61 +47,51 @@ window.Observer = {
 
 
 
-        this.observer = new MutationObserver(
-            
-            mutations => {
+        this.observer =
+            new MutationObserver(
+                mutations=>{
+
+
+                    if(this.translating)
+                        return;
 
 
 
-                let hasChanges = false;
+                    let hasChanges=false;
 
 
 
-
-
-                mutations.forEach(
-                    mutation=>{
+                    for(
+                        const mutation of mutations
+                    ){
 
 
                         if(
                             mutation.addedNodes.length
                         ){
 
-                            hasChanges = true;
+                            hasChanges=true;
+                            break;
 
                         }
 
 
                     }
-                );
 
 
 
 
 
+                    if(hasChanges){
+
+                        this.schedule();
+
+                    }
 
 
-                if(!hasChanges){
-
-                    return;
 
                 }
-
-
-
-
-
-
-                this.schedule();
-
-
-
-
-            }
-
-        );
-
-
+            );
 
 
 
@@ -141,8 +124,8 @@ window.Observer = {
 
 
 
-
     },
+
 
 
 
@@ -161,18 +144,26 @@ window.Observer = {
 
 
 
+        this.timer =
+            setTimeout(
+                ()=>{
 
 
-        this.timer = setTimeout(()=>{
+                    console.log(
+                        "[PathbuilderRU] Dynamic translation"
+                    );
 
 
-            this.translate();
+
+                    this.translate();
 
 
 
-        },800);
+                },
 
+                700
 
+            );
 
 
 
@@ -185,44 +176,20 @@ window.Observer = {
 
 
 
+
     translate(){
 
 
 
-        if(this.translating){
-
-            return;
-
-        }
-
-
-
-
-
-
         if(
-            !window.Translator
-        ){
-
+            this.translating
+        )
             return;
 
-        }
 
 
 
-
-
-
-        this.translating = true;
-
-
-
-
-
-        console.log(
-            "[PathbuilderRU] Dynamic translation"
-        );
-
+        this.translating=true;
 
 
 
@@ -230,8 +197,15 @@ window.Observer = {
         try{
 
 
+            if(
+                window.Translator
+            ){
 
-            window.Translator.translatePage();
+
+                window.Translator.translatePage();
+
+
+            }
 
 
 
@@ -240,9 +214,8 @@ window.Observer = {
         catch(e){
 
 
-
             console.error(
-                "[PathbuilderRU] Translation error",
+                "[PathbuilderRU] Observer translate error",
                 e
             );
 
@@ -253,24 +226,11 @@ window.Observer = {
 
 
 
-
-        setTimeout(()=>{
-
-
-            this.translating = false;
-
-
-
-        },300);
-
-
+        this.translating=false;
 
 
 
     }
-
-
-
 
 
 
@@ -279,8 +239,7 @@ window.Observer = {
 
 
 
-
 console.log(
     "[PathbuilderRU] observer object:",
-    window.Observer
+    window.PathbuilderObserver
 );
