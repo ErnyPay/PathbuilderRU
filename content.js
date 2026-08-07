@@ -3,33 +3,59 @@ console.log(
 );
 
 
+
 (async()=>{
 
 
-    await window.PathbuilderDictionary.load();
+    try{
 
 
-    console.log(
-        "[PathbuilderRU] Dictionary loaded"
-    );
+        await window.PathbuilderDictionary.load();
 
 
-
-    window.translator.init();
-
-
-
-    window.translator.translatePage();
+        console.log(
+            "[PathbuilderRU] Dictionary loaded"
+        );
 
 
 
-    console.log(
-        "[PathbuilderRU] Initial translation complete"
-    );
+        await Translator.init();
 
 
 
-    window.observer.start();
+        console.log(
+            "[PathbuilderRU] Initial translation complete"
+        );
+
+
+
+        if(
+            window.PathbuilderObserver
+        ){
+
+            window.PathbuilderObserver.start();
+
+        }
+        else{
+
+            console.error(
+                "[PathbuilderRU] Observer missing"
+            );
+
+        }
+
+
+    }
+
+
+    catch(e){
+
+        console.error(
+            "[PathbuilderRU]",
+            e
+        );
+
+    }
 
 
 

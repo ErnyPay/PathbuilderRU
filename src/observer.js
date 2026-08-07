@@ -1,21 +1,24 @@
-console.log("[PathbuilderRU] observer.js loaded");
+console.log(
+    "[PathbuilderRU] observer.js loaded"
+);
 
 
-window.observer = {
+
+const PathbuilderObserver = {
 
 
     observer: null,
 
 
-    start() {
+
+    start(){
 
 
-        console.log(
-            "[PathbuilderRU] Starting MutationObserver"
-        );
+        if(this.observer){
 
-
-        if (this.observer) {
+            console.warn(
+                "[PathbuilderRU] Observer already running"
+            );
 
             return;
 
@@ -23,42 +26,58 @@ window.observer = {
 
 
 
+        console.log(
+            "[PathbuilderRU] Starting MutationObserver"
+        );
+
+
+
         this.observer =
         new MutationObserver(
-            mutations => {
+            (mutations)=>{
 
 
-                console.log(
-                    "[PathbuilderRU] Dynamic translation"
-                );
+                let changed = false;
 
 
-                mutations.forEach(
-                    mutation => {
+
+                for(const mutation of mutations){
 
 
-                        mutation.addedNodes.forEach(
-                            node => {
+                    if(
+                        mutation.addedNodes.length > 0
+                    ){
 
-
-                                if (
-                                    node.nodeType === Node.ELEMENT_NODE
-                                ) {
-
-
-                                    window.translator
-                                    .translateElement(node);
-
-
-                                }
-
-
-                            }
-                        );
-
+                        changed = true;
+                        break;
 
                     }
-                );
+
+
+                }
+
+
+
+                if(changed){
+
+
+                    console.log(
+                        "[PathbuilderRU] Dynamic translation"
+                    );
+
+
+
+                    if(
+                        window.Translator &&
+                        typeof window.Translator.translatePage === "function"
+                    ){
+
+                        window.Translator.translatePage();
+
+                    }
+
+
+                }
 
 
             }
@@ -67,11 +86,17 @@ window.observer = {
 
 
         this.observer.observe(
+
             document.body,
+
             {
+
                 childList:true,
+
                 subtree:true
+
             }
+
         );
 
 
@@ -84,10 +109,10 @@ window.observer = {
     }
 
 
+
 };
 
 
-console.log(
-    "[PathbuilderRU] observer object:",
-    window.observer
-);
+
+window.PathbuilderObserver =
+PathbuilderObserver;

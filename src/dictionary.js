@@ -1,6 +1,12 @@
+console.log("[PathbuilderRU] dictionary.js loaded");
+
+
 class Dictionary {
+
     constructor() {
+
         this.dictionary = {};
+
         this.files = [
             "ui.json",
             "classes.json",
@@ -15,16 +21,24 @@ class Dictionary {
             "actions.json",
             "conditions.json"
         ];
+
     }
+
 
 
     async load() {
 
-        let total = 0;
+
+        console.log(
+            "[Dictionary] Start loading"
+        );
+
 
         for (const file of this.files) {
 
+
             try {
+
 
                 console.log(
                     "[Dictionary] Loading:",
@@ -33,42 +47,55 @@ class Dictionary {
 
 
                 const url =
-                    chrome.runtime.getURL(
-                        "dictionaries/" + file
-                    );
+                    new URL(
+                        chrome.runtime.getURL(
+                            "dictionaries/" + file
+                        )
+                    ).href;
+
 
 
                 const response =
                     await fetch(url);
 
 
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "HTTP " + response.status
+                    );
+
+                }
+
+
+
                 const data =
                     await response.json();
+
 
 
                 let count = 0;
 
 
-                for (const [key,value] of Object.entries(data)) {
 
-                    if (!this.dictionary[key]) {
-
-                        this.dictionary[key] = value;
-                        count++;
-                    }
-
-                    else {
-
-                        console.warn(
-                            "[Dictionary] Duplicate:",
-                            key
-                        );
-
-                    }
-                }
+                Object.entries(data)
+                    .forEach(
+                        ([key,value])=>{
 
 
-                total += count;
+                            if(
+                                !this.dictionary[key]
+                            ){
+
+                                this.dictionary[key]=value;
+                                count++;
+
+                            }
+
+                        }
+                    );
+
 
 
                 console.log(
@@ -79,9 +106,12 @@ class Dictionary {
                 );
 
 
+
             }
 
-            catch(error) {
+
+            catch(error){
+
 
                 console.error(
                     "[Dictionary] Failed:",
@@ -89,35 +119,50 @@ class Dictionary {
                     error
                 );
 
+
             }
+
         }
+
 
 
         console.log(
             "[Dictionary] TOTAL:",
-            Object.keys(this.dictionary).length
+            Object.keys(
+                this.dictionary
+            ).length
         );
 
 
+
         return this.dictionary;
+
     }
 
 
 
-    translate(text) {
 
-        if (!text)
+    translate(text){
+
+
+        if(!text)
             return text;
 
 
-        return this.dictionary[text]
-            || text;
+
+        return (
+            this.dictionary[text]
+            ||
+            text
+        );
 
     }
+
 
 }
 
 
 
+
 window.PathbuilderDictionary =
-    new Dictionary();
+new Dictionary();
