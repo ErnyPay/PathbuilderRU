@@ -1,5 +1,6 @@
 'use strict';
 
+
 console.log(
     "[PathbuilderRU] dictionary.js loaded"
 );
@@ -9,17 +10,28 @@ console.log(
 window.Dictionary = {
 
 
-    data:{},
+    entries: {},
 
+    loaded: false,
 
-    loaded:false,
-
-
-    _translating:null,
+    loading: false,
 
 
 
     async load(){
+
+
+        if(this.loaded){
+            return;
+        }
+
+
+        if(this.loading){
+            return;
+        }
+
+
+        this.loading = true;
 
 
         console.log(
@@ -30,30 +42,47 @@ window.Dictionary = {
 
         const files = [
 
+
             "ui",
+
             "classes",
+
             "ancestries",
+
             "heritages",
+
             "backgrounds",
+
             "feats",
+
             "feat_descriptions",
+
             "spells",
+
             "spell_descriptions",
+
             "items",
+
             "item_descriptions",
+
             "traits",
+
             "skills",
+
             "actions",
+
             "condition",
+
             "phrases"
+
 
         ];
 
 
 
 
-
         let total = 0;
+
 
 
 
@@ -72,19 +101,15 @@ window.Dictionary = {
 
 
 
-                const url =
+                let url =
                     chrome.runtime.getURL(
-                        "dictionaries/" +
-                        file +
-                        ".json"
+                        "dictionaries/" + file + ".json"
                     );
 
 
 
-
-                const response =
+                let response =
                     await fetch(url);
-
 
 
 
@@ -95,8 +120,6 @@ window.Dictionary = {
                         file
                     );
 
-                    this.data[file] = {};
-
                     continue;
 
                 }
@@ -104,18 +127,79 @@ window.Dictionary = {
 
 
 
-                const json =
+                let json =
                     await response.json();
 
 
 
 
-                this.data[file] = json;
+                let count = 0;
 
 
 
-                const count =
-                    Object.keys(json).length;
+
+                for(
+                    const key in json
+                ){
+
+
+                    let value =
+                        json[key];
+
+
+
+                    /*
+                        Поддержка:
+
+                        {
+                          "en":"",
+                          "ru":""
+                        }
+
+                    */
+
+
+                    if(
+                        typeof value === "object" &&
+                        value !== null
+                    ){
+
+
+                        if(value.ru){
+
+
+                            this.entries[key.trim()]
+                                =
+                            value.ru;
+
+
+                            count++;
+
+                        }
+
+
+                    }
+
+
+
+                    else if(
+                        typeof value === "string"
+                    ){
+
+
+                        this.entries[key.trim()]
+                            =
+                        value;
+
+
+                        count++;
+
+                    }
+
+
+
+                }
+
 
 
 
@@ -124,29 +208,32 @@ window.Dictionary = {
 
 
                 console.log(
+
                     "[Dictionary]",
                     file,
                     count,
                     "entries"
+
                 );
 
 
 
             }
+
             catch(error){
 
 
                 console.error(
+
                     "[Dictionary] Error:",
                     file,
                     error
+
                 );
 
 
-                this.data[file] = {};
-
-
             }
+
 
 
         }
@@ -155,14 +242,20 @@ window.Dictionary = {
 
 
 
+
         this.loaded = true;
+
+        this.loading = false;
 
 
 
         console.log(
+
             "[Dictionary] TOTAL:",
             total
+
         );
+
 
 
         console.log(
@@ -178,229 +271,218 @@ window.Dictionary = {
 
 
 
+
+
     translate(text){
+
 
 
         if(
             !text
-        )
+        ){
+
             return text;
 
+        }
 
 
-        const original =
-            String(text).trim();
+
+        let clean =
+            text.trim();
 
 
 
 
         if(
-            !original
-        )
+            !clean
+        ){
+
             return text;
+
+        }
+
+
+
 
 
 
 
         /*
-            защита от бесконечного вызова
+            1.
+            Точное совпадение
         */
 
 
         if(
-            this._translating === original
+            this.entries.hasOwnProperty(clean)
         ){
 
-            return original;
+            return this.entries[clean];
 
         }
 
 
 
 
-        this._translating = original;
 
 
 
-        try{
 
 
-            const dictionaries = [
+        /*
+            2.
+            По предложениям
+        */
 
 
-                this.data.ui,
+        if(
+            clean.length > 80
+        ){
 
 
-                this.data.classes,
 
-
-                this.data.ancestries,
-
-
-                this.data.heritages,
-
-
-                this.data.backgrounds,
-
-
-                this.data.feats,
-
-
-                this.data.feat_descriptions,
-
-
-                this.data.spells,
-
-
-                this.data.spell_descriptions,
-
-
-                this.data.items,
-
-
-                this.data.item_descriptions,
-
-
-                this.data.traits,
-
-
-                this.data.skills,
-
-
-                this.data.actions,
-
-
-                this.data.condition,
-
-
-                this.data.phrases
-
-
-            ];
-
-
-
-
-
-
-            for(
-                const dict of dictionaries
-            ){
-
-
-
-                if(
-                    !dict
-                )
-                    continue;
-
-
-
-
-
-                if(
-                    Object.prototype.hasOwnProperty.call(
-                        dict,
-                        original
-                    )
-                ){
-
-
-
-                    return dict[original];
-
-
-
-                }
-
-
-
-            }
-
-
-
-
-
-
-            /*
-                поиск без учёта пробелов
-            */
-
-
-            const normalized =
-                original
-                .replace(/\s+/g," ")
-                .trim();
-
+            let sentences =
+                clean.match(
+                    /[^.!?]+[.!?]+/g
+                );
 
 
 
 
             if(
-                normalized !== original
+                sentences &&
+                sentences.length > 1
             ){
 
 
 
-                for(
-                    const dict of dictionaries
+                let result =
+                    sentences.map(
+                        sentence => {
+
+
+                            let s =
+                                sentence.trim();
+
+
+
+                            return (
+                                this.entries[s]
+                                ||
+                                s
+                            );
+
+
+                        }
+                    )
+                    .join(" ");
+
+
+
+
+
+                if(
+                    result !== clean
                 ){
 
-
-                    if(
-                        !dict
-                    )
-                        continue;
-
-
-
-
-                    if(
-                        Object.prototype.hasOwnProperty.call(
-                            dict,
-                            normalized
-                        )
-                    ){
-
-
-                        return dict[normalized];
-
-
-                    }
-
+                    return result;
 
                 }
+
 
 
             }
 
 
 
+        }
 
 
 
 
-            return original;
 
 
+
+
+
+        /*
+            3.
+            Перевод отдельных строк
+        */
+
+
+        if(
+            clean.includes("\n")
+        ){
+
+
+            let lines =
+                clean.split("\n");
+
+
+
+            let result =
+                lines.map(
+                    line =>
+                    this.translateLine(line)
+                )
+                .join("\n");
+
+
+
+            return result;
 
 
         }
-        finally{
 
 
-            this._translating = null;
 
+
+
+
+
+        return clean;
+
+
+
+    },
+
+
+
+
+
+
+
+
+
+    translateLine(line){
+
+
+        let clean =
+            line.trim();
+
+
+
+        if(
+            !clean
+        ){
+
+            return line;
 
         }
+
+
+
+
+        return (
+            this.entries[clean]
+            ||
+            clean
+        );
 
 
 
     }
-
-
-
-
 
 
 
