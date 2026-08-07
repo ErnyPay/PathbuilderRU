@@ -7,20 +7,46 @@ console.log(
 
 
 
+
+
 window.Dictionary = {
 
 
 
-    dictionaries:{},
+    data:{},
 
 
-    loaded:false,
-
-
+    initialized:false,
 
 
 
-    async load(files){
+    files:[
+
+        "ui",
+        "classes",
+        "ancestries",
+        "heritages",
+        "backgrounds",
+        "feats",
+        "feat_descriptions",
+        "spells",
+        "spell_descriptions",
+        "items",
+        "item_descriptions",
+        "traits",
+        "skills",
+        "actions",
+        "condition"
+
+    ],
+
+
+
+
+
+
+
+    async load(){
 
 
         console.log(
@@ -31,8 +57,9 @@ window.Dictionary = {
 
 
         for(
-            const file of files
+            const file of this.files
         ){
+
 
 
             try{
@@ -45,21 +72,20 @@ window.Dictionary = {
 
 
 
-                const url =
-                    chrome.runtime.getURL(
-                        "dictionaries/" + file + ".json"
+                const response =
+                    await fetch(
+                        chrome.runtime.getURL(
+                            "dictionaries/" + file + ".json"
+                        )
                     );
 
-
-
-                const response =
-                    await fetch(url);
 
 
 
                 if(
                     !response.ok
                 ){
+
 
                     console.warn(
                         "[Dictionary] Missing:",
@@ -80,8 +106,8 @@ window.Dictionary = {
 
 
 
-                this.dictionaries[file] =
-                    json;
+
+                this.data[file]=json;
 
 
 
@@ -95,7 +121,9 @@ window.Dictionary = {
 
 
 
+
             }
+
             catch(e){
 
 
@@ -109,6 +137,7 @@ window.Dictionary = {
             }
 
 
+
         }
 
 
@@ -117,23 +146,19 @@ window.Dictionary = {
 
 
 
-        this.loaded = true;
-
-
-
-
-        let total = 0;
-
+        let total=0;
 
 
         Object.values(
-            this.dictionaries
-        ).forEach(d=>{
+            this.data
+        ).forEach(dict=>{
 
-            total += Object.keys(d).length;
+
+            total +=
+                Object.keys(dict).length;
+
 
         });
-
 
 
 
@@ -145,10 +170,14 @@ window.Dictionary = {
 
 
 
+
+        this.initialized=true;
+
+
+
         console.log(
             "[PathbuilderRU] Dictionary ready"
         );
-
 
 
 
@@ -165,120 +194,15 @@ window.Dictionary = {
     translate(text){
 
 
-
         if(
             !text
-        ){
-
+        )
             return text;
-
-        }
-
-
-
-
-
-
-
-        // специальные исправления PF2e
-
-
-        const overrides = {
-
-
-
-            "Exemplar":
-                "Избранник",
-
-
-
-            "Feat":
-                "Черта",
-
-
-
-            "Feats":
-                "Черты",
-
-
-
-            "Heritage":
-                "Наследие",
-
-
-
-            "Ancestry":
-                "Родословие",
-
-
-
-            "Background":
-                "Предыстория",
-
-
-
-            "Class":
-                "Класс",
-
-
-
-            "Level":
-                "Уровень",
-
-
-
-            "Skill":
-                "Навык",
-
-
-
-            "General":
-                "Общий",
-
-
-
-            "Ward Medic":
-                "Палатный медик",
-
-
-
-            "Battle Medicine":
-                "Боевая медицина",
-
-
-
-            "Quick Recognition":
-                "Быстрое распознавание"
-
-
-
-        };
-
-
-
-
-
-
-
-
-        if(
-            overrides[text]
-        ){
-
-            return overrides[text];
-
-        }
-
-
-
-
 
 
 
         for(
-            const dict of Object.values(
-                this.dictionaries
-            )
+            const dict of Object.values(this.data)
         ){
 
 
@@ -286,6 +210,7 @@ window.Dictionary = {
             if(
                 dict[text]
             ){
+
 
                 return dict[text];
 
@@ -297,9 +222,7 @@ window.Dictionary = {
 
 
 
-
         return text;
-
 
 
     }
