@@ -1,1 +1,92 @@
-{}
+{
+  "Blinded": "Ослеплён",
+  "Broken": "Сломан",
+
+  "Clumsy": "Неуклюжий",
+  "Concealed": "Скрытый",
+  "Confused": "Сбит с толку",
+
+  "Controlled": "Под контролем",
+
+  "Dazzled": "Ослеплённый",
+
+  "Doomed": "Обречён",
+
+  "Drained": "Истощён",
+
+  "Dying": "При смерти",
+
+  "Encumbered": "Перегружен",
+
+  "Enfeebled": "Ослаблен",
+
+  "Fascinated": "Заворожён",
+
+  "Fatigued": "Утомлён",
+
+  "Frightened": "Испуган",
+
+  "Grabbed": "Схвачен",
+
+  "Hidden": "Скрыт",
+
+  "Immobilized": "Обездвижен",
+
+  "Invisible": "Невидим",
+
+  "Observed": "Замечен",
+
+  "Off-Guard": "Открыт",
+
+  "Paralyzed": "Парализован",
+
+  "Persistent Damage": "Продолжающийся урон",
+
+  "Petrified": "Окаменевший",
+
+  "Prone": "Сбит с ног",
+
+  "Quickened": "Ускорен",
+
+  "Restrained": "Сдерживаем",
+
+  "Sickened": "Отравлен",
+
+  "Slowed": "Замедлен",
+
+  "Stunned": "Оглушён",
+
+  "Stupefied": "Ошеломлён",
+
+  "Unconscious": "Без сознания",
+
+  "Wounded": "Ранен",
+
+  "Doomed 1": "Обречён 1",
+  "Doomed 2": "Обречён 2",
+  "Doomed 3": "Обречён 3",
+
+  "Frightened 1": "Испуган 1",
+  "Frightened 2": "Испуган 2",
+  "Frightened 3": "Испуган 3",
+
+  "Clumsy 1": "Неуклюжий 1",
+  "Clumsy 2": "Неуклюжий 2",
+  "Clumsy 3": "Неуклюжий 3",
+
+  "Enfeebled 1": "Ослаблен 1",
+  "Enfeebled 2": "Ослаблен 2",
+  "Enfeebled 3": "Ослаблен 3",
+
+  "Sickened 1": "Отравлен 1",
+  "Sickened 2": "Отравлен 2",
+  "Sickened 3": "Отравлен 3",
+
+  "Stunned 1": "Оглушён 1",
+  "Stunned 2": "Оглушён 2",
+  "Stunned 3": "Оглушён 3",
+
+  "Slowed 1": "Замедлен 1",
+  "Slowed 2": "Замедлен 2",
+  "Slowed 3": "Замедлен 3"
+}

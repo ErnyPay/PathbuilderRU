@@ -1,1 +1,69 @@
-{}
+{
+  "Strike": "Удар",
+
+  "Stride": "Перемещение",
+  "Step": "Шаг",
+  "Leap": "Прыжок",
+  "Stand": "Встать",
+  "Crawl": "Ползти",
+  "Climb": "Лезть",
+  "Swim": "Плыть",
+
+  "Raise a Shield": "Поднять щит",
+  "Take Cover": "Укрыться",
+
+  "Cast a Spell": "Наложить заклинание",
+  "Sustain a Spell": "Поддерживать заклинание",
+  "Dismiss": "Отменить",
+
+  "Interact": "Взаимодействовать",
+  "Release": "Отпустить",
+  "Seek": "Искать",
+  "Ready": "Подготовиться",
+
+  "Aid": "Помочь",
+  "Delay": "Задержка",
+  "Point Out": "Указать",
+
+  "Escape": "Освободиться",
+  "Grapple": "Захватить",
+  "Shove": "Толкнуть",
+  "Trip": "Подсечь",
+  "Disarm": "Обезоружить",
+
+  "Demoralize": "Деморализовать",
+  "Bon Mot": "Остроумная реплика",
+  "Feint": "Финт",
+
+  "Recall Knowledge": "Вспомнить знания",
+  "Identify Magic": "Определить магию",
+  "Identify Alchemy": "Определить алхимию",
+
+  "Treat Wounds": "Обработать раны",
+  "Battle Medicine": "Боевая медицина",
+
+  "Repair": "Ремонт",
+
+  "Refocus": "Восстановить фокус",
+
+  "Affix a Talisman": "Прикрепить талисман",
+
+  "Draw an Item": "Достать предмет",
+  "Swap": "Сменить предмет",
+
+  "Reload": "Перезарядить",
+
+  "Interact with an Object": "Взаимодействовать с объектом",
+
+  "Command an Animal": "Приказать животному",
+
+  "Escape Artist": "Мастер побега",
+
+  "Sense Motive": "Оценить намерения",
+
+  "Search": "Поиск",
+
+  "Avoid Notice": "Избегать внимания",
+
+  "Follow the Expert": "Следовать за экспертом"
+}

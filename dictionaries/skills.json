@@ -1,1 +1,39 @@
-{}
+{
+  "Acrobatics": "Акробатика",
+  "Arcana": "Магия",
+  "Athletics": "Атлетика",
+  "Crafting": "Ремесло",
+  "Deception": "Обман",
+  "Diplomacy": "Дипломатия",
+  "Intimidation": "Запугивание",
+  "Medicine": "Медицина",
+  "Nature": "Природа",
+  "Occultism": "Оккультизм",
+  "Performance": "Выступление",
+  "Religion": "Религия",
+  "Society": "Общество",
+  "Stealth": "Скрытность",
+  "Survival": "Выживание",
+  "Thievery": "Воровство",
+
+  "Lore": "Знания",
+
+  "Alcohol Lore": "Знания алкоголя",
+  "Architecture Lore": "Знания архитектуры",
+  "Battlefield Lore": "Знания поля боя",
+  "Engineering Lore": "Инженерные знания",
+  "Farming Lore": "Знания фермерства",
+  "Legal Lore": "Знания права",
+  "Mercantile Lore": "Торговые знания",
+  "Military Lore": "Военные знания",
+  "Nobility Lore": "Знания знати",
+  "Sailing Lore": "Морские знания",
+  "Underworld Lore": "Знания преступного мира",
+  "Warfare Lore": "Знания войны",
+
+  "Untrained": "Нет подготовки",
+  "Trained": "Обучен",
+  "Expert": "Эксперт",
+  "Master": "Мастер",
+  "Legendary": "Легендарный"
+}
