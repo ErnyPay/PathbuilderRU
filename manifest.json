@@ -14,7 +14,7 @@
         "src/dictionary.js",
         "src/translator.js",
         "src/observer.js",
-        "src/extractor.js",
+        "src/missing.js",
         "content.js"
       ],
       "run_at": "document_idle"
