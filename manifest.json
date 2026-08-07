@@ -11,7 +11,12 @@
         "https://www.pathbuilder2e.com/*"
       ],
       "js": [
-        "content.js"
+    "src/cache.js",
+    "src/dictionary.js",
+    "src/translator.js",
+    "src/observer.js",
+    "content.js"
+]
       ],
       "run_at": "document_idle"
     }

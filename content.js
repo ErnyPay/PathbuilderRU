@@ -2,27 +2,14 @@
 
 (async () => {
 
-    const response = await fetch(
-        chrome.runtime.getURL('dictionaries/ui.json')
-    );
+    console.log("[PathbuilderRU] Starting...");
 
-    const dictionary = await response.json();
+    await Dictionary.load();
 
-    const walker = document.createTreeWalker(
-        document.body,
-        NodeFilter.SHOW_TEXT
-    );
+    Translator.translateNode(document.body);
 
-    while (walker.nextNode()) {
+    Observer.start();
 
-        const text = walker.currentNode.nodeValue.trim();
-
-        if (text.length > 0) {
-
-            console.log(text);
-
-        }
-
-    }
+    console.log("[PathbuilderRU] Ready");
 
 })();

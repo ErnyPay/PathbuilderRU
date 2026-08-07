@@ -1,22 +1,29 @@
 {
-  "Strength": "Сила",
-  "Dexterity": "Ловкость",
-  "Constitution": "Телосложение",
-  "Intelligence": "Интеллект",
-  "Wisdom": "Мудрость",
-  "Charisma": "Харизма",
+    "Character":"Персонаж",
+    "Character Options":"Параметры персонажа",
+    "New Character":"Новый персонаж",
+    "Save Character":"Сохранить персонажа",
+    "Open Character":"Открыть персонажа",
+    "Connect":"Подключение",
+    "Connect to GM":"Подключиться к Мастеру",
+    "Launch GM Mode":"Режим Мастера",
 
-  "Inventory": "Инвентарь",
-  "Actions": "Действия",
-  "Equipment": "Снаряжение",
-  "Spells": "Заклинания",
-  "Skills": "Навыки",
-  "Languages": "Языки",
-  "Class": "Класс",
-  "Level": "Уровень",
+    "Export":"Экспорт",
+    "Export JSON":"Экспорт JSON",
+    "Character Sheet PDF":"Лист персонажа PDF",
+    "Stat Block PDF":"Статблок PDF",
 
-  "Character": "Персонаж",
-  "Save": "Сохранить",
-  "Cancel": "Отмена",
-  "Close": "Закрыть"
+    "Campaign Management":"Управление кампанией",
+    "Feat Browser":"Браузер фитов",
+
+    "Help":"Помощь",
+    "Licenses":"Лицензии",
+    "Patch Notes":"История изменений",
+    "Report Error":"Сообщить об ошибке",
+
+    "Menu":"Меню",
+    "Loading Data":"Загрузка данных",
+    "Save":"Сохранить",
+    "Cancel":"Отмена",
+    "Close":"Закрыть"
 }
