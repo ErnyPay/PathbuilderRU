@@ -4,11 +4,12 @@ console.log("[PathbuilderRU] observer.js loaded");
 const Observer = {
 
     observer: null,
-
     timer: null,
+    translating: false,
 
 
     start() {
+
 
         console.log("[PathbuilderRU] Starting MutationObserver");
 
@@ -18,7 +19,13 @@ const Observer = {
         }
 
 
-        this.observer = new MutationObserver((mutations) => {
+
+        this.observer = new MutationObserver((mutations)=>{
+
+
+            if (this.translating) {
+                return;
+            }
 
 
             let changed = false;
@@ -26,21 +33,32 @@ const Observer = {
 
             for (const mutation of mutations) {
 
-                if (mutation.addedNodes.length > 0) {
+
+                if (
+                    mutation.addedNodes &&
+                    mutation.addedNodes.length
+                ) {
+
                     changed = true;
                     break;
+
                 }
 
             }
 
 
-            if (!changed) return;
+
+            if (!changed) {
+                return;
+            }
+
 
 
             clearTimeout(this.timer);
 
 
-            this.timer = setTimeout(() => {
+
+            this.timer = setTimeout(async ()=>{
 
 
                 if (
@@ -48,17 +66,44 @@ const Observer = {
                     typeof window.Translator.translatePage === "function"
                 ) {
 
+
                     console.log(
                         "[PathbuilderRU] Dynamic translation"
                     );
 
 
-                    window.Translator.translatePage();
+                    this.translating = true;
+
+
+                    try {
+
+
+                        await window.Translator.translatePage();
+
+
+                    }
+                    catch(e){
+
+                        console.error(
+                            "[PathbuilderRU] Translation error",
+                            e
+                        );
+
+                    }
+
+
+                    setTimeout(()=>{
+
+                        this.translating = false;
+
+                    },500);
+
 
                 }
 
 
-            }, 700);
+            },1000);
+
 
 
         });
@@ -74,11 +119,16 @@ const Observer = {
         );
 
 
-        console.log("[PathbuilderRU] Observer active");
+        console.log(
+            "[PathbuilderRU] Observer active"
+        );
+
 
     }
 
+
 };
+
 
 
 window.Observer = Observer;
