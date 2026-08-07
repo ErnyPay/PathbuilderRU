@@ -1,0 +1,64 @@
+{
+  "manifest_version": 3,
+
+  "name": "Pathbuilder 2e RU",
+
+  "short_name": "PBRU",
+
+  "description": "Русификатор Pathbuilder 2e",
+
+  "version": "0.1.0",
+
+  "minimum_chrome_version": "114",
+
+  "permissions": [
+    "storage"
+  ],
+
+  "host_permissions": [
+    "https://pathbuilder2e.com/*",
+    "https://www.pathbuilder2e.com/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Pathbuilder RU"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pathbuilder2e.com/*",
+        "https://www.pathbuilder2e.com/*"
+      ],
+
+      "js": [
+        "src/utils.js",
+        "src/cache.js",
+        "src/dictionary.js",
+        "src/translator.js",
+        "src/observer.js",
+        "content.js"
+      ],
+
+      "run_at": "document_idle"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "dictionaries/*.json"
+      ],
+
+      "matches": [
+        "https://pathbuilder2e.com/*",
+        "https://www.pathbuilder2e.com/*"
+      ]
+    }
+  ]
+}

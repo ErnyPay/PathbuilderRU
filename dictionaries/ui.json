@@ -1,0 +1,23 @@
+{
+    "Strength":"Сила",
+    "Dexterity":"Ловкость",
+    "Constitution":"Телосложение",
+    "Intelligence":"Интеллект",
+    "Wisdom":"Мудрость",
+    "Charisma":"Харизма",
+
+    "Inventory":"Инвентарь",
+    "Actions":"Действия",
+    "Equipment":"Снаряжение",
+    "Spells":"Заклинания",
+
+    "Level":"Уровень",
+    "Class":"Класс",
+
+    "Skills":"Навыки",
+    "Languages":"Языки",
+
+    "Hit Points":"Очки здоровья",
+
+    "Speed":"Скорость"
+}
