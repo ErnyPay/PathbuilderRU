@@ -1,7 +1,8 @@
 'use strict';
 
+
 console.log(
-    "[PathbuilderRU] observer.js loaded"
+"[PathbuilderRU] observer.js loaded"
 );
 
 
@@ -17,15 +18,12 @@ window.PathbuilderObserver = {
 
 
 
-
-
     start(){
 
 
         console.log(
             "[PathbuilderRU] Starting MutationObserver"
         );
-
 
 
         if(this.observer){
@@ -36,12 +34,10 @@ window.PathbuilderObserver = {
 
 
 
-
-
-
-        this.observer = new MutationObserver(
-
-            mutations => {
+        this.observer =
+        new MutationObserver(
+            
+            mutations=>{
 
 
                 if(this.translating)
@@ -49,66 +45,24 @@ window.PathbuilderObserver = {
 
 
 
-                let changed = false;
+                let changed=false;
 
 
 
                 for(
-                    const mutation of mutations
+                    let mutation of mutations
                 ){
 
-
-
-                    /*
-                        новые элементы
-                    */
-
                     if(
-                        mutation.addedNodes &&
                         mutation.addedNodes.length
                     ){
 
-                        changed = true;
+                        changed=true;
                         break;
 
                     }
-
-
-
-                    /*
-                        React меняет текст внутри узла
-                    */
-
-                    if(
-                        mutation.type === "characterData"
-                    ){
-
-                        changed = true;
-                        break;
-
-                    }
-
-
-
-
-                    /*
-                        React меняет атрибуты
-                    */
-
-                    if(
-                        mutation.type === "attributes"
-                    ){
-
-                        changed = true;
-                        break;
-
-                    }
-
-
 
                 }
-
-
 
 
 
@@ -119,13 +73,9 @@ window.PathbuilderObserver = {
                 }
 
 
-
             }
 
         );
-
-
-
 
 
 
@@ -135,42 +85,11 @@ window.PathbuilderObserver = {
             document.body,
 
             {
-
-
                 childList:true,
-
-
-                subtree:true,
-
-
-                characterData:true,
-
-
-                attributes:true,
-
-
-                attributeFilter:[
-
-                    "title",
-
-                    "aria-label",
-
-                    "data-tooltip",
-
-                    "data-content",
-
-                    "class"
-
-                ]
-
-
+                subtree:true
             }
 
         );
-
-
-
-
 
 
 
@@ -179,13 +98,7 @@ window.PathbuilderObserver = {
         );
 
 
-
     },
-
-
-
-
-
 
 
 
@@ -193,35 +106,19 @@ window.PathbuilderObserver = {
     schedule(){
 
 
-
         clearTimeout(
             this.timer
         );
 
 
+        this.timer =
+        setTimeout(()=>{
 
 
-
-        this.timer = setTimeout(
-
-            ()=>{
+            this.translate();
 
 
-                console.log(
-                    "[PathbuilderRU] Dynamic translation"
-                );
-
-
-
-                this.translate();
-
-
-
-            },
-
-            500
-
-        );
+        },800);
 
 
 
@@ -230,56 +127,37 @@ window.PathbuilderObserver = {
 
 
 
-
-
-
-
-
     translate(){
 
 
-
-        if(
-            this.translating
-        )
+        if(this.translating)
             return;
 
 
 
-
-
-        this.translating = true;
-
-
+        this.translating=true;
 
 
         try{
 
 
             if(
-                window.Translator
+                window.PathbuilderRUTranslator
             ){
 
-
-                window.Translator.translatePage();
-
+                window.PathbuilderRUTranslator
+                .translatePage();
 
             }
 
 
-
         }
-
-        catch(error){
-
+        catch(e){
 
 
             console.error(
-
-                "[PathbuilderRU] Observer translate error",
-
-                error
-
+                "[PathbuilderRU] Observer error",
+                e
             );
 
 
@@ -287,25 +165,13 @@ window.PathbuilderObserver = {
 
 
 
-
-
-
-        this.translating = false;
-
+        this.translating=false;
 
 
     }
 
 
-
-
-
-
-
 };
-
-
-
 
 
 
@@ -314,11 +180,6 @@ window.PathbuilderObserver;
 
 
 
-
 console.log(
-
-    "[PathbuilderRU] observer object:",
-
-    window.PathbuilderObserver
-
+"[PathbuilderRU] observer ready"
 );
