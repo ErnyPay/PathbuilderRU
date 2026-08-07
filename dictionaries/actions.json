@@ -65,5 +65,126 @@
 
   "Avoid Notice": "Избегать внимания",
 
-  "Follow the Expert": "Следовать за экспертом"
+  "Follow the Expert": "Следовать за экспертом",
+  "Strike": "Удар",
+
+  "Stride": "Перемещение",
+
+  "Step": "Шаг",
+
+  "Leap": "Прыжок",
+
+  "High Jump": "Высокий прыжок",
+
+  "Long Jump": "Дальний прыжок",
+
+  "Climb": "Лазание",
+
+  "Swim": "Плавание",
+
+  "Fly": "Полет",
+
+  "Seek": "Поиск",
+
+  "Sense Motive": "Оценить намерения",
+
+  "Recall Knowledge": "Вспомнить знания",
+
+  "Identify Magic": "Определить магию",
+
+  "Decipher Writing": "Расшифровать текст",
+
+  "Aid": "Помощь",
+
+  "Delay": "Задержка",
+
+  "Ready": "Подготовка",
+
+  "Interact": "Взаимодействие",
+
+  "Release": "Освободить",
+
+  "Drop Prone": "Упасть ничком",
+
+  "Stand": "Встать",
+
+  "Escape": "Освободиться",
+
+  "Disarm": "Разоружить",
+
+  "Grapple": "Захватить",
+
+  "Shove": "Толкнуть",
+
+  "Trip": "Подсечь",
+
+  "Demoralize": "Запугать",
+
+  "Bon Mot": "Остроумная реплика",
+
+  "Feint": "Финт",
+
+  "Create a Diversion": "Создать отвлечение",
+
+  "Hide": "Спрятаться",
+
+  "Sneak": "Прокрасться",
+
+  "Avoid Notice": "Избегать внимания",
+
+  "Sense": "Чувство",
+
+  "Raise a Shield": "Поднять щит",
+
+  "Take Cover": "Найти укрытие",
+
+  "Point Out": "Указать",
+
+  "Administer First Aid": "Оказать первую помощь",
+
+  "Treat Wounds": "Обработать раны",
+
+  "Treat Disease": "Лечить болезнь",
+
+  "Treat Poison": "Лечить яд",
+
+  "Battle Medicine": "Боевая медицина",
+
+  "Cast a Spell": "Наложить заклинание",
+
+  "Sustain a Spell": "Поддерживать заклинание",
+
+  "Dismiss": "Отменить",
+
+  "Counteract": "Противодействие",
+
+  "Affix a Talisman": "Закрепить талисман",
+
+  "Activate an Item": "Активировать предмет",
+
+  "Craft": "Создать",
+
+  "Repair": "Починить",
+
+  "Earn Income": "Получить доход",
+
+  "Subsist": "Выживание",
+
+  "Gather Information": "Собрать информацию",
+
+  "Perform": "Выступить",
+
+  "Request": "Попросить",
+
+  "Coerce": "Принудить",
+
+  "Lie": "Солгать",
+
+  "Make an Impression": "Произвести впечатление",
+
+  "Make a Distraction": "Создать отвлечение",
+
+  "Follow an Expert": "Следовать за экспертом",
+
+  "Investigate": "Исследовать"
 }

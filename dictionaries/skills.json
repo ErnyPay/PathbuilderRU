@@ -35,5 +35,57 @@
   "Trained": "Обучен",
   "Expert": "Эксперт",
   "Master": "Мастер",
-  "Legendary": "Легендарный"
+  "Legendary": "Легендарный",
+  "Academia Lore": "Академические знания",
+
+  "Art Lore": "Знания искусства",
+
+  "Bargain Lore": "Знания торговли",
+
+  "Cave Lore": "Знания пещер",
+
+  "Engineering Lore": "Инженерные знания",
+
+  "Farming Lore": "Знания фермерства",
+
+  "Games Lore": "Знания игр",
+
+  "Genealogy Lore": "Генеалогические знания",
+
+  "Gladiatorial Lore": "Гладиаторские знания",
+
+  "Herbalism Lore": "Знания травничества",
+
+  "Legal Lore": "Юридические знания",
+
+  "Mercantile Lore": "Торговые знания",
+
+  "Military Lore": "Военные знания",
+
+  "Mining Lore": "Горные знания",
+
+  "Nautical Lore": "Морские знания",
+
+  "Piloting Lore": "Знания пилотирования",
+
+  "Sailing Lore": "Знания мореплавания",
+
+  "Underworld Lore": "Знания преступного мира",
+
+  "Warfare Lore": "Знания войны",
+
+  "Architecture Lore": "Знания архитектуры",
+
+  "Cooking Lore": "Кулинарные знания",
+
+  "Dragon Lore": "Знания драконов",
+
+  "Demon Lore": "Знания демонов",
+
+  "Undead Lore": "Знания нежити",
+
+  "Plant Lore": "Знания растений",
+
+  "Beast Lore": "Знания зверей"
+
 }

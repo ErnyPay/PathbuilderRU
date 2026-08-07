@@ -1,1 +1,511 @@
-{}
+{
+  "Longsword": "Длинный меч",
+
+  "Shortsword": "Короткий меч",
+
+  "Greatsword": "Двуручный меч",
+
+  "Bastard Sword": "Бастардный меч",
+
+  "Dagger": "Кинжал",
+
+  "Rapier": "Рапира",
+
+  "Scimitar": "Скимитар",
+
+  "Falchion": "Фальшион",
+
+  "Battle Axe": "Боевой топор",
+
+  "Greataxe": "Большой топор",
+
+  "Hatchet": "Топорик",
+
+  "Handaxe": "Ручной топор",
+
+  "Warhammer": "Боевой молот",
+
+  "Maul": "Кувалда",
+
+  "Morningstar": "Моргенштерн",
+
+  "Flail": "Цеп",
+
+  "Glaive": "Глефа",
+
+  "Halberd": "Алебарда",
+
+  "Spear": "Копьё",
+
+  "Longspear": "Длинное копьё",
+
+  "Trident": "Трезубец",
+
+  "Club": "Дубинка",
+
+  "Greatclub": "Большая дубинка",
+
+  "Mace": "Булава",
+
+  "Pick": "Кирка",
+
+  "Light Pick": "Лёгкая кирка",
+
+  "Heavy Pick": "Тяжёлая кирка",
+
+  "Sickle": "Серп",
+
+  "Staff": "Посох",
+
+  "Shield": "Щит",
+
+  "Buckler": "Баклер",
+
+  "Tower Shield": "Башенный щит",
+
+  "Crossbow": "Арбалет",
+
+  "Hand Crossbow": "Ручной арбалет",
+
+  "Shortbow": "Короткий лук",
+
+  "Longbow": "Длинный лук",
+
+  "Composite Shortbow": "Композитный короткий лук",
+
+  "Composite Longbow": "Композитный длинный лук",
+
+  "Blowgun": "Духовая трубка",
+
+  "Sling": "Праща",
+
+  "Pistol": "Пистолет",
+
+  "Arquebus": "Аркебуза",
+
+  "Musket": "Мушкет",
+
+  "Dueling Pistol": "Дуэльный пистолет",
+
+  "Firearm": "Огнестрельное оружие",
+
+  "Adventurer's Pack": "Набор путешественника",
+
+  "Backpack": "Рюкзак",
+
+  "Bedroll": "Спальный мешок",
+
+  "Rope": "Верёвка",
+
+  "Torch": "Факел",
+
+  "Lantern": "Фонарь",
+
+  "Flint and Steel": "Огниво",
+
+  "Crowbar": "Лом",
+
+  "Grappling Hook": "Крюк-кошка",
+
+  "Climbing Kit": "Набор для лазания",
+
+  "Repair Kit": "Ремонтный набор",
+  "Alchemist's Fire": "Алхимический огонь",
+
+  "Acid Flask": "Кислотная колба",
+
+  "Bottled Lightning": "Молния в бутылке",
+
+  "Frost Vial": "Морозный флакон",
+
+  "Thunderstone": "Громовой камень",
+
+  "Tanglefoot Bag": "Мешок липкой жидкости",
+
+  "Dread Ampoule": "Ампула ужаса",
+
+  "Crystal Shards": "Кристальные осколки",
+
+  "Peshpine Grenade": "Граната из пешпина",
+
+  "Redpitch Bomb": "Красная смоляная бомба",
+
+  "Blight Bomb": "Бомба порчи",
+
+  "Bane Ammunition": "Поражающие боеприпасы",
+
+  "Ghost Charge": "Призрачный заряд",
+
+  "Necrotic Bomb": "Некротическая бомба",
+
+  "Bloat Bomb": "Раздувающая бомба",
+
+  "Alignment Ampoule": "Ампула мировоззрения",
+
+  "Demon Mask": "Маска демона",
+
+  "Elixir of Life": "Эликсир жизни",
+
+  "Elixir of Rejuvenation": "Эликсир омоложения",
+
+  "Elixir of Vision": "Эликсир зрения",
+
+  "Elixir of Flying": "Эликсир полёта",
+
+  "Elixir of Swimming": "Эликсир плавания",
+
+  "Elixir of Quickness": "Эликсир быстроты",
+
+  "Antidote": "Противоядие",
+
+  "Antiplague": "Противочумное средство",
+
+  "Antidote (Greater)": "Великое противоядие",
+
+  "Antiplague (Greater)": "Великое противочумное средство",
+
+  "Drakeheart Mutagen": "Мутаген драконьего сердца",
+
+  "Juggernaut Mutagen": "Мутаген неукротимости",
+
+  "Quicksilver Mutagen": "Мутаген ртути",
+
+  "Cognitive Mutagen": "Когнитивный мутаген",
+
+  "Energy Mutagen": "Энергетический мутаген",
+
+  "Fury Cocktail": "Коктейль ярости",
+
+  "Bestial Mutagen": "Звериный мутаген",
+
+  "Silvertongue Mutagen": "Мутаген серебряного языка",
+
+  "Sinew-Shock Serum": "Сыворотка мышечного шока",
+
+  "War Blood Mutagen": "Боевой кровавый мутаген",
+
+  "Mistform Elixir": "Эликсир туманной формы",
+
+  "Darkvision Elixir": "Эликсир тёмного зрения",
+
+  "Potion of Healing": "Зелье лечения",
+
+  "Potion of Flying": "Зелье полёта",
+
+  "Potion of Invisibility": "Зелье невидимости",
+
+  "Potion of Water Breathing": "Зелье дыхания водой",
+
+  "Potion of Leaping": "Зелье прыжка",
+
+  "Potion of Expeditious Retreat": "Зелье быстрого отступления",
+  "+1 Weapon Potency Rune": "+1 руна мощи оружия",
+
+  "+2 Weapon Potency Rune": "+2 руна мощи оружия",
+
+  "+3 Weapon Potency Rune": "+3 руна мощи оружия",
+
+  "+1 Striking Rune": "+1 руна удара",
+
+  "Striking Rune": "Руна удара",
+
+  "Greater Striking Rune": "Великая руна удара",
+
+  "Major Striking Rune": "Высшая руна удара",
+
+  "Greater Weapon Potency Rune": "Великая руна мощи оружия",
+
+  "Major Weapon Potency Rune": "Высшая руна мощи оружия",
+
+  "Flaming Rune": "Огненная руна",
+
+  "Greater Flaming Rune": "Великая огненная руна",
+
+  "Frost Rune": "Ледяная руна",
+
+  "Greater Frost Rune": "Великая ледяная руна",
+
+  "Shock Rune": "Электрическая руна",
+
+  "Greater Shock Rune": "Великая электрическая руна",
+
+  "Thundering Rune": "Громовая руна",
+
+  "Greater Thundering Rune": "Великая громовая руна",
+
+  "Corrosive Rune": "Кислотная руна",
+
+  "Greater Corrosive Rune": "Великая кислотная руна",
+
+  "Holy Rune": "Святая руна",
+
+  "Unholy Rune": "Нечестивая руна",
+
+  "Anarchic Rune": "Анархическая руна",
+
+  "Axiomatic Rune": "Аксиоматическая руна",
+
+  "Disrupting Rune": "Разрушающая руна",
+
+  "Speed Rune": "Руна скорости",
+
+  "Keen Rune": "Острая руна",
+
+  "Wounding Rune": "Руна ранения",
+
+  "Greater Wounding Rune": "Великая руна ранения",
+
+  "Vorpal Rune": "Руна отсечения",
+
+  "Brilliant Rune": "Блистательная руна",
+
+  "Dancing Rune": "Танцующая руна",
+
+  "Spellstriker Rune": "Руна заклинательного удара",
+
+  "Shadow Rune": "Теневая руна",
+
+  "Ghost Touch Rune": "Руна касания призрака",
+
+  "Anchoring Rune": "Якорная руна",
+
+  "Bane Rune": "Руна уничтожения",
+
+  "Fearsome Rune": "Устрашающая руна",
+
+  "Fortification Rune": "Руна укрепления",
+
+  "Resilient Rune": "Руна стойкости",
+
+  "Greater Resilient Rune": "Великая руна стойкости",
+
+  "Major Resilient Rune": "Высшая руна стойкости",
+
+  "Energy-Resistant Rune": "Руна сопротивления энергии",
+
+  "Invisibility Rune": "Руна невидимости",
+
+  "Glamered Rune": "Руна изменения вида",
+
+  "Shadow Armor Rune": "Руна теневой брони",
+
+  "Ready Armor Rune": "Руна готовой брони",
+
+  "Stanching Rune": "Руна остановки крови",
+   "Wand": "Жезл",
+
+  "Staff": "Посох",
+
+  "Scroll": "Свиток",
+
+  "Spellbook": "Книга заклинаний",
+
+  "Bag of Holding": "Сумка хранения",
+
+  "Portable Hole": "Переносная дыра",
+
+  "Decanter of Endless Water": "Графин бесконечной воды",
+
+  "Aeon Stone": "Камень эона",
+
+  "Dust of Disappearance": "Пыль исчезновения",
+
+  "Dust of Appearance": "Пыль обнаружения",
+
+  "Handy Haversack": "Удобный ранец",
+
+  "Broom of Flying": "Метла полёта",
+
+  "Boots of Speed": "Сапоги скорости",
+
+  "Boots of Bounding": "Сапоги прыжков",
+
+  "Boots of Elvenkind": "Сапоги эльфийского народа",
+
+  "Cloak of Elvenkind": "Плащ эльфийского народа",
+
+  "Cloak of Resistance": "Плащ сопротивления",
+
+  "Ring of Protection": "Кольцо защиты",
+
+  "Ring of Wizardry": "Кольцо магии",
+
+  "Ring of Energy Resistance": "Кольцо сопротивления энергии",
+
+  "Ring of the Ram": "Кольцо тарана",
+
+  "Bracers of Armor": "Наручи брони",
+
+  "Gloves of Storing": "Перчатки хранения",
+
+  "Gloves of Dexterity": "Перчатки ловкости",
+
+  "Belt of Giant Strength": "Пояс силы великана",
+
+  "Belt of Physical Might": "Пояс физического могущества",
+
+  "Headband of Intellect": "Повязка интеллекта",
+
+  "Headband of Inspired Wisdom": "Повязка вдохновенной мудрости",
+
+  "Circlet of Persuasion": "Диадема убеждения",
+
+  "Goggles of Night": "Очки ночного зрения",
+
+  "Eyes of the Eagle": "Глаза орла",
+
+  "Mask of the Banshee": "Маска банши",
+
+  "Phylactery": "Филактерия",
+
+  "Holy Symbol": "Святой символ",
+
+  "Religious Text": "Религиозный текст",
+
+  "Alchemist's Goggles": "Очки алхимика",
+
+  "Choker of Elocution": "Ошейник красноречия",
+
+  "Dancing Scarf": "Танцующий шарф",
+
+  "Cape of the Mountebank": "Накидка шарлатана",
+
+  "Hat of Disguise": "Шляпа маскировки",
+
+  "Hat of the Magi": "Шляпа мага",
+
+  "Greater Hat of the Magi": "Великая шляпа мага",
+
+  "Staff of Fire": "Посох огня",
+
+  "Staff of Healing": "Посох исцеления",
+
+  "Staff of Power": "Посох силы",
+
+  "Staff of Divination": "Посох прорицания",
+
+  "Staff of Necromancy": "Посох некромантии",
+
+  "Staff of Enchantment": "Посох очарования",
+
+  "Staff of Transmutation": "Посох трансмутации",
+
+  "Wand of Fireball": "Жезл огненного шара",
+
+  "Wand of Haste": "Жезл ускорения",
+
+  "Wand of Invisibility": "Жезл невидимости",
+
+  "Wand of Heal": "Жезл исцеления",
+
+  "Wand of Fear": "Жезл страха",
+
+  "Manual of Gainful Exercise": "Руководство физических упражнений",
+
+  "Tome of Clear Thought": "Том ясной мысли",
+
+  "Tome of Understanding": "Том понимания",
+
+  "Apex Item": "Предельный предмет",
+  "Explorer's Clothing": "Одежда исследователя",
+
+  "Mage Armor": "Магическая броня",
+
+  "Leather Armor": "Кожаная броня",
+
+  "Studded Leather Armor": "Шипованная кожаная броня",
+
+  "Hide Armor": "Шкуры",
+
+  "Chain Shirt": "Кольчужная рубаха",
+
+  "Chain Mail": "Кольчуга",
+
+  "Breastplate": "Кираса",
+
+  "Scale Mail": "Чешуйчатый доспех",
+
+  "Splint Mail": "Пластинчатый доспех",
+
+  "Half Plate": "Полулаты",
+
+  "Full Plate": "Полный латный доспех",
+
+  "Plate Armor": "Латный доспех",
+
+  "Padded Armor": "Стёганая броня",
+
+  "Wooden Shield": "Деревянный щит",
+
+  "Steel Shield": "Стальной щит",
+
+  "Tower Shield": "Башенный щит",
+
+  "Buckler": "Баклер",
+
+  "Shield Boss": "Навершие щита",
+
+  "Shield Spikes": "Шипы щита",
+
+  "Reinforcing Rune": "Укрепляющая руна",
+
+  "Fortification Rune": "Руна укрепления",
+
+  "Energy Resistant Rune": "Руна сопротивления энергии",
+
+  "Shadow Rune": "Теневая руна брони",
+
+  "Glamered Rune": "Руна изменения вида",
+
+  "Ready Rune": "Руна готовности",
+
+  "Slick Rune": "Скользящая руна",
+
+  "Bane Rune": "Руна уничтожения",
+
+  "Dread Rune": "Ужасающая руна",
+
+  "Immovable Rune": "Неподвижная руна",
+
+  "Quenching Rune": "Закаляющая руна",
+
+  "Spellguard Shield": "Щит защиты от заклинаний",
+
+  "Sturdy Shield": "Прочный щит",
+
+  "Sturdy Shield (Greater)": "Великий прочный щит",
+
+  "Sturdy Shield (Major)": "Высший прочный щит",
+
+  "Dueling Cape": "Дуэльный плащ",
+
+  "Gloves of Swimming and Climbing": "Перчатки плавания и лазания",
+
+  "Ring of Climbing": "Кольцо лазания",
+
+  "Ring of Jumping": "Кольцо прыжков",
+
+  "Boots of Bounding": "Сапоги прыжков",
+
+  "Boots of Elvenkind": "Сапоги эльфийского народа",
+
+  "Cloak of the Bat": "Плащ летучей мыши",
+
+  "Cloak of the Manta": "Плащ манты",
+
+  "Mantle of the Magi": "Мантия мага",
+
+  "Robe of the Archmagi": "Мантия архимага",
+
+  "Vestments of Faith": "Облачение веры",
+
+  "Explorer's Clothing (Greater)": "Улучшенная одежда исследователя",
+
+  "Druid's Vestments": "Одеяние друида",
+
+  "Sorcerer's Robe": "Мантия чародея",
+
+  "Wizard's Robe": "Мантия волшебника",
+
+  "Witch's Familiar Satchel": "Сумка фамильяра ведьмы"
+}

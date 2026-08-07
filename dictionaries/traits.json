@@ -116,5 +116,137 @@
   "Incapacitation": "Выведение из строя",
   "Death": "Смерть",
   "Healing": "Исцеление",
-  "Teleportation": "Телепортация"
+  "Teleportation": "Телепортация",
+   "Agile": "Проворное",
+
+  "Finesse": "Точное",
+
+  "Deadly": "Смертельное",
+
+  "Fatal": "Фатальное",
+
+  "Reach": "Досягаемость",
+
+  "Versatile": "Универсальное",
+
+  "Sweep": "Размах",
+
+  "Trip": "Подсечка",
+
+  "Disarm": "Разоружение",
+
+  "Shove": "Толчок",
+
+  "Grapple": "Захват",
+
+  "Parry": "Парирование",
+
+  "Twin": "Парное",
+
+  "Forceful": "Мощное",
+
+  "Backstabber": "Удар в спину",
+
+  "Backswing": "Замах",
+
+  "Thrown": "Метательное",
+
+  "Propulsive": "Толкающее",
+
+  "Volley": "Залповое",
+
+  "Brutal": "Жестокое",
+
+  "Attached": "Прикреплённое",
+
+  "Free-Hand": "Свободная рука",
+
+  "Two-Hand": "Двуручное",
+
+  "Unarmed": "Безоружное",
+
+  "Monk": "Монах",
+
+  "Magical": "Магическое",
+
+  "Alchemical": "Алхимическое",
+
+  "Bomb": "Бомба",
+
+  "Fire": "Огонь",
+
+  "Cold": "Холод",
+
+  "Electricity": "Электричество",
+
+  "Acid": "Кислота",
+
+  "Poison": "Яд",
+
+  "Mental": "Ментальное",
+
+  "Emotion": "Эмоция",
+
+  "Fear": "Страх",
+
+  "Auditory": "Слуховое",
+
+  "Visual": "Зрительное",
+
+  "Incapacitation": "Выводящее из строя",
+
+  "Concentrate": "Концентрация",
+
+  "Manipulate": "Манипуляция",
+
+  "Flourish": "Расцвет",
+
+  "Open": "Открытие",
+
+  "Press": "Нажатие",
+
+  "Stance": "Стойка",
+
+  "Metamagic": "Метамагия",
+
+  "Sustain": "Поддержание",
+
+  "Secret": "Тайное",
+
+  "Exploration": "Исследование",
+
+  "Rare": "Редкое",
+
+  "Uncommon": "Необычное",
+
+  "Common": "Обычное",
+
+  "Unique": "Уникальное",
+
+  "Artifact": "Артефакт",
+
+  "Cursed": "Проклятое",
+
+  "Invested": "Настроенное",
+
+  "Summon": "Призыв",
+
+  "Teleportation": "Телепортация",
+
+  "Illusion": "Иллюзия",
+
+  "Necromancy": "Некромантия",
+
+  "Transmutation": "Трансмутация",
+
+  "Evocation": "Воплощение",
+
+  "Abjuration": "Ограждение",
+
+  "Conjuration": "Призыв",
+
+  "Divination": "Прорицание",
+
+  "Enchantment": "Очарование"
+
 }
