@@ -7,52 +7,71 @@ console.log(
 (async()=>{
 
 
-    try{
+try{
 
 
-        await window.PathbuilderDictionary.load();
-
-
-        console.log(
-            "[PathbuilderRU] Dictionary loaded"
-        );
+    await window.PathbuilderDictionary.load();
 
 
 
-        await window.translator.init();
+    console.log(
+        "[PathbuilderRU] Dictionary loaded"
+    );
 
 
 
-        console.log(
-            "[PathbuilderRU] Initial translation complete"
-        );
+    await window.Translator.init();
 
 
 
-        window.translator.translatePage();
+    console.log(
+        "[PathbuilderRU] Translator initialized"
+    );
 
 
 
-        if(
-            window.PathbuilderObserver
-        ){
+    window.Translator.translatePage();
 
-            window.PathbuilderObserver.start();
 
-        }
 
+    console.log(
+        "[PathbuilderRU] Initial translation complete"
+    );
+
+
+
+    if(
+        window.PathbuilderObserver
+    ){
+
+        window.PathbuilderObserver.start();
 
     }
+    else{
 
-
-    catch(e){
 
         console.error(
-            "[PathbuilderRU]",
-            e
+            "[PathbuilderRU] Observer not found"
         );
 
+
     }
+
+
+
+}
+
+
+catch(error){
+
+
+    console.error(
+        "[PathbuilderRU]",
+        error
+    );
+
+
+}
 
 
 

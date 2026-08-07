@@ -1,16 +1,17 @@
-console.log("[PathbuilderRU] translator.js loaded");
+console.log(
+    "[PathbuilderRU] translator.js loaded"
+);
 
 
-window.PathbuilderTranslator = {
 
-    initialized: false,
+const Translator = {
 
 
-    init() {
+    initialized:false,
 
-        if (this.initialized) {
-            return;
-        }
+
+
+    async init(){
 
 
         this.initialized = true;
@@ -21,119 +22,134 @@ window.PathbuilderTranslator = {
         );
 
 
-        this.translatePage();
+    },
+
+
+
+    translateText(text){
+
+
+        if(!text)
+            return text;
+
+
+
+        if(
+            window.PathbuilderDictionary &&
+            typeof window.PathbuilderDictionary.translate === "function"
+        ){
+
+            return window.PathbuilderDictionary.translate(text);
+
+        }
+
+
+
+        return text;
+
 
     },
 
 
-    translatePage() {
 
-        if (!window.PathbuilderDictionary) {
+    translateElement(element){
 
-            console.warn(
-                "[PathbuilderRU] Dictionary unavailable"
-            );
+
+        if(
+            !element ||
+            element.nodeType !== Node.TEXT_NODE
+        ){
 
             return;
+
         }
 
 
-        const walker =
-            document.createTreeWalker(
-                document.body,
-                NodeFilter.SHOW_TEXT,
-                {
-                    acceptNode(node) {
 
-                        if (!node.nodeValue.trim()) {
-
-                            return NodeFilter.FILTER_REJECT;
-
-                        }
+        let oldText =
+            element.textContent.trim();
 
 
-                        return NodeFilter.FILTER_ACCEPT;
 
-                    }
-                }
+        if(!oldText)
+            return;
+
+
+
+        let newText =
+            this.translateText(oldText);
+
+
+
+        if(
+            newText !== oldText
+        ){
+
+            element.textContent =
+                element.textContent.replace(
+                    oldText,
+                    newText
+                );
+
+
+            console.log(
+                "[RU]",
+                oldText,
+                "→",
+                newText
             );
 
-
-        const nodes = [];
-
-
-        let node;
-
-
-        while (node = walker.nextNode()) {
-
-            nodes.push(node);
-
         }
 
 
-
-        for (const textNode of nodes) {
-
-
-            const original =
-                textNode.nodeValue;
-
-
-            const clean =
-                original.trim();
+    },
 
 
 
-            if (!clean) {
-                continue;
-            }
+    translatePage(){
+
+
+        console.log(
+            "[PathbuilderRU] Translating page"
+        );
 
 
 
-            const translated =
-                window.PathbuilderDictionary.translate(
-                    clean
+        document
+        .querySelectorAll("*")
+        .forEach(
+            element=>{
+
+
+                element.childNodes
+                .forEach(
+                    node=>{
+
+                        this.translateElement(node);
+
+                    }
                 );
 
 
-
-            if (
-                translated &&
-                translated !== clean
-            ) {
-
-
-                textNode.nodeValue =
-                    original.replace(
-                        clean,
-                        translated
-                    );
-
-
-                console.log(
-                    "[RU]",
-                    clean,
-                    "→",
-                    translated
-                );
-
             }
-
-        }
+        );
 
 
     }
+
 
 };
 
 
 
+// ГЛАВНОЕ
+// экспортируем именно так
+
+window.Translator = Translator;
+
+
+
 console.log(
     "[PathbuilderRU] translator object:",
-    window.PathbuilderTranslator
+    window.Translator
 );
-window.PathbuilderTranslator = translator;
-
-
-console.log("[PathbuilderRU] translator object:", window.PathbuilderTranslator);
