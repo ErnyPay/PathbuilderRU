@@ -9,6 +9,9 @@
     Translator.translateNode(document.body);
 
     Observer.start();
+    Extractor.scan();
+
+window.Extractor = Extractor;
 
     console.log("[PathbuilderRU] Ready");
 
