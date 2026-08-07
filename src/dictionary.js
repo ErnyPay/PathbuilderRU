@@ -1,157 +1,293 @@
-'use strict';
-
-console.log('[PathbuilderRU] dictionary.js loaded');
+console.log("[PathbuilderRU] dictionary.js loaded");
 
 
-const Dictionary = {
+window.Dictionary = {
+
 
     dictionaries: {},
 
-    files: [
-        'ui',
-        'classes',
-        'ancestries',
-        'heritages',
-        'backgrounds',
-        'feats',
-        'feat_descriptions',
-        'spells',
-        'spell_descriptions',
-        'items',
-        'item_descriptions',
-        'traits',
-        'skills',
-        'actions',
-        'condition'
-    ],
+
+    loaded: false,
 
 
-    async load() {
 
-        console.log('[Dictionary] Start loading');
-
-
-        for (const file of this.files) {
-
-            try {
-
-                console.log('[Dictionary] Loading:', file);
+    async load(name) {
 
 
-                const response = await fetch(
+        console.log(
+            "[Dictionary] Loading:",
+            name
+        );
+
+
+
+        try {
+
+
+            const response =
+                await fetch(
                     chrome.runtime.getURL(
-                        `dictionaries/${file}.json`
+                        "dictionaries/" + name + ".json"
                     )
                 );
 
 
-                if (!response.ok) {
-                    throw new Error(
-                        `HTTP ${response.status}`
-                    );
-                }
 
+            if (!response.ok) {
 
-                const json = await response.json();
-
-
-                this.dictionaries[file] = json;
-
-
-                console.log(
-                    '[Dictionary]',
-                    file,
-                    Object.keys(json).length,
-                    'entries'
-                );
-
-
-            } catch (e) {
 
                 console.warn(
-                    '[Dictionary] Failed:',
-                    file,
-                    e
+                    "[Dictionary] Missing:",
+                    name
                 );
 
 
-                this.dictionaries[file] = {};
+                this.dictionaries[name] = {};
+
+                return;
 
             }
 
+
+
+
+            const json =
+                await response.json();
+
+
+
+            this.dictionaries[name] =
+                json || {};
+
+
+
+            console.log(
+                "[Dictionary]",
+                name,
+                Object.keys(
+                    this.dictionaries[name]
+                ).length,
+                "entries"
+            );
+
+
+
+        } catch(error) {
+
+
+            console.error(
+                "[Dictionary] Failed:",
+                name,
+                error
+            );
+
+
+            this.dictionaries[name] = {};
+
         }
+
+
+    },
+
+
+
+
+
+
+
+    async init() {
 
 
         console.log(
-            '[Dictionary] TOTAL:',
-            this.total()
+            "[Dictionary] Start loading"
         );
 
 
-        return true;
-    },
+
+        const files = [
 
 
-    total() {
 
-        let count = 0;
+            "ui",
+
+            "classes",
+
+            "ancestries",
+
+            "heritages",
+
+            "backgrounds",
 
 
-        for (const d of Object.values(this.dictionaries)) {
+            "feats",
 
-            count += Object.keys(d).length;
+            "feat_descriptions",
+
+
+            "spells",
+
+            "spell_descriptions",
+
+
+            "items",
+
+            "item_descriptions",
+
+
+            "traits",
+
+            "skills",
+
+            "actions",
+
+            "condition"
+
+
+
+        ];
+
+
+
+
+
+        for (
+            const file of files
+        ) {
+
+
+            await this.load(file);
+
 
         }
 
 
-        return count;
+
+
+
+
+        let total = 0;
+
+
+
+        Object.values(
+            this.dictionaries
+        ).forEach(dict => {
+
+
+            total +=
+                Object.keys(dict).length;
+
+
+        });
+
+
+
+
+        console.log(
+            "[Dictionary] TOTAL:",
+            total
+        );
+
+
+
+        this.loaded = true;
+
+
+        console.log(
+            "[PathbuilderRU] Dictionary ready"
+        );
 
     },
+
+
+
+
+
+
 
 
     translate(text) {
 
 
-        if (!text)
-            return text;
+        if (!text) return text;
 
 
 
-        for (const dict of Object.values(this.dictionaries)) {
+        let result =
+            text;
 
 
-            if (dict[text]) {
 
-                return dict[text];
+        for (
+            const dict of Object.values(
+                this.dictionaries
+            )
+        ) {
+
+
+
+            if (
+                dict[result]
+            ) {
+
+
+                result =
+                    dict[result];
+
+
+
+                break;
+
 
             }
+
 
         }
 
 
-        return text;
+
+        return result;
+
 
     },
 
 
-    get(type,key){
-
-        if(
-            this.dictionaries[type] &&
-            this.dictionaries[type][key]
-        ){
-
-            return this.dictionaries[type][key];
-
-        }
 
 
-        return null;
+
+
+
+    getDescription(
+        type,
+        name
+    ) {
+
+
+
+        const dict =
+            this.dictionaries[
+                type + "_descriptions"
+            ];
+
+
+
+        if (
+            !dict
+        ) return null;
+
+
+
+        return (
+            dict[name] || null
+        );
+
 
     }
+
 
 
 };
 
 
-console.log('[PathbuilderRU] Dictionary ready');
+
+Dictionary.init();
