@@ -3,7 +3,6 @@ console.log("[PathbuilderRU] translator.js loaded");
 
 window.Translator = {
 
-
     initialized: false,
 
 
@@ -30,6 +29,7 @@ window.Translator = {
             window.Dictionary.translate(text);
 
 
+
         if (result !== text) {
 
             console.log(
@@ -45,6 +45,56 @@ window.Translator = {
         return result;
 
     },
+
+
+
+
+
+    translateDescription(text, type) {
+
+        if (!text) return text;
+
+        if (!window.Dictionary) return text;
+
+
+
+        let dictionaryName =
+            type + "_descriptions";
+
+
+
+        if (
+            window.Dictionary.dictionaries &&
+            window.Dictionary.dictionaries[dictionaryName]
+        ) {
+
+
+            const dict =
+                window.Dictionary.dictionaries[dictionaryName];
+
+
+
+            if (dict[text]) {
+
+
+                console.log(
+                    "[RU DESCRIPTION]",
+                    text
+                );
+
+
+                return dict[text];
+
+            }
+
+        }
+
+
+        return text;
+
+    },
+
+
 
 
 
@@ -105,6 +155,8 @@ window.Translator = {
 
 
 
+
+
         if (
             element.nodeType !== Node.ELEMENT_NODE
         ) {
@@ -117,10 +169,13 @@ window.Translator = {
 
 
 
+
+
         // CHILDREN
 
         [
             ...element.childNodes
+
         ].forEach(child => {
 
             this.translateElement(child);
@@ -133,7 +188,10 @@ window.Translator = {
 
 
 
-        // обычные атрибуты
+
+
+        // ATTRIBUTES
+
 
         const attributes = [
 
@@ -146,7 +204,6 @@ window.Translator = {
 
             "alt",
 
-
             "data-tooltip",
 
             "data-content",
@@ -157,6 +214,7 @@ window.Translator = {
 
 
         ];
+
 
 
 
@@ -176,8 +234,18 @@ window.Translator = {
 
 
 
-                const translated =
+                let translated =
                     this.translateText(old);
+
+
+
+
+                translated =
+                    this.translateDescription(
+                        translated,
+                        "feat"
+                    );
+
 
 
 
@@ -192,6 +260,7 @@ window.Translator = {
                         attr,
                         translated
                     );
+
 
 
                     console.log(
@@ -217,7 +286,10 @@ window.Translator = {
 
 
 
+
+
         // INPUT / BUTTON VALUE
+
 
 
         if (
@@ -264,7 +336,72 @@ window.Translator = {
 
 
 
+
+        // PATHBUILDER DESCRIPTION BLOCKS
+
+        this.translateFeatDescriptions(element);
+
+
+
     },
+
+
+
+
+
+
+
+
+
+    translateFeatDescriptions(element){
+
+
+        if(!window.Dictionary) return;
+
+
+
+        const descriptions =
+            window.Dictionary.dictionaries.feat_descriptions;
+
+
+
+        if(!descriptions) return;
+
+
+
+
+
+        const text =
+            element.innerText;
+
+
+
+        if(!text) return;
+
+
+
+
+
+        if(descriptions[text]){
+
+
+            element.innerText =
+                descriptions[text];
+
+
+
+            console.log(
+                "[RU FEAT DESCRIPTION]",
+                text
+            );
+
+
+        }
+
+
+    },
+
+
 
 
 
@@ -287,7 +424,6 @@ window.Translator = {
 
 
     }
-
 
 
 };
