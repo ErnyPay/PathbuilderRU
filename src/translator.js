@@ -1,11 +1,8 @@
 'use strict';
 
-
 console.log(
     "[PathbuilderRU] translator.js loaded"
 );
-
-
 
 
 window.Translator = {
@@ -13,32 +10,18 @@ window.Translator = {
 
     initialized:false,
 
-
-    cache:new Map(),
-
-
-    translatedNodes:new WeakSet(),
-
-
-
+    translatedTexts:new Map(),
 
 
     init(){
 
-
         this.initialized = true;
-
 
         console.log(
             "[PathbuilderRU] Translator initialized"
         );
 
-
     },
-
-
-
-
 
 
 
@@ -47,17 +30,8 @@ window.Translator = {
     translateText(text){
 
 
-
-        if(!text){
-
-            return text;
-
-        }
-
-
-
-
         if(
+            !text ||
             !window.Dictionary
         ){
 
@@ -67,14 +41,102 @@ window.Translator = {
 
 
 
+        let clean =
+            text.trim();
+
+
+
+        if(!clean){
+
+            return text;
+
+        }
+
 
 
 
         if(
-            this.cache.has(text)
+            this.translatedTexts.has(clean)
         ){
 
-            return this.cache.get(text);
+            return this.translatedTexts.get(clean);
+
+        }
+
+
+
+
+
+        let result =
+            window.Dictionary.translate(clean);
+
+
+
+
+
+        /*
+            обработка длинных описаний
+        */
+
+        if(
+            result === clean &&
+            clean.length > 80
+        ){
+
+
+            let parts =
+                clean.split("\n");
+
+
+
+            result =
+                parts.map(
+                    part =>
+                    window.Dictionary.translate(
+                        part
+                    )
+                )
+                .join("\n");
+
+
+        }
+
+
+
+
+
+        /*
+            поиск по предложениям
+        */
+
+        if(
+            result === clean &&
+            clean.length > 120
+        ){
+
+
+            let sentences =
+                clean.match(
+                    /[^.!?]+[.!?]+/g
+                );
+
+
+
+            if(sentences){
+
+
+                result =
+                    sentences.map(
+                        s =>
+                        window.Dictionary.translate(
+                            s.trim()
+                        )
+                    )
+                    .join(" ");
+
+
+            }
+
 
         }
 
@@ -83,40 +145,26 @@ window.Translator = {
 
 
 
-        const result =
-            window.Dictionary.translate(text);
-
-
-
-
-
-
-
-        this.cache.set(
-            text,
+        this.translatedTexts.set(
+            clean,
             result
         );
 
 
 
 
-
-
-
         if(
-            result !== text
+            result !== clean
         ){
 
             console.log(
                 "[RU]",
-                text,
+                clean.substring(0,100),
                 "→",
-                result
+                result.substring(0,100)
             );
 
         }
-
-
 
 
 
@@ -134,11 +182,10 @@ window.Translator = {
 
 
 
-    translateNode(node){
+    translateElement(element){
 
 
-
-        if(!node){
+        if(!element){
 
             return;
 
@@ -147,32 +194,27 @@ window.Translator = {
 
 
 
+        /*
+            TEXT NODE
+        */
 
 
         if(
-            node.nodeType === Node.TEXT_NODE
+            element.nodeType === Node.TEXT_NODE
         ){
 
 
-
-            const old =
-                node.nodeValue;
-
+            let old =
+                element.nodeValue;
 
 
 
-
-            const clean =
+            let clean =
                 old.trim();
 
 
 
-
-
-
-            if(
-                !clean
-            ){
+            if(!clean){
 
                 return;
 
@@ -181,13 +223,10 @@ window.Translator = {
 
 
 
-
-
-            const translated =
-                this.translateText(clean);
-
-
-
+            let translated =
+                this.translateText(
+                    clean
+                );
 
 
 
@@ -196,25 +235,16 @@ window.Translator = {
                 translated !== clean
             ){
 
-
-
-                node.nodeValue =
+                element.nodeValue =
                     old.replace(
                         clean,
                         translated
                     );
 
-
-
             }
 
 
-
-
-
-
             return;
-
 
         }
 
@@ -223,11 +253,8 @@ window.Translator = {
 
 
 
-
-
-
         if(
-            node.nodeType !== Node.ELEMENT_NODE
+            element.nodeType !== Node.ELEMENT_NODE
         ){
 
             return;
@@ -239,47 +266,17 @@ window.Translator = {
 
 
 
-
-
-        // пропускаем уже обработанные
-
-        if(
-            this.translatedNodes.has(node)
-        ){
-
-            return;
-
-        }
-
-
-
-
-
-
-
-
-        this.translatedNodes.add(node);
-
-
-
-
-
-
-
-
-        // дети
+        /*
+            дети
+        */
 
 
         [
-            ...node.childNodes
+            ...element.childNodes
 
         ].forEach(
-            child=>{
-
-                this.translateNode(child);
-
-            }
-
+            child =>
+            this.translateElement(child)
         );
 
 
@@ -288,33 +285,12 @@ window.Translator = {
 
 
 
-
-
-        this.translateAttributes(node);
-
-
-
-
-
-
-
-
-    },
-
-
-
-
-
-
-
-
-
-    translateAttributes(element){
-
+        /*
+            атрибуты
+        */
 
 
         const attrs = [
-
 
             "title",
 
@@ -332,18 +308,11 @@ window.Translator = {
 
             "data-text"
 
-
         ];
 
 
 
-
-
-
-
-
         attrs.forEach(attr=>{
-
 
 
             if(
@@ -351,42 +320,29 @@ window.Translator = {
             ){
 
 
-
-                const old =
+                let old =
                     element.getAttribute(attr);
 
 
 
-
-
-                const translated =
+                let translated =
                     this.translateText(old);
 
 
 
-
-
-
                 if(
-                    old !== translated
+                    translated !== old
                 ){
-
-
 
                     element.setAttribute(
                         attr,
                         translated
                     );
 
-
-
                 }
 
 
-
-
             }
-
 
 
         });
@@ -397,53 +353,69 @@ window.Translator = {
 
 
 
+        /*
+            React часто кладет описание сюда
+        */
+
+
         if(
-
-            element.tagName === "INPUT" ||
-
-            element.tagName === "BUTTON"
-
+            element.innerHTML &&
+            element.children.length === 0
         ){
 
 
-
-            if(element.value){
-
-
-
-                const old =
-                    element.value;
+            let html =
+                element.innerHTML;
 
 
 
-
-
-                const translated =
-                    this.translateText(old);
-
-
+            let translated =
+                this.translateText(
+                    html
+                );
 
 
 
-                if(
-                    old !== translated
-                ){
+            if(
+                translated !== html
+            ){
 
-
-                    element.value =
-                        translated;
-
-
-                }
-
-
+                element.innerHTML =
+                    translated;
 
             }
 
 
-
         }
 
+
+
+
+
+
+
+
+        /*
+            input/button
+        */
+
+
+        if(
+            element.value
+        ){
+
+
+            let translated =
+                this.translateText(
+                    element.value
+                );
+
+
+            element.value =
+                translated;
+
+
+        }
 
 
 
@@ -457,8 +429,9 @@ window.Translator = {
 
 
 
-    translatePage(){
 
+
+    translatePage(){
 
 
         console.log(
@@ -466,16 +439,11 @@ window.Translator = {
         );
 
 
-
-
-        this.translateNode(
+        this.translateElement(
             document.body
         );
 
 
-
     }
-
-
 
 };
