@@ -9,9 +9,9 @@
     Translator.translateNode(document.body);
 
     Observer.start();
-    Extractor.scan();
 
-window.Extractor = Extractor;
+    // Делаем объект доступным из консоли
+    window.Missing = Missing;
 
     console.log("[PathbuilderRU] Ready");
 
