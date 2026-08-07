@@ -10,8 +10,13 @@
   "Actions": "Действия",
   "Equipment": "Снаряжение",
   "Spells": "Заклинания",
+  "Skills": "Навыки",
+  "Languages": "Языки",
   "Class": "Класс",
   "Level": "Уровень",
-  "Skills": "Навыки",
-  "Languages": "Языки"
+
+  "Character": "Персонаж",
+  "Save": "Сохранить",
+  "Cancel": "Отмена",
+  "Close": "Закрыть"
 }
