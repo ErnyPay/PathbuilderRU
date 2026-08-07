@@ -1,100 +1,73 @@
 'use strict';
 
-console.log("[PathbuilderRU] translator.js loaded");
+
+console.log(
+    "[PathbuilderRU] translator.js loaded"
+);
+
 
 
 window.Translator = {
 
-    initialized: false,
 
-    translatedTexts: new Map(),
+    initialized:false,
 
-    translating: false,
+
+    translatedTexts:new Map(),
+
 
 
     init(){
 
+
         this.initialized = true;
+
 
         console.log(
             "[PathbuilderRU] Translator initialized"
         );
 
+
     },
+
+
+
 
 
     translateText(text){
 
+
         if(
             !text ||
             !window.Dictionary
-        ){
+        )
             return text;
-        }
 
 
-        let clean = text.trim();
+
+        let clean =
+            text.trim();
 
 
-        if(!clean){
+
+        if(!clean)
             return text;
-        }
+
 
 
         if(
             this.translatedTexts.has(clean)
-        ){
-
+        )
+        {
             return this.translatedTexts.get(clean);
-
-        }
-
-
-        let result;
-
-
-        try {
-
-            result =
-                window.Dictionary.translate(clean);
-
-        }
-
-        catch(e){
-
-            console.error(
-                "[PathbuilderRU] Dictionary error",
-                e
-            );
-
-            result = clean;
-
         }
 
 
 
-        /*
-            Попытка перевода больших описаний
-        */
 
-        if(
-            result === clean &&
-            clean.length > 80
-        ){
+        let result =
+            window.Dictionary.translate(clean);
 
-            let lines =
-                clean.split("\n");
-
-
-            result =
-                lines.map(
-                    line =>
-                    window.Dictionary.translate(line)
-                )
-                .join("\n");
-
-
-        }
 
 
 
@@ -105,15 +78,17 @@ window.Translator = {
 
 
 
+
         if(
             result !== clean
-        ){
+        )
+        {
 
             console.log(
                 "[RU]",
-                clean.substring(0,80),
+                clean.substring(0,100),
                 "→",
-                result.substring(0,80)
+                result.substring(0,100)
             );
 
         }
@@ -122,7 +97,11 @@ window.Translator = {
 
         return result;
 
+
+
     },
+
+
 
 
 
@@ -131,42 +110,40 @@ window.Translator = {
     translateNode(node){
 
 
-        if(!node){
-            return;
-        }
-
-
-        /*
-            Текстовые узлы
-        */
 
         if(
             node.nodeType === Node.TEXT_NODE
-        ){
+        )
+        {
 
-            let old =
+
+            let text =
                 node.nodeValue;
 
 
+
             let clean =
-                old.trim();
+                text.trim();
 
 
-            if(!clean){
+
+            if(!clean)
                 return;
-            }
+
 
 
             let translated =
                 this.translateText(clean);
 
 
+
             if(
                 translated !== clean
-            ){
+            )
+            {
 
                 node.nodeValue =
-                    old.replace(
+                    text.replace(
                         clean,
                         translated
                     );
@@ -174,32 +151,31 @@ window.Translator = {
             }
 
 
+
             return;
 
         }
+
+
 
 
 
 
         if(
             node.nodeType !== Node.ELEMENT_NODE
-        ){
-
+        )
             return;
-
-        }
 
 
 
 
 
         /*
-            Сначала дети
+            Переводим обычный текст
         */
 
-        [
-            ...node.childNodes
-        ]
+
+        [...node.childNodes]
         .forEach(
             child =>
             this.translateNode(child)
@@ -212,55 +188,52 @@ window.Translator = {
 
 
         /*
-            Атрибуты
+            Переводим атрибуты
         */
 
-        const attrs = [
 
+        [
             "title",
             "aria-label",
             "placeholder",
-            "alt",
             "data-tooltip",
             "data-content",
-            "data-description",
-            "data-original-title"
-
-        ];
-
-
-
-        attrs.forEach(attr=>{
+            "data-description"
+        ]
+        .forEach(attr=>{
 
 
             if(
-                !node.hasAttribute(attr)
-            ){
-                return;
+                node.hasAttribute(attr)
+            )
+            {
+
+
+                let value =
+                    node.getAttribute(attr);
+
+
+
+                let translated =
+                    this.translateText(value);
+
+
+
+                if(
+                    translated !== value
+                )
+                {
+
+                    node.setAttribute(
+                        attr,
+                        translated
+                    );
+
+                }
+
+
             }
 
-
-
-            let old =
-                node.getAttribute(attr);
-
-
-
-            let translated =
-                this.translateText(old);
-
-
-
-            if(
-                old !== translated
-            ){
-
-                node.setAttribute(
-                    attr,
-                    translated
-                );
-
-            }
 
 
         });
@@ -271,67 +244,48 @@ window.Translator = {
 
 
 
-
-        /*
-            INPUT / BUTTON
-        */
-
-        if(
-            node.value
-        ){
-
-            let translated =
-                this.translateText(
-                    node.value
-                );
-
-
-            if(
-                translated !== node.value
-            ){
-
-                node.value =
-                    translated;
-
-            }
-
-        }
-
-
-
-
-
         /*
             ВАЖНО:
-            ловим всплывающие описания Pathbuilder
+            описания фитов Pathbuilder
+            находятся здесь
         */
 
+
         if(
-            node.innerText &&
-            node.innerText.length > 20
-        ){
+            node.innerText
+            &&
+            node.innerText.length > 50
+        )
+        {
 
 
-            let old =
+            let text =
                 node.innerText;
 
 
+
             let translated =
-                this.translateText(old);
+                this.translateText(text);
 
 
 
             if(
-                translated !== old &&
-                node.children.length === 0
-            ){
+                translated !== text
+            )
+            {
 
-                node.textContent =
+
+                node.innerText =
                     translated;
+
+
 
             }
 
+
+
         }
+
 
 
 
@@ -344,50 +298,25 @@ window.Translator = {
 
 
 
-
     translatePage(){
 
 
-        if(
-            this.translating
-        ){
-            return;
-        }
-
-
-        this.translating = true;
-
-
-        try{
-
-
-            console.log(
-                "[PathbuilderRU] Translating page"
-            );
-
-
-            this.translateNode(
-                document.body
-            );
-
-
-        }
-
-        catch(e){
-
-            console.error(
-                "[PathbuilderRU] Translation error",
-                e
-            );
-
-        }
+        console.log(
+            "[PathbuilderRU] Translating page"
+        );
 
 
 
-        this.translating = false;
+        this.translateNode(
+            document.body
+        );
+
 
 
     }
+
+
+
 
 
 };
