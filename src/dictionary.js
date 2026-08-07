@@ -1,13 +1,29 @@
 console.log("[PathbuilderRU] dictionary.js loaded");
 
 
-const Dictionary = {
+window.Dictionary = {
 
 
     data:{},
 
+    ready:false,
 
-    total:0,
+
+    files:[
+        "ui",
+        "classes",
+        "ancestries",
+        "heritages",
+        "backgrounds",
+        "feats",
+        "spells",
+        "items",
+        "traits",
+        "skills",
+        "actions",
+        "conditions"
+    ],
+
 
 
     async load(){
@@ -18,44 +34,23 @@ const Dictionary = {
         );
 
 
-
-        const files = [
-
-            "ui",
-            "classes",
-            "ancestries",
-            "heritages",
-            "backgrounds",
-            "feats",
-            "spells",
-            "items",
-            "traits",
-            "skills",
-            "actions",
-            "condition"
-
-        ];
-
-
-
-        for(const file of files){
-
+        for(
+            const file of this.files
+        ){
 
             try{
 
 
                 console.log(
                     "[Dictionary] Loading:",
-                    file + ".json"
+                    file+".json"
                 );
 
 
-
                 const url =
-                    chrome.runtime.getURL(
-                        "dictionaries/" + file + ".json"
-                    );
-
+                chrome.runtime.getURL(
+                    "dictionaries/"+file+".json"
+                );
 
 
                 const response =
@@ -68,53 +63,77 @@ const Dictionary = {
 
 
 
-                this.data =
-                    {
-                        ...this.data,
-                        ...json
-                    };
+                this.data[file]=json;
 
 
 
                 console.log(
                     "[Dictionary]",
-                    file + ".json",
-                    Object.keys(json).length,
+                    file,
+                    Object.keys(json).length || json.length,
                     "entries"
                 );
 
 
 
-                this.total +=
-                    Object.keys(json).length;
-
-
-
-            }catch(error){
-
+            }
+            catch(e){
 
                 console.error(
                     "[Dictionary] Failed:",
                     file,
-                    error
+                    e
                 );
 
-
             }
-
 
         }
 
 
 
+        this.ready=true;
+
+
         console.log(
             "[Dictionary] TOTAL:",
-            this.total
+            this.count()
         );
 
 
-        return true;
+    },
 
+
+
+    count(){
+
+        let total=0;
+
+
+        for(
+            const key in this.data
+        ){
+
+            const obj=this.data[key];
+
+
+            if(
+                Array.isArray(obj)
+            ){
+
+                total+=obj.length;
+
+            }
+            else{
+
+                total+=
+                Object.keys(obj).length;
+
+            }
+
+        }
+
+
+        return total;
 
     },
 
@@ -125,69 +144,130 @@ const Dictionary = {
     translate(text){
 
 
-        if(!text)
-            return text;
+        if(!text) return text;
+
+
+        let result=text;
 
 
 
-        const entry =
-            this.data[text];
+        for(
+            const file in this.data
+        ){
+
+
+            const db =
+                this.data[file];
 
 
 
-        if(!entry)
-            return text;
-
-
-
-        /*
-            Старый формат:
-
-            {
-              "Monk":"Монах"
-            }
-        */
-
-
-        if(typeof entry === "string"){
-
-
-            return entry;
+            result =
+            this.search(
+                db,
+                result
+            );
 
 
         }
 
 
 
+        return result;
 
 
-        /*
-            Новый формат:
+    },
 
-            {
-              "Battle Medicine":{
-                   "name":"Боевая медицина",
-                   "description":"..."
-              }
+
+
+
+
+    search(obj,text){
+
+
+
+        if(!obj)
+            return text;
+
+
+
+        if(
+            Array.isArray(obj)
+        ){
+
+
+            for(
+                const item of obj
+            ){
+
+                const r =
+                this.search(
+                    item,
+                    text
+                );
+
+
+                if(r!==text)
+                    return r;
+
+
             }
-        */
 
 
-        if(typeof entry === "object"){
-
-
-
-            if(entry.name){
-
-                return entry.name;
-
-            }
+        }
 
 
 
-            if(entry.description){
+        else if(
+            typeof obj==="object"
+        ){
 
-                return entry.description;
+
+
+            for(
+                const key in obj
+            ){
+
+
+                const value=obj[key];
+
+
+
+                if(
+                    typeof value==="string"
+                ){
+
+
+                    if(
+                        value.trim()===text.trim()
+                    ){
+
+
+                        if(
+                            obj.name
+                        ){
+
+                            return obj.name;
+
+                        }
+
+
+                    }
+
+
+                }
+
+
+
+                const r =
+                this.search(
+                    value,
+                    text
+                );
+
+
+                if(r!==text)
+                    return r;
+
 
             }
 
@@ -205,15 +285,6 @@ const Dictionary = {
 };
 
 
-
-
-window.Dictionary = Dictionary;
-
-
-// совместимость со старым content.js
-window.dictionary = Dictionary;
-
-
 console.log(
-    "[PathbuilderRU] Dictionary ready"
+"[PathbuilderRU] Dictionary ready"
 );

@@ -10,7 +10,9 @@ window.Translator = {
 
         this.initialized = true;
 
-        console.log("[PathbuilderRU] Translator initialized");
+        console.log(
+            "[PathbuilderRU] Translator initialized"
+        );
 
     },
 
@@ -22,7 +24,8 @@ window.Translator = {
         if (!window.Dictionary) return text;
 
 
-        const result = window.Dictionary.translate(text);
+        const result =
+            window.Dictionary.translate(text);
 
 
         if (result !== text) {
@@ -49,86 +52,120 @@ window.Translator = {
         if (!element) return;
 
 
-        // обычный текст
+
+        // TEXT NODE
+
         if (
             element.nodeType === Node.TEXT_NODE
         ) {
 
-            const oldText = element.nodeValue;
 
-            const newText =
-                this.translateText(oldText.trim());
+            const oldText =
+                element.nodeValue;
+
+
+
+            const clean =
+                oldText.trim();
+
+
+
+            if (!clean) return;
+
+
+
+            const translated =
+                this.translateText(clean);
+
 
 
             if (
-                oldText !== newText &&
-                newText
+                translated !== clean
             ) {
+
 
                 element.nodeValue =
                     oldText.replace(
-                        oldText.trim(),
-                        newText
+                        clean,
+                        translated
                     );
+
 
             }
 
 
             return;
+
         }
 
 
+
+        // не элемент
 
         if (
             element.nodeType !== Node.ELEMENT_NODE
         ) {
+
             return;
-        }
-
-
-
-        // текст внутри элемента
-        if (element.childNodes.length) {
-
-            [...element.childNodes]
-                .forEach(child => {
-
-                    this.translateElement(child);
-
-                });
 
         }
 
 
 
 
-        // title
+        // дочерние элементы
+
+        [...element.childNodes]
+            .forEach(child => {
+
+                this.translateElement(child);
+
+            });
+
+
+
+
+
+        // TITLE
+
         if (
             element.hasAttribute("title")
         ) {
 
+
             const old =
-                element.getAttribute("title");
+                element.getAttribute(
+                    "title"
+                );
 
 
             const translated =
                 this.translateText(old);
 
 
-            if(old !== translated){
+
+            if (
+                old !== translated
+            ) {
+
 
                 element.setAttribute(
                     "title",
                     translated
                 );
 
+
             }
+
 
         }
 
 
 
-        // aria-label
+
+
+        // ARIA LABEL
+
         if (
             element.hasAttribute("aria-label")
         ) {
@@ -140,25 +177,34 @@ window.Translator = {
                 );
 
 
+
             const translated =
                 this.translateText(old);
 
 
-            if(old !== translated){
+
+            if (
+                old !== translated
+            ) {
+
 
                 element.setAttribute(
                     "aria-label",
                     translated
                 );
 
+
             }
+
 
         }
 
 
 
 
-        // placeholder
+
+        // PLACEHOLDER
+
         if (
             element.hasAttribute("placeholder")
         ) {
@@ -170,51 +216,75 @@ window.Translator = {
                 );
 
 
+
             const translated =
                 this.translateText(old);
 
 
-            if(old !== translated){
+
+            if (
+                old !== translated
+            ) {
+
 
                 element.setAttribute(
                     "placeholder",
                     translated
                 );
 
+
             }
+
 
         }
 
 
 
-        // value у кнопок
+
+
+
+
+        // INPUT / BUTTON VALUE
+
         if (
             element.tagName === "INPUT" ||
             element.tagName === "BUTTON"
         ) {
 
 
-            if(element.value){
+
+            if (
+                element.value
+            ) {
 
 
                 const old =
                     element.value;
 
 
+
                 const translated =
                     this.translateText(old);
 
 
-                if(old !== translated){
+
+                if (
+                    old !== translated
+                ) {
+
 
                     element.value =
                         translated;
 
+
                 }
+
 
             }
 
+
         }
+
 
 
     },
@@ -222,7 +292,9 @@ window.Translator = {
 
 
 
-    translatePage(){
+
+
+    translatePage() {
 
 
         console.log(
