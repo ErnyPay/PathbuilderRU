@@ -1,7 +1,4 @@
-console.log(
-    "[PathbuilderRU] Starting..."
-);
-
+console.log("[PathbuilderRU] Starting...");
 
 
 (async()=>{
@@ -10,8 +7,7 @@ console.log(
 try{
 
 
-    await window.PathbuilderDictionary.load();
-
+    await Dictionary.load();
 
 
     console.log(
@@ -20,8 +16,7 @@ try{
 
 
 
-    await window.Translator.init();
-
+    await Translator.init();
 
 
     console.log(
@@ -30,8 +25,7 @@ try{
 
 
 
-    window.Translator.translatePage();
-
+    Translator.translatePage();
 
 
     console.log(
@@ -40,29 +34,17 @@ try{
 
 
 
-    if (
-    window.Observer &&
-    typeof window.Observer.start === "function"
-) {
+    if(window.Observer){
 
-    window.Observer.start();
 
-}
-else {
-
-    console.error(
-        "[PathbuilderRU] Observer not available"
-    );
+        Observer.start();
 
 
     }
 
 
 
-}
-
-
-catch(error){
+}catch(error){
 
 
     console.error(
@@ -72,7 +54,6 @@ catch(error){
 
 
 }
-
 
 
 })();
