@@ -21,49 +21,48 @@ const Dictionary = {
 
     async load() {
 
-        this.dictionaries = {};
+    this.dictionaries = {};
 
-        let total = 0;
+    let total = 0;
 
-        for (const file of this.files) {
+    for (const file of this.files) {
 
-            try {
+        const url = chrome.runtime.getURL("dictionaries/" + file);
 
-                const response = await fetch(
-                    chrome.runtime.getURL(
-                        "dictionaries/" + file
-                    )
-                );
+        console.log("[Dictionary] Loading:", file);
+        console.log("[Dictionary] URL:", url);
 
-                if (!response.ok) {
-                    console.warn("[Dictionary] Не найден:", file);
-                    continue;
-                }
+        try {
 
-                const json = await response.json();
+            const response = await fetch(url);
 
-                Object.assign(this.dictionaries, json);
+            console.log("[Dictionary] Status:", response.status);
 
-                total += Object.keys(json).length;
-
-                console.log(
-                    "[Dictionary]",
-                    file,
-                    Object.keys(json).length,
-                    "entries"
-                );
-
-            } catch (e) {
-
-                console.error(
-                    "[Dictionary]",
-                    file,
-                    e
-                );
-
+            if (!response.ok) {
+                console.warn("[Dictionary] Не найден:", file);
+                continue;
             }
 
+            const json = await response.json();
+
+            Object.assign(this.dictionaries, json);
+
+            total += Object.keys(json).length;
+
+            console.log("[Dictionary]", file, Object.keys(json).length);
+
+        } catch (e) {
+
+            console.error("[Dictionary ERROR]", file);
+            console.error(e);
+
         }
+
+    }
+
+    console.log("[Dictionary] Total:", total);
+
+}
 
         console.log(
             "[Dictionary]",
