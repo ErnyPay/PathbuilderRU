@@ -1,1 +1,166 @@
-{}
+{
+  "Acrobatic Performer": "Акробатическое выступление",
+  "Adopted Ancestry": "Принятое наследие",
+  "Additional Lore": "Дополнительные знания",
+  "Advanced First Aid": "Продвинутая первая помощь",
+  "Advanced Weapon Training": "Продвинутая тренировка оружия",
+  "Alchemical Crafting": "Алхимическое создание",
+  "Ancestral Paragon": "Родовой парагон",
+  "Animal Elocutionist": "Толкователь животных",
+  "Animal Trainer": "Дрессировщик животных",
+  "Arcane Sense": "Магическое чутьё",
+  "Armor Proficiency": "Владение доспехами",
+  "Assurance": "Гарантия",
+  "Assurance (Athletics)": "Гарантия (Атлетика)",
+  "Assurance (Medicine)": "Гарантия (Медицина)",
+  "Assurance (Nature)": "Гарантия (Природа)",
+  "Assurance (Religion)": "Гарантия (Религия)",
+  "Assurance (Society)": "Гарантия (Общество)",
+  "Battle Medicine": "Боевая медицина",
+  "Battle Prayer": "Боевая молитва",
+  "Bespell Weapon": "Заколдовать оружие",
+  "Bon Mot": "Удачная шутка",
+  "Breath Control": "Контроль дыхания",
+  "Cat Fall": "Кошачье падение",
+  "Canny Acumen": "Проницательность",
+  "Combat Climber": "Боевой альпинист",
+  "Continual Recovery": "Непрерывное восстановление",
+  "Cooperative Nature": "Природное сотрудничество",
+  "Craft Anything": "Создать что угодно",
+  "Crafting Specialty": "Специализация ремесла",
+  "Cunning Initiative": "Хитрая инициатива",
+  "Diehard": "Живучесть",
+  "Diverse Lore": "Разносторонние знания",
+  "Dubious Knowledge": "Сомнительные знания",
+  "Experienced Professional": "Опытный профессионал",
+  "Familiar Master": "Мастер фамильяра",
+  "Fleet": "Быстрый",
+  "Forager": "Собиратель",
+  "General Training": "Общая тренировка",
+  "Glad-Hand": "Дружелюбное приветствие",
+  "Group Impression": "Групповое впечатление",
+  "Incredible Initiative": "Невероятная инициатива",
+  "Intimidating Glare": "Устрашающий взгляд",
+  "Kip Up": "Подъём кувырком",
+  "Lastwall Sentry": "Часовой Последней Стены",
+  "Magical Crafting": "Магическое создание",
+  "Magical Shorthand": "Магическая стенография",
+  "Martial Artist": "Боевой мастер",
+  "Multilingual": "Многоязычие",
+  "Natural Medicine": "Природная медицина",
+  "Nimble Crawl": "Ловкое ползание",
+  "Quick Climb": "Быстрое лазание",
+  "Quick Jump": "Быстрый прыжок",
+  "Quick Recognition": "Быстрое распознавание",
+  "Recognize Spell": "Распознать заклинание",
+  "Risky Surgery": "Рискованная хирургия",
+  "Robust Health": "Крепкое здоровье",
+  "Scare to Death": "Запугать до смерти",
+  "Shield Block": "Блок щитом",
+  "Skill Training": "Обучение навыку",
+  "Snare Crafting": "Создание ловушек",
+  "Specialty Crafting": "Специализированное ремесло",
+  "Steady Balance": "Устойчивое равновесие",
+  "Toughness": "Стойкость",
+  "Trick Magic Item": "Использование магического предмета",
+  "Twin Parry": "Парирование двумя оружиями",
+  "Untrained Improvisation": "Импровизация без подготовки",
+  "Wary Disarmament": "Осторожное обезвреживание",
+  "Acrobatic Performer": "Акробатическое выступление",
+  "Adopted Ancestry": "Принятое наследие",
+  "Additional Lore": "Дополнительные знания",
+  "Advanced First Aid": "Продвинутая первая помощь",
+  "Advanced First Aid": "Продвинутая первая помощь",
+  "Advanced Weapon Training": "Продвинутая тренировка оружия",
+
+  "Ancestral Paragon": "Родовой парагон",
+  "Armor Proficiency": "Владение доспехами",
+  "Armor Proficiency (Light)": "Владение лёгкими доспехами",
+  "Armor Proficiency (Medium)": "Владение средними доспехами",
+  "Armor Proficiency (Heavy)": "Владение тяжёлыми доспехами",
+
+  "Assurance": "Уверенность",
+  "Assurance (Acrobatics)": "Уверенность (Акробатика)",
+  "Assurance (Athletics)": "Уверенность (Атлетика)",
+  "Assurance (Crafting)": "Уверенность (Ремесло)",
+  "Assurance (Deception)": "Уверенность (Обман)",
+  "Assurance (Diplomacy)": "Уверенность (Дипломатия)",
+  "Assurance (Intimidation)": "Уверенность (Запугивание)",
+  "Assurance (Medicine)": "Уверенность (Медицина)",
+  "Assurance (Nature)": "Уверенность (Природа)",
+  "Assurance (Occultism)": "Уверенность (Оккультизм)",
+  "Assurance (Religion)": "Уверенность (Религия)",
+  "Assurance (Society)": "Уверенность (Общество)",
+  "Assurance (Stealth)": "Уверенность (Скрытность)",
+  "Assurance (Survival)": "Уверенность (Выживание)",
+
+  "Battle Medicine": "Боевая медицина",
+  "Bon Mot": "Остроумная реплика",
+  "Breath Control": "Контроль дыхания",
+
+  "Cat Fall": "Кошачье падение",
+  "Canny Acumen": "Проницательность",
+  "Charming Liar": "Очаровательный лжец",
+  "Combat Climber": "Боевой альпинист",
+
+  "Continual Recovery": "Постоянное восстановление",
+  "Cooperative Nature": "Природное сотрудничество",
+  "Craft Anything": "Создать что угодно",
+
+  "Dubious Knowledge": "Сомнительные знания",
+
+  "Experienced Professional": "Опытный профессионал",
+
+  "Fleet": "Быстрый",
+  "Forager": "Собиратель",
+
+  "Glad-Hand": "Дружеское приветствие",
+  "Group Impression": "Групповое впечатление",
+
+  "Impressive Performance": "Впечатляющее выступление",
+  "Incredible Initiative": "Невероятная инициатива",
+  "Intimidating Glare": "Устрашающий взгляд",
+
+  "Kip Up": "Подъём кувырком",
+
+  "Magical Crafting": "Магическое ремесло",
+  "Magical Shorthand": "Магическая стенография",
+
+  "Multilingual": "Многоязычие",
+
+  "Natural Medicine": "Природная медицина",
+
+  "Pickpocket": "Карманник",
+  "Quick Climb": "Быстрое лазание",
+  "Quick Disguise": "Быстрая маскировка",
+  "Quick Identification": "Быстрая идентификация",
+  "Quick Jump": "Быстрый прыжок",
+  "Quick Repair": "Быстрый ремонт",
+
+  "Quick Recognition": "Быстрое распознавание",
+
+  "Recognize Spell": "Распознать заклинание",
+
+  "Risky Surgery": "Рискованная хирургия",
+
+  "Scare to Death": "Запугать до смерти",
+
+  "Shield Block": "Блок щитом",
+
+  "Skill Training": "Обучение навыку",
+
+  "Specialty Crafting": "Специализированное ремесло",
+
+  "Steady Balance": "Устойчивое равновесие",
+
+  "Toughness": "Стойкость",
+
+  "Train Animal": "Обучение животного",
+
+  "Trick Magic Item": "Использование магического предмета",
+
+  "Untrained Improvisation": "Импровизация без подготовки",
+
+  "Assurance (Lore)": "Уверенность (Знания)"
+
+}
