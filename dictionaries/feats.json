@@ -161,6 +161,899 @@
 
   "Untrained Improvisation": "Импровизация без подготовки",
 
-  "Assurance (Lore)": "Уверенность (Знания)"
+  "Assurance (Lore)": "Уверенность (Знания)",
+   "Crane Stance": "Стойка журавля",
+  "Crushing Grab": "Сокрушающий захват",
+  "Dragon Stance": "Стойка дракона",
+  "Dragon Roar": "Рёв дракона",
+  "Dragon Tail": "Хвост дракона",
+  "Flurry of Maneuvers": "Шквал манёвров",
+  "Flurry of Maneuvers": "Шквал манёвров",
+  "Flying Kick": "Летающий удар",
+  "Follow-Up Strike": "Последующий удар",
+  "Gorilla Stance": "Стойка гориллы",
+  "Gorilla Pound": "Удар гориллы",
+  "Mountain Stance": "Стойка горы",
+  "Mountain Stronghold": "Горная крепость",
+  "Mountain Quake": "Горное землетрясение",
+  "Monastic Weaponry": "Монашеское оружие",
+  "Powerful Fist": "Мощный кулак",
+  "Qi Spells": "Заклинания ци",
+  "Qi Blast": "Взрыв ци",
+  "Qi Rush": "Рывок ци",
+  "Reflective Ripple Stance": "Стойка отражающей ряби",
+  "Stumbling Stance": "Стойка спотыкающегося мастера",
+  "Stumbling Feint": "Спотыкающийся финт",
+  "Tiger Stance": "Стойка тигра",
+  "Tiger Slash": "Тигриный удар",
+  "Tangled Forest Stance": "Стойка запутанного леса",
+  "Whirling Throw": "Вращающий бросок",
+  "Whirling Blade Stance": "Стойка вращающегося клинка",
+  "Wind Jump": "Прыжок ветра",
+  "Wolf Stance": "Стойка волка",
+  "Wolf Drag": "Волчий рывок",
+  "Winding Flow": "Извивающийся поток",
+  "Abundant Step": "Изобильный шаг",
+  "Align Ki": "Настройка ци",
+  "Ancient Techniques": "Древние техники",
+  "Arrow Snatching": "Перехват стрел",
+  "Brawling Focus": "Фокусировка на драках",
+  "Deflect Arrow": "Отражение стрел",
+  "Diamond Fists": "Алмазные кулаки",
+  "Empty Body": "Пустое тело",
+  "Enduring Quickness": "Неугасимая быстрота",
+  "Explosive Arrival": "Взрывное прибытие",
+  "Graceful Leaper": "Грациозный прыжок",
+  "Impossible Technique": "Невозможная техника",
+  "Incredible Movement": "Невероятное движение",
+  "Ki Form": "Форма ци",
+  "Master of Many Styles": "Мастер многих стилей",
+  "Meditative Focus": "Медитативная концентрация",
+  "Mixed Maneuver": "Смешанный манёвр",
+  "One-Inch Punch": "Удар одного дюйма",
+  "Prevailing Position": "Доминирующая позиция",
+  "Return Fire": "Ответный выстрел",
+  "Sense Ki": "Чувство ци",
+  "Sleeper Hold": "Удушающий захват",
+  "Stance Savant": "Знаток стоек",
+  "Tangled Forest": "Запутанный лес",
+  "Timeless Body": "Вневременное тело",
+  "Triumphant Return": "Триумфальное возвращение",
+  "Basic Lesson": "Базовый урок",
+  "Basic Lesson of Elements": "Базовый урок стихий",
+  "Basic Lesson of Life": "Базовый урок жизни",
+  "Basic Lesson of Vengeance": "Базовый урок возмездия",
+  "Basic Lesson of the Wild": "Базовый урок дикой природы",
+  "Basic Lesson of Dreams": "Базовый урок снов",
+  "Basic Lesson of Protection": "Базовый урок защиты",
 
+  "Cackle": "Хихиканье",
+  "Cauldron": "Котёл",
+  "Communal Healing": "Общее исцеление",
+  "Counterspell": "Контрзаклинание",
+
+  "Enhanced Familiar": "Улучшенный фамильяр",
+  "Familiar's Language": "Язык фамильяра",
+  "Familiar Mascot": "Фамильяр-талисман",
+  "Familiar's Eyes": "Глаза фамильяра",
+
+  "Greater Lesson": "Великий урок",
+  "Greater Lesson of Elements": "Великий урок стихий",
+  "Greater Lesson of Life": "Великий урок жизни",
+  "Greater Lesson of Vengeance": "Великий урок возмездия",
+  "Greater Lesson of the Wild": "Великий урок дикой природы",
+  "Greater Lesson of Dreams": "Великий урок снов",
+
+  "Hex Focus": "Фокусировка на чарах",
+  "Hex Master": "Мастер колдовства",
+  "Hex Plucker": "Похититель чар",
+  "Hex Warden": "Страж чар",
+
+  "Major Lesson": "Великий тайный урок",
+  "Major Lesson of Life": "Великий урок жизни",
+  "Major Lesson of Vengeance": "Великий урок возмездия",
+
+  "Patron's Claim": "Требование покровителя",
+  "Patron's Presence": "Присутствие покровителя",
+
+  "Rites of Transfiguration": "Ритуалы преображения",
+
+  "Rites of the Frozen Wastes": "Ритуалы ледяных пустошей",
+
+  "Shared Familiar": "Общий фамильяр",
+  "Spirit Familiar": "Духовный фамильяр",
+
+  "Steady Spellcasting": "Устойчивое колдовство",
+
+  "Temporary Familiar": "Временный фамильяр",
+
+  "Witch's Charge": "Подопечный ведьмы",
+  "Witch's Familiar": "Фамильяр ведьмы",
+
+  "Witch's Communion": "Причастие ведьмы",
+  "Witch's Hut": "Хижина ведьмы",
+
+  "Blood Components": "Кровавые компоненты",
+  "Ceremonial Knife": "Церемониальный нож",
+  "Cackle": "Хихиканье",
+  "Cursed Effigy": "Проклятое изображение",
+
+  "Malicious Shadow": "Зловещая тень",
+  "Mischievous Shadows": "Озорные тени",
+
+  "Patron's Gift": "Дар покровителя",
+
+  "Phase Familiar": "Фазовый фамильяр",
+
+  "Ritualist": "Ритуалист",
+
+  "Split Hex": "Разделённое проклятие",
+
+  "Sustaining Steel": "Поддерживающая сталь",
+
+  "Witch's Armaments": "Оружие ведьмы",
+  "Boost Eidolon": "Усиление эйдолона",
+  "Eidolon’s Opportunity": "Возможность эйдолона",
+  "Eidolon Opportunity": "Возможность эйдолона",
+
+  "Evolution Surge": "Всплеск эволюции",
+  "Advanced Weaponry": "Продвинутое вооружение",
+  "Aerial Form": "Воздушная форма",
+  "Burrower Evolution": "Эволюция землероя",
+  "Claws Evolution": "Эволюция когтей",
+  "Energy Heart": "Энергетическое сердце",
+  "Impressive Appearance": "Впечатляющий облик",
+  "Large Form Evolution": "Эволюция большой формы",
+  "Manual Dexterity": "Ручная ловкость",
+  "Meld into Eidolon": "Слияние с эйдолоном",
+  "Miniature Form": "Миниатюрная форма",
+  "Mount Evolution": "Эволюция ездового существа",
+  "Permanent Evolution Surge": "Постоянный всплеск эволюции",
+  "Plant Form": "Растительная форма",
+  "Ranged Combatant": "Дальний боец",
+  "Riding Partner": "Верховой партнёр",
+  "Skilled Partner": "Умелый партнёр",
+  "Speed Evolution": "Эволюция скорости",
+  "Steed Form": "Форма скакуна",
+  "Swim Evolution": "Эволюция плавания",
+  "Tandem Movement": "Совместное движение",
+
+  "Summoner Dedication": "Посвящение призывателя",
+  "Boost Summon": "Усиление призыва",
+  "Extend Boost": "Продление усиления",
+  "Master Summoner": "Мастер призыва",
+
+  "Act Together": "Действовать вместе",
+  "Effortless Concentration": "Лёгкая концентрация",
+  "Effortless Boost": "Лёгкое усиление",
+  "Harmonize": "Гармонизация",
+  "Life Link": "Связь жизни",
+  "Lifelink Surge": "Всплеск связи жизни",
+
+  "Merge Eidolon": "Объединение с эйдолоном",
+  "Twin Eidolon": "Двойной эйдолон",
+
+  "Protect Companion": "Защитить спутника",
+  "Reinforce Eidolon": "Укрепить эйдолона",
+
+  "Shared Surge": "Общий всплеск",
+
+  "Summon Elemental": "Призвать элементаля",
+  "Summoner's Call": "Призыв призывателя",
+
+  "Transcendent Eidolon": "Превосходный эйдолон",
+
+  "Unfettered Eidolon": "Освобождённый эйдолон",
+
+  "Wand of Twin Eidolon": "Жезл двойного эйдолона",
+
+  "Eidolon’s Wrath": "Ярость эйдолона",
+  "Eidolon’s Strike": "Удар эйдолона",
+
+  "Devastating Summons": "Разрушительные призывы",
+  "Ongoing Grief": "Продолжающееся горе",
+
+  "Reclaim Spell": "Возврат заклинания",
+
+  "Final Sacrifice": "Последняя жертва",
+
+  "Efficient Summons": "Эффективные призывы",
+
+  "Master Summoner's Bond": "Связь мастера призыва",
+  "Alchemical Familiar": "Алхимический фамильяр",
+  "Alchemical Crafting": "Алхимическое создание",
+  "Advanced Alchemy": "Продвинутая алхимия",
+  "Alchemical Alacrity": "Алхимическая стремительность",
+
+  "Calculated Splash": "Рассчитанный всплеск",
+  "Chirurgeon Expertise": "Эксперт хирурга",
+  "Combine Elixirs": "Объединение эликсиров",
+  "Combine Elixirs": "Объединить эликсиры",
+
+  "Debilitating Bomb": "Ослабляющая бомба",
+  "Debilitating Bombs": "Ослабляющие бомбы",
+
+  "Efficient Alchemy": "Эффективная алхимия",
+
+  "Expanded Splash": "Расширенный всплеск",
+
+  "Far Lobber": "Дальний метатель",
+
+  "Feral Mutagen": "Дикий мутаген",
+  "Greater Field Discovery": "Великое открытие поля",
+  "Greater Field Discovery (Bomber)": "Великое открытие поля (Бомбардир)",
+  "Greater Field Discovery (Chirurgeon)": "Великое открытие поля (Хирург)",
+  "Greater Field Discovery (Mutagenist)": "Великое открытие поля (Мутагенист)",
+
+  "Healing Bomb": "Лечебная бомба",
+
+  "Improvise Elixir": "Импровизированный эликсир",
+
+  "Mega Bomb": "Мегабомба",
+
+  "Mutagenic Flashback": "Мутагенная вспышка",
+
+  "Perpetual Breadth": "Постоянное расширение",
+  "Perpetual Infusions": "Постоянные настои",
+
+  "Poison Resistance": "Сопротивление ядам",
+
+  "Quick Alchemy": "Быстрая алхимия",
+
+  "Quick Bomber": "Быстрый бомбардир",
+
+  "Revivifying Mutagen": "Возрождающий мутаген",
+
+  "Smoke Bomb": "Дымовая бомба",
+
+  "Sticky Bomb": "Липкая бомба",
+
+  "Sticky Poison": "Липкий яд",
+
+  "Subtle Delivery": "Незаметная доставка",
+
+  "Swift Alchemy": "Быстрая алхимия",
+
+  "Toxicologist's Expertise": "Экспертиза токсиколога",
+
+  "True Mutagen": "Истинный мутаген",
+
+  "Uncanny Bombs": "Необычные бомбы",
+
+  "Unstable Mutagen": "Нестабильный мутаген",
+
+  "Vicious Debilitations": "Жестокие ослабления",
+
+  "Voluminous Vials": "Объёмные флаконы",
+
+  "Calculated Splash": "Рассчитанный всплеск",
+
+  "Double Brew": "Двойное варево",
+
+  "Endless Elixir": "Бесконечный эликсир",
+
+  "Extend Elixir": "Продлить эликсир",
+
+  "Greater Debilitating Bomb": "Великая ослабляющая бомба",
+
+  "Perfect Mutagen": "Совершенный мутаген",
+
+  "Plum Deluge": "Сливовый поток",
+
+  "Witch's Brew": "Ведьмино зелье",
+  "Explode": "Взрыв",
+  "Megaton Strike": "Мегатонный удар",
+  "Megavolt": "Мегавольт",
+  "Gigaton Strike": "Гигатонный удар",
+
+  "Overdrive": "Перегрузка",
+  "Advanced Construct Companion": "Продвинутый механический спутник",
+
+  "Clockwork Celerity": "Часовая стремительность",
+
+  "Collapse Construct": "Свернуть конструкцию",
+
+  "Construct Shell": "Корпус конструкции",
+
+  "Construct Innovation": "Инновация конструкции",
+
+  "Diversified Innovation": "Разнообразная инновация",
+
+  "Energized Siphon": "Энергетический сифон",
+
+  "Explosive Leap": "Взрывной прыжок",
+
+  "Gadget Specialist": "Специалист по гаджетам",
+
+  "Gadget Specialist Dedication": "Посвящение специалиста по гаджетам",
+
+  "Gadget Technician": "Техник гаджетов",
+
+  "Haphazard Repair": "Случайный ремонт",
+
+  "Haphazardly Repaired": "Небрежно отремонтированный",
+
+  "Helpful Tinkering": "Полезное мастерство",
+
+  "Incredible Construct": "Невероятная конструкция",
+
+  "Innovative Weapon": "Инновационное оружие",
+
+  "Inventor Dedication": "Посвящение изобретателя",
+
+  "Megaton Strike": "Мегатонный удар",
+
+  "Negative Feedback": "Обратная связь",
+
+  "Prototype Construct Companion": "Прототип механического спутника",
+
+  "Reverse Engineer": "Обратный инженерный анализ",
+
+  "Revive Innovation": "Возрождение инновации",
+
+  "Rigorous Inventor": "Строгий изобретатель",
+
+  "Tamper": "Вмешательство",
+
+  "Tamper Expertise": "Экспертиза вмешательства",
+
+  "Ubiquitous Overdrive": "Повсеместная перегрузка",
+
+  "Unstable Innovation": "Нестабильная инновация",
+
+  "Weapon Innovation": "Инновация оружия",
+
+  "Armor Innovation": "Инновация брони",
+
+  "Construct Innovation": "Инновация конструкции",
+
+  "Variable Core": "Переменное ядро",
+
+  "Clockwork Celerity": "Часовая стремительность",
+
+  "Collapse Armor": "Сложить броню",
+
+  "Collapse Weapon": "Сложить оружие",
+
+  "Gadget Specialist": "Специалист по гаджетам",
+
+  "Gadget Savant": "Знаток гаджетов",
+
+  "Inventor Expertise": "Экспертиза изобретателя",
+
+  "Brilliant Crafter": "Гениальный мастер",
+
+  "Extra Innovation": "Дополнительная инновация",
+
+  "Impossible Modification": "Невозможная модификация",
+
+  "Reconfigure": "Перенастройка",
+
+  "Shared Innovation": "Общая инновация",
+
+  "Ubiquitous Gadgets": "Повсеместные гаджеты",
+  "Way of the Pistolero": "Путь пистолеро",
+  "Way of the Sniper": "Путь снайпера",
+  "Way of the Vanguard": "Путь авангарда",
+  "Way of the Drifter": "Путь странника",
+  "Way of the Spellshot": "Путь заклинателя",
+
+  "Fake Out": "Блеф",
+  "Risky Reload": "Рискованная перезарядка",
+  "Running Reload": "Бегущая перезарядка",
+
+  "Covered Reload": "Перезарядка под укрытием",
+  "Alchemical Shot": "Алхимический выстрел",
+
+  "Blast Lock": "Взлом выстрелом",
+  "Black Powder Boost": "Усиление чёрного пороха",
+
+  "Fake Out": "Обманный выстрел",
+
+  "Munitions Crafter": "Создатель боеприпасов",
+
+  "Pistol Twirl": "Вращение пистолета",
+
+  "Quick Draw": "Быстрая стрельба",
+
+  "Sword and Pistol": "Меч и пистолет",
+
+  "Sword and Pistol Dedication": "Посвящение меча и пистолета",
+
+  "Crossbow Crack Shot": "Меткий арбалетчик",
+
+  "Hit the Dirt": "Падай на землю",
+
+  "Leap and Fire": "Прыжок и выстрел",
+
+  "Fake Out Expertise": "Экспертиза блефа",
+
+  "Warning Shot": "Предупреждающий выстрел",
+
+  "Called Shot": "Прицельный выстрел",
+
+  "Vital Shot": "Жизненно важный выстрел",
+
+  "Deadeye": "Орлиный глаз",
+
+  "Deadeye's Aim": "Прицеливание орлиного глаза",
+
+  "Perfect Readiness": "Идеальная готовность",
+
+  "Instant Backup": "Мгновенное подкрепление",
+
+  "Penetrating Shot": "Пробивающий выстрел",
+
+  "Ricochet Shot": "Рикошетный выстрел",
+
+  "Scatter Blast": "Разлетающийся залп",
+
+  "Smoke Curtain": "Дымовая завеса",
+
+  "Stab and Blast": "Удар и выстрел",
+
+  "Triggerbrand": "Спусковой клинок",
+
+  "Triggerbrand Salvo": "Залп спускового клинка",
+
+  "Twin Shot Knockdown": "Двойной сбивающий выстрел",
+
+  "Unshakable Aim": "Непоколебимое прицеливание",
+
+  "Vital Shot": "Жизненно важный выстрел",
+
+  "Called Shot Expertise": "Экспертиза прицельного выстрела",
+
+  "Greater Fake Out": "Великий блеф",
+
+  "Impossible Volley": "Невозможный залп",
+
+  "Legendary Shot": "Легендарный выстрел",
+
+  "Ricochet Master": "Мастер рикошета",
+
+  "Spellshot Dedication": "Посвящение заклинателя",
+
+  "Spellshot's Reload": "Перезарядка заклинателя",
+
+  "Spellshot's Counterspell": "Контрзаклинание заклинателя",
+  "Arcane Thesis": "Тезис магии",
+  "Spellbook Prodigy": "Гений книги заклинаний",
+
+  "Arcane Sense": "Чувство магии",
+  "Arcane Shroud": "Тайная завеса",
+
+  "Basic Wizard Spellcasting": "Базовое колдовство волшебника",
+  "Expert Wizard Spellcasting": "Экспертное колдовство волшебника",
+  "Master Wizard Spellcasting": "Мастерское колдовство волшебника",
+
+  "Bond Conservation": "Сохранение связи",
+  "Bonded Focus": "Связанный фокус",
+
+  "Call of the Wild": "Зов дикой природы",
+
+  "Cantrip Expansion": "Расширение заговоров",
+  "Conceal Spell": "Скрыть заклинание",
+
+  "Counterspell": "Контрзаклинание",
+  "Effortless Concentration": "Лёгкая концентрация",
+
+  "Expanded Spell Knowledge": "Расширенные знания заклинаний",
+
+  "Familiar": "Фамильяр",
+
+  "Familiar Focus": "Фокус фамильяра",
+
+  "Linked Focus": "Связанный фокус",
+
+  "Magic Sense": "Магическое чувство",
+
+  "Quickened Casting": "Ускоренное колдовство",
+
+  "Reach Spell": "Дальнее заклинание",
+
+  "Recognize Spell": "Распознать заклинание",
+
+  "Scroll Savant": "Знаток свитков",
+
+  "Spell Combination": "Комбинация заклинаний",
+
+  "Spell Mastery": "Мастерство заклинаний",
+
+  "Steady Spellcasting": "Устойчивое колдовство",
+
+  "Widen Spell": "Расширить заклинание",
+
+  "Wizard's Hand of the Apprentice": "Рука ученика волшебника",
+
+  "Spell Blending": "Смешение заклинаний",
+
+  "Spell Substitution": "Замена заклинания",
+
+  "Spell Tinker": "Настройка заклинаний",
+
+  "Universal Versatility": "Универсальная универсальность",
+
+  "Ancient Spellbook": "Древняя книга заклинаний",
+
+
+  "Magus Dedication": "Посвящение магуса",
+
+  "Arcane Fists": "Тайные кулаки",
+
+  "Arcane Cascade": "Тайный каскад",
+
+  "Arcane Shroud": "Тайная завеса",
+
+  "Spellstrike": "Удар заклинанием",
+
+  "Expansive Spellstrike": "Расширенный удар заклинанием",
+
+  "Fused Staff": "Слитый посох",
+
+  "Hybrid Study": "Гибридное исследование",
+
+  "Inexorable Iron": "Неумолимое железо",
+
+  "Laughing Shadow": "Смеющаяся тень",
+
+  "Sparkling Targe": "Сверкающий щит",
+
+  "Starlit Span": "Звёздный охват",
+
+  "Twisting Tree": "Извивающееся дерево",
+
+  "Cascade Countermeasure": "Контрмера каскада",
+
+  "Conflux Focus": "Фокус конклюкса",
+
+  "Distracting Spellstrike": "Отвлекающий удар заклинанием",
+
+  "Devastating Spellstrike": "Разрушительный удар заклинанием",
+
+  "Meteoric Spellstrike": "Метеорный удар заклинанием",
+
+  "Resounding Cascade": "Громовой каскад",
+
+
+  "Sorcerer Dedication": "Посвящение чародея",
+
+  "Bloodline Breadth": "Расширение родословной",
+
+  "Dangerous Sorcery": "Опасная магия",
+
+  "Divine Evolution": "Божественная эволюция",
+
+  "Esoteric Evolution": "Эзотерическая эволюция",
+
+  "Evolution Surge": "Всплеск эволюции",
+
+  "Greater Bloodline": "Великая родословная",
+
+  "Signature Spell Expansion": "Расширение коронных заклинаний",
+
+  "Signature Spells": "Коронные заклинания",
+
+  "Sorcerous Potency": "Чародейская сила",
+
+  "Steady Spellcasting": "Устойчивое колдовство",
+
+  "Bloodline Focus": "Фокус родословной",
+
+
+  "Psychic Dedication": "Посвящение психика",
+
+  "Amped Cantrip": "Усиленный заговор",
+
+  "Conscious Mind": "Сознательный разум",
+
+  "Distant Grasp": "Далёкая хватка",
+
+  "Infinite Eye": "Бесконечный глаз",
+
+  "Silent Whisper": "Безмолвный шёпот",
+
+  "Tangible Dream": "Осязаемый сон",
+
+  "Unbound Step": "Освобождённый шаг",
+
+  "Unleash Psyche": "Высвободить психику",
+
+  "Strain Mind": "Напряжение разума",
+
+  "Parallel Breakthrough": "Параллельный прорыв",
+
+  "Mental Buffer": "Ментальный буфер",
+
+  "Psi Strikes": "Пси-удары",
+  "Fighter Dedication": "Посвящение воина",
+
+  "Sudden Charge": "Внезапный рывок",
+  "Power Attack": "Мощная атака",
+  "Double Slice": "Двойной удар",
+  "Exacting Strike": "Точная атака",
+  "Vicious Swing": "Жестокий замах",
+
+  "Intimidating Strike": "Устрашающий удар",
+  "Combat Grab": "Боевой захват",
+  "Knockdown": "Сбивание",
+  "Improved Knockdown": "Улучшенное сбивание",
+
+  "Dueling Parry": "Парирование в дуэли",
+  "Dueling Riposte": "Ответный удар дуэлянта",
+
+  "Reactive Shield": "Реактивный щит",
+  "Reactive Strike": "Ответный удар",
+
+  "Attack of Opportunity": "Атака возможности",
+
+  "Exacting Strike": "Точный удар",
+
+  "Furious Focus": "Яростная концентрация",
+
+  "Certain Strike": "Верный удар",
+
+  "Weapon Supremacy": "Превосходство оружия",
+
+  "Graceful Poise": "Грациозная стойка",
+
+  "Boundless Reprisals": "Безграничные возмездия",
+
+  "Determination": "Решимость",
+
+  "Disarming Twist": "Обезоруживающий поворот",
+
+  "Mirror Shield": "Зеркальный щит",
+
+  "Savage Critical": "Жестокий критический удар",
+
+
+  "Ranger Dedication": "Посвящение следопыта",
+
+  "Hunt Prey": "Охота на добычу",
+
+  "Twin Takedown": "Двойное поражение",
+
+  "Hunted Shot": "Охотничий выстрел",
+
+  "Gravity Weapon": "Гравитационное оружие",
+
+  "Monster Hunter": "Охотник на чудовищ",
+
+  "Monster Warden": "Страж чудовищ",
+
+  "Quick Draw": "Быстрая стрельба",
+
+  "Far Shot": "Дальний выстрел",
+
+  "Skirmish Strike": "Манёвр и удар",
+
+  "Disrupt Prey": "Нарушить охоту",
+
+  "Impossible Flurry": "Невозможный шквал",
+
+  "Shared Prey": "Общая добыча",
+
+  "Distracting Shot": "Отвлекающий выстрел",
+
+  "Penetrating Shot": "Пробивающий выстрел",
+
+  "Warden's Boon": "Дар стража",
+
+  "Master Monster Hunter": "Мастер охоты на чудовищ",
+
+  "Legendary Shot": "Легендарный выстрел",
+
+
+  "Rogue Dedication": "Посвящение плута",
+
+  "Sneak Attack": "Скрытая атака",
+
+  "Nimble Dodge": "Ловкое уклонение",
+
+  "Dread Striker": "Ужасающий удар",
+
+  "Gang Up": "Групповая атака",
+
+  "Mobility": "Подвижность",
+
+  "Twin Feint": "Двойной финт",
+
+  "Debilitating Strike": "Ослабляющий удар",
+
+  "Preparation": "Подготовка",
+
+  "Analyze Weakness": "Анализ слабости",
+
+  "Precise Debilitations": "Точные ослабления",
+
+  "Opportune Backstab": "Удачный удар в спину",
+
+  "Distracting Feint": "Отвлекающий финт",
+
+  "Blank Slate": "Чистый лист",
+
+  "Hidden Paragon": "Скрытый парагон",
+
+  "Implausible Infiltration": "Невероятное проникновение",
+
+  "Impossible Striker": "Невозможный боец",
+
+
+  "Barbarian Dedication": "Посвящение варвара",
+
+  "Rage": "Ярость",
+
+  "Raging Intimidation": "Яростное запугивание",
+
+  "Moment of Clarity": "Момент ясности",
+
+  "Furious Finish": "Яростное завершение",
+
+  "Animal Instinct": "Звериный инстинкт",
+
+  "Giant Instinct": "Инстинкт великана",
+
+  "Dragon Instinct": "Инстинкт дракона",
+
+  "Spirit Instinct": "Инстинкт духа",
+
+  "Superstition Instinct": "Инстинкт суеверия",
+
+  "Sudden Charge": "Внезапный рывок",
+
+  "No Escape": "Без побега",
+
+  "Thrash": "Крушение",
+
+  "Come and Get Me": "Иди сюда",
+
+  "Reckless Abandon": "Безрассудная атака",
+
+  "Share Rage": "Общая ярость",
+
+  "Collateral Thrash": "Побочный удар",
+
+  "Unstoppable Juggernaut": "Неудержимый гигант",
+  "Champion Dedication": "Посвящение чемпиона",
+
+  "Deity's Domain": "Домен божества",
+  "Domain Initiate": "Посвящение в домен",
+
+  "Lay on Hands": "Возложение рук",
+
+  "Divine Ally": "Божественный союзник",
+  "Blade Ally": "Союзник-клинок",
+  "Shield Ally": "Союзник-щит",
+  "Steed Ally": "Союзник-скакун",
+
+  "Liberating Step": "Освобождающий шаг",
+  "Retributive Strike": "Ответный удар",
+
+  "Divine Reflexes": "Божественные рефлексы",
+
+  "Radiant Blade Spirit": "Дух сияющего клинка",
+
+  "Champion's Reaction": "Реакция чемпиона",
+
+  "Weight of Guilt": "Бремя вины",
+
+  "Shining Oath": "Сияющая клятва",
+
+  "Aura of Courage": "Аура мужества",
+
+  "Aura of Faith": "Аура веры",
+
+  "Instrument of Zeal": "Орудие рвения",
+
+
+  "Cleric Dedication": "Посвящение жреца",
+
+  "Healing Hands": "Исцеляющие руки",
+
+  "Communal Healing": "Общее исцеление",
+
+  "Advanced Domain": "Продвинутый домен",
+
+  "Expanded Domain Initiate": "Расширенное посвящение в домен",
+
+  "Divine Defense": "Божественная защита",
+
+  "Cast Down": "Повергнуть",
+
+  "Directed Channel": "Направленный канал",
+
+  "Selective Energy": "Избирательная энергия",
+
+  "Channeled Succor": "Направленное облегчение",
+
+
+  "Druid Dedication": "Посвящение друида",
+
+  "Order Explorer": "Исследователь ордена",
+
+  "Animal Companion": "Животный спутник",
+
+  "Wild Shape": "Дикая форма",
+
+  "Untamed Form": "Неукрощённая форма",
+
+  "Storm Born": "Рождённый бурей",
+
+  "Elemental Summons": "Призывы элементалей",
+
+  "Order Magic": "Магия ордена",
+
+  "Primal Focus": "Первобытный фокус",
+
+  "Green Empathy": "Зелёное сочувствие",
+
+  "Timeless Nature": "Вневременная природа",
+
+
+  "Bard Dedication": "Посвящение барда",
+
+  "Composition Spells": "Заклинания композиций",
+
+  "Lingering Composition": "Длительная композиция",
+
+  "Harmonize": "Гармонизация",
+
+  "Inspire Courage": "Вдохновение мужества",
+
+  "Inspire Defense": "Вдохновение защиты",
+
+  "Dirge of Doom": "Песнь рока",
+
+  "Counter Performance": "Контрвыступление",
+
+  "Eclectic Skill": "Разносторонний навык",
+
+  "Versatile Performance": "Универсальное выступление",
+
+  "Synesthesia": "Синестезия",
+
+  "Fatal Aria": "Роковая ария",
+
+
+  "Investigator Dedication": "Посвящение следователя",
+
+  "Devise a Stratagem": "Разработать стратегию",
+
+  "Known Weaknesses": "Известные слабости",
+
+  "That's Odd": "Это странно",
+
+  "Clue In": "Посвятить в тайну",
+
+  "Strategic Strike": "Стратегический удар",
+
+  "Shared Stratagem": "Общая стратегия",
+
+  "Known Vulnerability": "Известная уязвимость",
+
+  "Blind-Fight": "Бой вслепую",
+
+  "Plot the Future": "Предсказать будущее",
+
+
+  "Kineticist Dedication": "Посвящение кинетика",
+
+  "Kinetic Aura": "Кинетическая аура",
+
+  "Elemental Blast": "Стихийный взрыв",
+
+  "Elemental Familiar": "Стихийный фамильяр",
+
+  "Impulse Control": "Контроль импульса",
+
+  "Safe Elements": "Безопасные элементы",
+
+  "Versatile Blasts": "Универсальные взрывы",
+
+  "Effortless Impulse": "Лёгкий импульс",
+
+  "Expand the Portal": "Расширить портал",
+
+  "Omnikinesis": "Омникинез"
 }
