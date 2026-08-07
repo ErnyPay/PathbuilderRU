@@ -23,7 +23,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "dictionaries/ui.json"
+        "dictionaries/*.json"
       ],
       "matches": [
         "https://pathbuilder2e.com/*",
