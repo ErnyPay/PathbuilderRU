@@ -21,54 +21,46 @@ const Dictionary = {
 
     async load() {
 
-    this.dictionaries = {};
+        this.dictionaries = {};
 
-    let total = 0;
+        let total = 0;
 
-    for (const file of this.files) {
+        for (const file of this.files) {
 
-        const url = chrome.runtime.getURL("dictionaries/" + file);
+            const url = chrome.runtime.getURL("dictionaries/" + file);
 
-        console.log("[Dictionary] Loading:", file);
-        console.log("[Dictionary] URL:", url);
+            console.log("[Dictionary] Loading:", file);
+            console.log("[Dictionary] URL:", url);
 
-        try {
+            try {
 
-            const response = await fetch(url);
+                const response = await fetch(url);
 
-            console.log("[Dictionary] Status:", response.status);
+                console.log("[Dictionary] Status:", response.status);
 
-            if (!response.ok) {
-                console.warn("[Dictionary] Не найден:", file);
-                continue;
+                if (!response.ok) {
+                    console.warn("[Dictionary] Не найден:", file);
+                    continue;
+                }
+
+                const json = await response.json();
+
+                Object.assign(this.dictionaries, json);
+
+                total += Object.keys(json).length;
+
+                console.log("[Dictionary]", file, Object.keys(json).length);
+
+            } catch (e) {
+
+                console.error("[Dictionary ERROR]", file);
+                console.error(e);
+
             }
-
-            const json = await response.json();
-
-            Object.assign(this.dictionaries, json);
-
-            total += Object.keys(json).length;
-
-            console.log("[Dictionary]", file, Object.keys(json).length);
-
-        } catch (e) {
-
-            console.error("[Dictionary ERROR]", file);
-            console.error(e);
 
         }
 
-    }
-
-    console.log("[Dictionary] Total:", total);
-
-}
-
-        console.log(
-            "[Dictionary]",
-            total,
-            "entries loaded"
-        );
+        console.log("[Dictionary] Total:", total);
 
     },
 
