@@ -1,166 +1,135 @@
-'use strict';
+console.log("[PathbuilderRU] translator.js loaded");
 
 
-const Translator = {
+window.PathbuilderTranslator = {
+
+    initialized: false,
 
 
-    translate(text) {
+    init() {
 
-        return Dictionary.translate(text);
-
-    },
-
-
-
-    translateTextNode(node) {
-
-        if (!node)
+        if (this.initialized) {
             return;
+        }
 
 
-        if (PathbuilderRU.Cache.has(node))
-            return;
-
-
-        const original = node.nodeValue;
-
-
-        if (!original)
-            return;
-
-
-        const trimmed = original.trim();
-
-
-        if (trimmed.length === 0)
-            return;
-
-
-        PathbuilderRU.Missing.add(trimmed);
-
-
-
-        const translated =
-            this.translate(trimmed);
-
-
-
-        if (!translated)
-            return;
-
-
-
-        node.nodeValue =
-            original.replace(
-                trimmed,
-                translated
-            );
-
-
-
-        PathbuilderRU.Cache.add(node);
-
+        this.initialized = true;
 
 
         console.log(
-            "[RU]",
-            trimmed,
-            "→",
-            translated
+            "[PathbuilderRU] Translator initialized"
         );
+
+
+        this.translatePage();
 
     },
 
 
+    translatePage() {
 
-    translateAttributes(element) {
+        if (!window.PathbuilderDictionary) {
 
+            console.warn(
+                "[PathbuilderRU] Dictionary unavailable"
+            );
 
-        const attrs = [
-            "title",
-            "placeholder",
-            "aria-label"
-        ];
-
-
-
-        for (const attr of attrs) {
+            return;
+        }
 
 
-            if (!element.hasAttribute(attr))
+        const walker =
+            document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode(node) {
+
+                        if (!node.nodeValue.trim()) {
+
+                            return NodeFilter.FILTER_REJECT;
+
+                        }
+
+
+                        return NodeFilter.FILTER_ACCEPT;
+
+                    }
+                }
+            );
+
+
+        const nodes = [];
+
+
+        let node;
+
+
+        while (node = walker.nextNode()) {
+
+            nodes.push(node);
+
+        }
+
+
+
+        for (const textNode of nodes) {
+
+
+            const original =
+                textNode.nodeValue;
+
+
+            const clean =
+                original.trim();
+
+
+
+            if (!clean) {
                 continue;
-
-
-
-            const value =
-                element.getAttribute(attr);
-
-
-
-            PathbuilderRU.Missing.add(value);
+            }
 
 
 
             const translated =
-                this.translate(value);
-
-
-
-            if (translated) {
-
-
-                element.setAttribute(
-                    attr,
-                    translated
+                window.PathbuilderDictionary.translate(
+                    clean
                 );
 
+
+
+            if (
+                translated &&
+                translated !== clean
+            ) {
+
+
+                textNode.nodeValue =
+                    original.replace(
+                        clean,
+                        translated
+                    );
+
+
+                console.log(
+                    "[RU]",
+                    clean,
+                    "→",
+                    translated
+                );
 
             }
 
         }
 
-    },
-
-
-
-    translateNode(node) {
-
-
-        if (!node)
-            return;
-
-
-
-        if (node.nodeType === Node.TEXT_NODE) {
-
-
-            this.translateTextNode(node);
-
-
-            return;
-
-        }
-
-
-
-        if (node.nodeType !== Node.ELEMENT_NODE)
-            return;
-
-
-
-        this.translateAttributes(node);
-
-
-
-        for (const child of node.childNodes) {
-
-
-            this.translateNode(child);
-
-
-        }
 
     }
 
-
 };
+
+
+
+console.log(
+    "[PathbuilderRU] translator object:",
+    window.PathbuilderTranslator
+);
