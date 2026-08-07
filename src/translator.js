@@ -1,16 +1,15 @@
 'use strict';
 
-console.log(
-    "[PathbuilderRU] translator.js loaded"
-);
+console.log("[PathbuilderRU] translator.js loaded");
 
 
 window.Translator = {
 
+    initialized: false,
 
-    initialized:false,
+    translatedTexts: new Map(),
 
-    translatedTexts:new Map(),
+    translating: false,
 
 
     init(){
@@ -24,35 +23,22 @@ window.Translator = {
     },
 
 
-
-
-
     translateText(text){
-
 
         if(
             !text ||
             !window.Dictionary
         ){
-
             return text;
-
         }
 
 
-
-        let clean =
-            text.trim();
-
+        let clean = text.trim();
 
 
         if(!clean){
-
             return text;
-
         }
-
-
 
 
         if(
@@ -64,18 +50,31 @@ window.Translator = {
         }
 
 
+        let result;
 
 
+        try {
 
-        let result =
-            window.Dictionary.translate(clean);
+            result =
+                window.Dictionary.translate(clean);
 
+        }
 
+        catch(e){
+
+            console.error(
+                "[PathbuilderRU] Dictionary error",
+                e
+            );
+
+            result = clean;
+
+        }
 
 
 
         /*
-            обработка длинных описаний
+            Попытка перевода больших описаний
         */
 
         if(
@@ -83,65 +82,19 @@ window.Translator = {
             clean.length > 80
         ){
 
-
-            let parts =
+            let lines =
                 clean.split("\n");
 
 
-
             result =
-                parts.map(
-                    part =>
-                    window.Dictionary.translate(
-                        part
-                    )
+                lines.map(
+                    line =>
+                    window.Dictionary.translate(line)
                 )
                 .join("\n");
 
 
         }
-
-
-
-
-
-        /*
-            поиск по предложениям
-        */
-
-        if(
-            result === clean &&
-            clean.length > 120
-        ){
-
-
-            let sentences =
-                clean.match(
-                    /[^.!?]+[.!?]+/g
-                );
-
-
-
-            if(sentences){
-
-
-                result =
-                    sentences.map(
-                        s =>
-                        window.Dictionary.translate(
-                            s.trim()
-                        )
-                    )
-                    .join(" ");
-
-
-            }
-
-
-        }
-
-
-
 
 
 
@@ -152,16 +105,15 @@ window.Translator = {
 
 
 
-
         if(
             result !== clean
         ){
 
             console.log(
                 "[RU]",
-                clean.substring(0,100),
+                clean.substring(0,80),
                 "→",
-                result.substring(0,100)
+                result.substring(0,80)
             );
 
         }
@@ -170,72 +122,50 @@ window.Translator = {
 
         return result;
 
-
-
     },
 
 
 
 
 
+    translateNode(node){
 
 
-
-
-    translateElement(element){
-
-
-        if(!element){
-
+        if(!node){
             return;
-
         }
 
 
-
-
         /*
-            TEXT NODE
+            Текстовые узлы
         */
 
-
         if(
-            element.nodeType === Node.TEXT_NODE
+            node.nodeType === Node.TEXT_NODE
         ){
 
-
             let old =
-                element.nodeValue;
-
+                node.nodeValue;
 
 
             let clean =
                 old.trim();
 
 
-
             if(!clean){
-
                 return;
-
             }
 
 
-
-
             let translated =
-                this.translateText(
-                    clean
-                );
-
-
+                this.translateText(clean);
 
 
             if(
                 translated !== clean
             ){
 
-                element.nodeValue =
+                node.nodeValue =
                     old.replace(
                         clean,
                         translated
@@ -251,10 +181,8 @@ window.Translator = {
 
 
 
-
-
         if(
-            element.nodeType !== Node.ELEMENT_NODE
+            node.nodeType !== Node.ELEMENT_NODE
         ){
 
             return;
@@ -265,18 +193,16 @@ window.Translator = {
 
 
 
-
         /*
-            дети
+            Сначала дети
         */
 
-
         [
-            ...element.childNodes
-
-        ].forEach(
+            ...node.childNodes
+        ]
+        .forEach(
             child =>
-            this.translateElement(child)
+            this.translateNode(child)
         );
 
 
@@ -286,27 +212,19 @@ window.Translator = {
 
 
         /*
-            атрибуты
+            Атрибуты
         */
-
 
         const attrs = [
 
             "title",
-
             "aria-label",
-
             "placeholder",
-
             "alt",
-
             "data-tooltip",
-
             "data-content",
-
             "data-description",
-
-            "data-text"
+            "data-original-title"
 
         ];
 
@@ -316,31 +234,31 @@ window.Translator = {
 
 
             if(
-                element.hasAttribute(attr)
+                !node.hasAttribute(attr)
+            ){
+                return;
+            }
+
+
+
+            let old =
+                node.getAttribute(attr);
+
+
+
+            let translated =
+                this.translateText(old);
+
+
+
+            if(
+                old !== translated
             ){
 
-
-                let old =
-                    element.getAttribute(attr);
-
-
-
-                let translated =
-                    this.translateText(old);
-
-
-
-                if(
-                    translated !== old
-                ){
-
-                    element.setAttribute(
-                        attr,
-                        translated
-                    );
-
-                }
-
+                node.setAttribute(
+                    attr,
+                    translated
+                );
 
             }
 
@@ -353,38 +271,29 @@ window.Translator = {
 
 
 
+
         /*
-            React часто кладет описание сюда
+            INPUT / BUTTON
         */
 
-
         if(
-            element.innerHTML &&
-            element.children.length === 0
+            node.value
         ){
-
-
-            let html =
-                element.innerHTML;
-
-
 
             let translated =
                 this.translateText(
-                    html
+                    node.value
                 );
 
 
-
             if(
-                translated !== html
+                translated !== node.value
             ){
 
-                element.innerHTML =
+                node.value =
                     translated;
 
             }
-
 
         }
 
@@ -392,28 +301,35 @@ window.Translator = {
 
 
 
-
-
-
         /*
-            input/button
+            ВАЖНО:
+            ловим всплывающие описания Pathbuilder
         */
 
-
         if(
-            element.value
+            node.innerText &&
+            node.innerText.length > 20
         ){
 
 
+            let old =
+                node.innerText;
+
+
             let translated =
-                this.translateText(
-                    element.value
-                );
+                this.translateText(old);
 
 
-            element.value =
-                translated;
 
+            if(
+                translated !== old &&
+                node.children.length === 0
+            ){
+
+                node.textContent =
+                    translated;
+
+            }
 
         }
 
@@ -429,21 +345,49 @@ window.Translator = {
 
 
 
-
-
     translatePage(){
 
 
-        console.log(
-            "[PathbuilderRU] Translating page"
-        );
+        if(
+            this.translating
+        ){
+            return;
+        }
 
 
-        this.translateElement(
-            document.body
-        );
+        this.translating = true;
+
+
+        try{
+
+
+            console.log(
+                "[PathbuilderRU] Translating page"
+            );
+
+
+            this.translateNode(
+                document.body
+            );
+
+
+        }
+
+        catch(e){
+
+            console.error(
+                "[PathbuilderRU] Translation error",
+                e
+            );
+
+        }
+
+
+
+        this.translating = false;
 
 
     }
+
 
 };
