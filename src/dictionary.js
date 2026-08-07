@@ -1,32 +1,16 @@
 console.log("[PathbuilderRU] dictionary.js loaded");
 
 
-class Dictionary {
-
-    constructor() {
-
-        this.dictionary = {};
-
-        this.files = [
-            "ui.json",
-            "classes.json",
-            "ancestries.json",
-            "heritages.json",
-            "backgrounds.json",
-            "feats.json",
-            "spells.json",
-            "items.json",
-            "traits.json",
-            "skills.json",
-            "actions.json",
-            "conditions.json"
-        ];
-
-    }
+const Dictionary = {
 
 
+    data:{},
 
-    async load() {
+
+    total:0,
+
+
+    async load(){
 
 
         console.log(
@@ -34,24 +18,43 @@ class Dictionary {
         );
 
 
-        for (const file of this.files) {
+
+        const files = [
+
+            "ui",
+            "classes",
+            "ancestries",
+            "heritages",
+            "backgrounds",
+            "feats",
+            "spells",
+            "items",
+            "traits",
+            "skills",
+            "actions",
+            "condition"
+
+        ];
 
 
-            try {
+
+        for(const file of files){
+
+
+            try{
 
 
                 console.log(
                     "[Dictionary] Loading:",
-                    file
+                    file + ".json"
                 );
 
 
+
                 const url =
-                    new URL(
-                        chrome.runtime.getURL(
-                            "dictionaries/" + file
-                        )
-                    ).href;
+                    chrome.runtime.getURL(
+                        "dictionaries/" + file + ".json"
+                    );
 
 
 
@@ -60,57 +63,34 @@ class Dictionary {
 
 
 
-                if (!response.ok) {
-
-                    throw new Error(
-                        "HTTP " + response.status
-                    );
-
-                }
-
-
-
-                const data =
+                const json =
                     await response.json();
 
 
 
-                let count = 0;
-
-
-
-                Object.entries(data)
-                    .forEach(
-                        ([key,value])=>{
-
-
-                            if(
-                                !this.dictionary[key]
-                            ){
-
-                                this.dictionary[key]=value;
-                                count++;
-
-                            }
-
-                        }
-                    );
+                this.data =
+                    {
+                        ...this.data,
+                        ...json
+                    };
 
 
 
                 console.log(
                     "[Dictionary]",
-                    file,
-                    count,
+                    file + ".json",
+                    Object.keys(json).length,
                     "entries"
                 );
 
 
 
-            }
+                this.total +=
+                    Object.keys(json).length;
 
 
-            catch(error){
+
+            }catch(error){
 
 
                 console.error(
@@ -122,22 +102,22 @@ class Dictionary {
 
             }
 
+
         }
 
 
 
         console.log(
             "[Dictionary] TOTAL:",
-            Object.keys(
-                this.dictionary
-            ).length
+            this.total
         );
 
 
+        return true;
 
-        return this.dictionary;
 
-    }
+    },
+
 
 
 
@@ -150,19 +130,87 @@ class Dictionary {
 
 
 
-        return (
-            this.dictionary[text]
-            ||
-            text
-        );
+        const entry =
+            this.data[text];
+
+
+
+        if(!entry)
+            return text;
+
+
+
+        /*
+            Старый формат:
+
+            {
+              "Monk":"Монах"
+            }
+        */
+
+
+        if(typeof entry === "string"){
+
+
+            return entry;
+
+
+        }
+
+
+
+
+
+        /*
+            Новый формат:
+
+            {
+              "Battle Medicine":{
+                   "name":"Боевая медицина",
+                   "description":"..."
+              }
+            }
+        */
+
+
+        if(typeof entry === "object"){
+
+
+
+            if(entry.name){
+
+                return entry.name;
+
+            }
+
+
+
+            if(entry.description){
+
+                return entry.description;
+
+            }
+
+
+        }
+
+
+
+        return text;
+
 
     }
 
 
-}
+};
 
 
 
 
-window.PathbuilderDictionary =
-new Dictionary();
+window.Dictionary = Dictionary;
+
+
+
+console.log(
+    "[PathbuilderRU] Dictionary ready"
+);
