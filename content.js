@@ -1,11 +1,22 @@
 'use strict';
 
-const Cache = new Set();
-const Missing = new Set();
 
 console.log(
     "[PathbuilderRU] Starting..."
 );
+
+
+// Используем существующие переменные,
+// если они уже созданы другими файлами
+
+if (typeof Cache === "undefined") {
+    var Cache = new Set();
+}
+
+if (typeof Missing === "undefined") {
+    var Missing = new Set();
+}
+
 
 (async () => {
 
@@ -17,13 +28,16 @@ console.log(
             "[PathbuilderRU] Dictionary loaded"
         );
 
+
         Translator.translateNode(
             document.body
         );
 
+
         console.log(
             "[PathbuilderRU] Initial translation complete"
         );
+
 
     }
     catch (e) {
@@ -38,8 +52,6 @@ console.log(
 })();
 
 
-// Следим за изменениями страницы
-// Pathbuilder динамически меняет интерфейс
 
 const observer = new MutationObserver(
     mutations => {
@@ -51,6 +63,7 @@ const observer = new MutationObserver(
                 if (!node)
                     continue;
 
+
                 Translator.translateNode(node);
 
             }
@@ -59,6 +72,7 @@ const observer = new MutationObserver(
 
     }
 );
+
 
 
 observer.observe(
@@ -70,10 +84,11 @@ observer.observe(
 );
 
 
-// Экспортируем доступ для других файлов
+
 window.PathbuilderRU = {
 
-    Cache,
-    Missing
+    Cache: Cache,
+
+    Missing: Missing
 
 };
