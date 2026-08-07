@@ -3,6 +3,7 @@ console.log("[PathbuilderRU] translator.js loaded");
 
 window.Translator = {
 
+
     initialized: false,
 
 
@@ -17,6 +18,7 @@ window.Translator = {
     },
 
 
+
     translateText(text) {
 
         if (!text) return text;
@@ -24,7 +26,7 @@ window.Translator = {
         if (!window.Dictionary) return text;
 
 
-        let result =
+        const result =
             window.Dictionary.translate(text);
 
 
@@ -32,9 +34,9 @@ window.Translator = {
 
             console.log(
                 "[RU]",
-                text.substring(0,80),
+                text,
                 "→",
-                result.substring(0,80)
+                result
             );
 
         }
@@ -46,24 +48,28 @@ window.Translator = {
 
 
 
-    translateNode(node) {
+
+    translateElement(element) {
 
 
-        if (!node) return;
+        if (!element) return;
 
 
+
+        // TEXT NODE
 
         if (
-            node.nodeType === Node.TEXT_NODE
+            element.nodeType === Node.TEXT_NODE
         ) {
 
 
-            let old =
-                node.nodeValue;
+            const oldText =
+                element.nodeValue;
 
 
-            let clean =
-                old.trim();
+
+            const clean =
+                oldText.trim();
 
 
 
@@ -71,7 +77,7 @@ window.Translator = {
 
 
 
-            let translated =
+            const translated =
                 this.translateText(clean);
 
 
@@ -81,8 +87,8 @@ window.Translator = {
             ) {
 
 
-                node.nodeValue =
-                    old.replace(
+                element.nodeValue =
+                    oldText.replace(
                         clean,
                         translated
                     );
@@ -100,20 +106,24 @@ window.Translator = {
 
 
         if (
-            node.nodeType !== Node.ELEMENT_NODE
-        ) return;
+            element.nodeType !== Node.ELEMENT_NODE
+        ) {
+
+            return;
+
+        }
 
 
 
 
 
+        // CHILDREN
 
-        // переводим весь текст внутри
+        [
+            ...element.childNodes
+        ].forEach(child => {
 
-        [...node.childNodes]
-        .forEach(child=>{
-
-            this.translateNode(child);
+            this.translateElement(child);
 
         });
 
@@ -121,141 +131,141 @@ window.Translator = {
 
 
 
-        // title
-
-        this.translateAttribute(
-            node,
-            "title"
-        );
 
 
+        // обычные атрибуты
 
-        // aria
-
-        this.translateAttribute(
-            node,
-            "aria-label"
-        );
+        const attributes = [
 
 
+            "title",
 
-        // placeholder
+            "aria-label",
 
-        this.translateAttribute(
-            node,
-            "placeholder"
-        );
+            "placeholder",
 
-
-
-        // value кнопок
-
-        if(
-            node.value
-        ){
-
-            let old =
-                node.value;
+            "alt",
 
 
-            let translated =
-                this.translateText(old);
+            "data-tooltip",
+
+            "data-content",
+
+            "data-description",
+
+            "data-text"
+
+
+        ];
 
 
 
-            if(old!==translated){
 
-                node.value =
-                    translated;
+        attributes.forEach(attr => {
+
+
+
+            if (
+                element.hasAttribute(attr)
+            ) {
+
+
+
+                const old =
+                    element.getAttribute(attr);
+
+
+
+                const translated =
+                    this.translateText(old);
+
+
+
+
+                if (
+                    old !== translated
+                ) {
+
+
+
+                    element.setAttribute(
+                        attr,
+                        translated
+                    );
+
+
+                    console.log(
+                        "[RU ATTR]",
+                        attr,
+                        old,
+                        "→",
+                        translated
+                    );
+
+
+                }
+
 
             }
 
-        }
+
+        });
 
 
 
-        // DATA ATTRIBUTES
-        // тут лежат описания React
 
 
-        [...node.attributes]
-        .forEach(attr=>{
 
 
-            if(
-                attr.name.startsWith("data-")
-            ){
+        // INPUT / BUTTON VALUE
 
 
-                let old =
-                    attr.value;
+        if (
+
+            element.tagName === "INPUT" ||
+
+            element.tagName === "BUTTON"
+
+        ) {
 
 
-                let translated =
+
+            if(element.value){
+
+
+
+                const old =
+                    element.value;
+
+
+
+                const translated =
                     this.translateText(old);
 
 
 
                 if(
-                    old!==translated
+                    old !== translated
                 ){
 
-                    node.setAttribute(
-                        attr.name,
-                        translated
-                    );
+
+                    element.value =
+                        translated;
+
 
                 }
+
 
             }
 
 
-        });
-
-
-
-    },
-
-
-
-
-
-    translateAttribute(
-        element,
-        attribute
-    ){
-
-
-        if(
-            !element.hasAttribute(attribute)
-        )
-        return;
-
-
-
-        let old =
-            element.getAttribute(attribute);
-
-
-
-        let translated =
-            this.translateText(old);
-
-
-
-        if(
-            old!==translated
-        ){
-
-            element.setAttribute(
-                attribute,
-                translated
-            );
-
         }
 
 
+
+
     },
+
 
 
 
@@ -271,7 +281,7 @@ window.Translator = {
 
 
 
-        this.translateNode(
+        this.translateElement(
             document.body
         );
 
