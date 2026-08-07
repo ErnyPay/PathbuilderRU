@@ -7,40 +7,14 @@ console.log(
 
 
 
-
-
 window.Dictionary = {
-
 
 
     data:{},
 
+    phrases:{},
 
-    initialized:false,
-
-
-
-    files:[
-
-        "ui",
-        "classes",
-        "ancestries",
-        "heritages",
-        "backgrounds",
-        "feats",
-        "feat_descriptions",
-        "spells",
-        "spell_descriptions",
-        "items",
-        "item_descriptions",
-        "traits",
-        "skills",
-        "actions",
-        "condition"
-
-    ],
-
-
+    loaded:false,
 
 
 
@@ -55,11 +29,55 @@ window.Dictionary = {
 
 
 
+        const files = [
+
+            "ui",
+
+            "classes",
+
+            "ancestries",
+
+            "heritages",
+
+            "backgrounds",
+
+            "feats",
+
+            "feat_descriptions",
+
+            "spells",
+
+            "spell_descriptions",
+
+            "items",
+
+            "item_descriptions",
+
+            "traits",
+
+            "skills",
+
+            "actions",
+
+            "condition",
+
+            "phrases"
+
+        ];
+
+
+
+
+
+        let total = 0;
+
+
+
+
 
         for(
-            const file of this.files
+            const file of files
         ){
-
 
 
             try{
@@ -72,20 +90,23 @@ window.Dictionary = {
 
 
 
-                const response =
-                    await fetch(
-                        chrome.runtime.getURL(
-                            "dictionaries/" + file + ".json"
-                        )
+                const url =
+                    chrome.runtime.getURL(
+                        "dictionaries/" +
+                        file +
+                        ".json"
                     );
 
+
+
+                const response =
+                    await fetch(url);
 
 
 
                 if(
                     !response.ok
                 ){
-
 
                     console.warn(
                         "[Dictionary] Missing:",
@@ -99,7 +120,6 @@ window.Dictionary = {
 
 
 
-
                 const json =
                     await response.json();
 
@@ -107,30 +127,59 @@ window.Dictionary = {
 
 
 
-                this.data[file]=json;
+                if(
+                    file === "phrases"
+                ){
+
+
+                    this.phrases =
+                        json;
+
+
+                    console.log(
+                        "[Dictionary] phrases",
+                        Object.keys(json).length
+                    );
+
+
+                }
+
+                else{
+
+
+                    this.data[file] =
+                        json;
+
+
+                    total +=
+                        Object.keys(json).length;
 
 
 
-                console.log(
-                    "[Dictionary]",
-                    file,
-                    Object.keys(json).length,
-                    "entries"
-                );
+                    console.log(
+                        "[Dictionary]",
+                        file,
+                        Object.keys(json).length,
+                        "entries"
+                    );
 
+
+                }
 
 
 
 
             }
 
-            catch(e){
+            catch(error){
 
 
                 console.error(
-                    "[Dictionary] Failed:",
+
+                    "[Dictionary] Error:",
                     file,
-                    e
+                    error
+
                 );
 
 
@@ -146,20 +195,7 @@ window.Dictionary = {
 
 
 
-        let total=0;
-
-
-        Object.values(
-            this.data
-        ).forEach(dict=>{
-
-
-            total +=
-                Object.keys(dict).length;
-
-
-        });
-
+        this.loaded = true;
 
 
 
@@ -167,11 +203,6 @@ window.Dictionary = {
             "[Dictionary] TOTAL:",
             total
         );
-
-
-
-
-        this.initialized=true;
 
 
 
@@ -194,6 +225,7 @@ window.Dictionary = {
     translate(text){
 
 
+
         if(
             !text
         )
@@ -201,18 +233,36 @@ window.Dictionary = {
 
 
 
+
+
+        let result =
+            text;
+
+
+
+
+
+        /*
+            1. точное совпадение
+        */
+
+
+
         for(
-            const dict of Object.values(this.data)
+            const group in this.data
         ){
+
+
+            let dict =
+                this.data[group];
 
 
 
             if(
-                dict[text]
+                dict[result]
             ){
 
-
-                return dict[text];
+                return dict[result];
 
             }
 
@@ -222,12 +272,125 @@ window.Dictionary = {
 
 
 
-        return text;
+
+
+
+
+
+        /*
+            2. перевод фраз внутри текста
+        */
+
+
+
+        const phraseKeys =
+            Object.keys(
+                this.phrases
+            )
+            .sort(
+                (a,b)=>
+                b.length-a.length
+            );
+
+
+
+
+
+        for(
+            const phrase of phraseKeys
+        ){
+
+
+            if(
+                result.includes(
+                    phrase
+                )
+            ){
+
+
+                result =
+                    result.replaceAll(
+
+                        phrase,
+
+                        this.phrases[phrase]
+
+                    );
+
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+        /*
+            3. перевод предложений
+        */
+
+
+        if(
+            result === text &&
+            text.length > 60
+        ){
+
+
+            const sentences =
+                text.split(
+                    /(?<=[.!?])\s+/
+                );
+
+
+
+            let translated = [];
+
+
+
+            for(
+                const sentence of sentences
+            ){
+
+
+                let s =
+                    this.translate(sentence);
+
+
+
+                translated.push(
+                    s
+                );
+
+
+            }
+
+
+
+            result =
+                translated.join(
+                    " "
+                );
+
+
+        }
+
+
+
+
+
+
+
+        return result;
+
 
 
     }
-
-
 
 
 
