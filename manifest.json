@@ -3,7 +3,6 @@
   "name": "Pathbuilder 2e RU",
   "version": "0.0.1",
   "description": "Русификатор Pathbuilder 2e",
-
   "content_scripts": [
     {
       "matches": [
@@ -20,7 +19,6 @@
       "run_at": "document_idle"
     }
   ],
-
   "web_accessible_resources": [
     {
       "resources": [

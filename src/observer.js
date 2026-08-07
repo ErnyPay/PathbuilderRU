@@ -2,26 +2,26 @@
 
 const Observer = {
 
-    observer: null,
+    instance: null,
 
     start() {
 
-        if (this.observer) {
+        if (this.instance) {
             return;
         }
 
-        this.observer = new MutationObserver((mutations) => {
+        this.instance = new MutationObserver((mutations) => {
 
             for (const mutation of mutations) {
 
-                // Новые элементы
+                // новые элементы
                 for (const node of mutation.addedNodes) {
 
                     Translator.translateNode(node);
 
                 }
 
-                // Изменение текста
+                // изменён текст
                 if (mutation.type === "characterData") {
 
                     Translator.translateNode(
@@ -34,7 +34,7 @@ const Observer = {
 
         });
 
-        this.observer.observe(document.body, {
+        this.instance.observe(document.body, {
 
             childList: true,
             subtree: true,
@@ -43,6 +43,17 @@ const Observer = {
         });
 
         console.log("[Observer] Started");
+
+    },
+
+    stop() {
+
+        if (!this.instance)
+            return;
+
+        this.instance.disconnect();
+
+        this.instance = null;
 
     }
 
