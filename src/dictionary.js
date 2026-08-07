@@ -210,6 +210,9 @@ const Dictionary = {
 window.Dictionary = Dictionary;
 
 
+// совместимость со старым content.js
+window.dictionary = Dictionary;
+
 
 console.log(
     "[PathbuilderRU] Dictionary ready"
