@@ -31,7 +31,10 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "dictionaries/*.json"
+        "dictionary.js",
+        "translator.js",
+        "observer.js",
+        "content.js"
       ],
       "matches": [
         "https://pathbuilder2e.com/*",

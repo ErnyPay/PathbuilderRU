@@ -1,61 +1,68 @@
 console.log("[PathbuilderRU] observer.js loaded");
 
 
-const PathbuilderObserver = {
+window.observer = {
+
 
     observer: null,
 
 
     start() {
 
+
+        console.log(
+            "[PathbuilderRU] Starting MutationObserver"
+        );
+
+
         if (this.observer) {
-            console.log("[PathbuilderRU] observer already running");
+
             return;
+
         }
 
 
-        console.log("[PathbuilderRU] Starting MutationObserver");
+
+        this.observer =
+        new MutationObserver(
+            mutations => {
 
 
-        this.observer = new MutationObserver((mutations)=>{
+                console.log(
+                    "[PathbuilderRU] Dynamic translation"
+                );
 
 
-            let needTranslate = false;
+                mutations.forEach(
+                    mutation => {
 
 
-            for (const mutation of mutations) {
+                        mutation.addedNodes.forEach(
+                            node => {
 
 
-                if (mutation.addedNodes.length > 0) {
-                    needTranslate = true;
-                    break;
-                }
-
-            }
+                                if (
+                                    node.nodeType === Node.ELEMENT_NODE
+                                ) {
 
 
-            if (needTranslate) {
+                                    window.translator
+                                    .translateElement(node);
 
-                clearTimeout(this.timer);
+
+                                }
 
 
-                this.timer = setTimeout(()=>{
+                            }
+                        );
 
-                    if(window.PathbuilderTranslator){
-
-                        console.log("[PathbuilderRU] Dynamic translation");
-
-                        window.PathbuilderTranslator.translatePage();
 
                     }
+                );
 
-
-                },300);
 
             }
-
-
-        });
+        );
 
 
 
@@ -68,18 +75,19 @@ const PathbuilderObserver = {
         );
 
 
-        console.log("[PathbuilderRU] Observer active");
+
+        console.log(
+            "[PathbuilderRU] Observer active"
+        );
+
 
     }
+
 
 };
 
 
-
-window.PathbuilderObserver = PathbuilderObserver;
-
-
 console.log(
     "[PathbuilderRU] observer object:",
-    PathbuilderObserver
+    window.observer
 );

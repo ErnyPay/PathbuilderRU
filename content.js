@@ -1,4 +1,7 @@
-console.log("[PathbuilderRU] Starting...");
+console.log(
+    "[PathbuilderRU] Starting..."
+);
+
 
 (async()=>{
 
@@ -11,10 +14,13 @@ console.log("[PathbuilderRU] Starting...");
     );
 
 
-    translator.init();
+
+    window.translator.init();
 
 
-    translator.translatePage();
+
+    window.translator.translatePage();
+
 
 
     console.log(
@@ -22,7 +28,9 @@ console.log("[PathbuilderRU] Starting...");
     );
 
 
-    observer.start();
+
+    window.observer.start();
+
 
 
 })();
