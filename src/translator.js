@@ -182,5 +182,6 @@ window.translator = {
 
 console.log(
     "[PathbuilderRU] translator object:",
-    window.translator
+    translator
+    
 );
