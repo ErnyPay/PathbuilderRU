@@ -133,3 +133,10 @@ console.log(
     "[PathbuilderRU] translator object:",
     window.PathbuilderTranslator
 );
+window.PathbuilderTranslator = translator;
+
+
+console.log(
+"[PathbuilderRU] translator object:",
+translator
+);

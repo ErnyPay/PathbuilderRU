@@ -1,80 +1,32 @@
-(async () => {
-
-    console.log("[PathbuilderRU] Starting...");
+console.log("[PathbuilderRU] Starting...");
 
 
-    // Загружаем словарь
-    await PathbuilderDictionary.load();
+(async()=>{
 
 
-    console.log(
-        "[PathbuilderRU] Dictionary loaded"
-    );
+    await window.PathbuilderDictionary.load();
 
 
-    // Запускаем переводчик
-    if (window.PathbuilderTranslator) {
+    console.log("[PathbuilderRU] Dictionary loaded");
 
-        window.PathbuilderTranslator.init();
 
-        console.log(
-            "[PathbuilderRU] Initial translation complete"
-        );
 
-    }
+    window.PathbuilderTranslator.init();
 
-    else {
 
-        console.error(
-            "[PathbuilderRU] Translator not found"
-        );
+    console.log("[PathbuilderRU] Initial translation complete");
+
+
+
+    window.PathbuilderTranslator.translatePage();
+
+
+
+    if(window.PathbuilderObserver){
+
+        window.PathbuilderObserver.start();
 
     }
-
-
-
-    // Повторный перевод после динамической загрузки UI
-    const observer =
-        new MutationObserver(
-            (mutations) => {
-
-                let changed = false;
-
-
-                for (const mutation of mutations) {
-
-                    if (
-                        mutation.addedNodes.length
-                    ) {
-
-                        changed = true;
-                        break;
-
-                    }
-
-                }
-
-
-                if (changed) {
-
-                    window.PathbuilderTranslator
-                        ?.translatePage();
-
-                }
-
-            }
-        );
-
-
-
-    observer.observe(
-        document.body,
-        {
-            childList:true,
-            subtree:true
-        }
-    );
-
 
 
 })();
