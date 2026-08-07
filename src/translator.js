@@ -7,17 +7,17 @@ console.log(
 
 
 
-window.Translator = {
 
+window.Translator = {
 
 
     initialized:false,
 
 
+    cache:new Map(),
+
+
     translatedNodes:new WeakSet(),
-
-
-    translatedTexts:new Map(),
 
 
 
@@ -48,9 +48,7 @@ window.Translator = {
 
 
 
-        if(
-            !text
-        ){
+        if(!text){
 
             return text;
 
@@ -71,19 +69,14 @@ window.Translator = {
 
 
 
-        const cached =
-            this.translatedTexts.get(text);
-
-
 
         if(
-            cached
+            this.cache.has(text)
         ){
 
-            return cached;
+            return this.cache.get(text);
 
         }
-
 
 
 
@@ -99,10 +92,20 @@ window.Translator = {
 
 
 
+        this.cache.set(
+            text,
+            result
+        );
+
+
+
+
+
+
+
         if(
             result !== text
         ){
-
 
             console.log(
                 "[RU]",
@@ -111,18 +114,7 @@ window.Translator = {
                 result
             );
 
-
         }
-
-
-
-
-
-
-        this.translatedTexts.set(
-            text,
-            result
-        );
 
 
 
@@ -142,13 +134,11 @@ window.Translator = {
 
 
 
-    translateElement(element){
+    translateNode(node){
 
 
 
-        if(
-            !element
-        ){
+        if(!node){
 
             return;
 
@@ -159,23 +149,23 @@ window.Translator = {
 
 
 
-
-
-        // TEXT NODE
-
         if(
-            element.nodeType === Node.TEXT_NODE
+            node.nodeType === Node.TEXT_NODE
         ){
 
 
 
             const old =
-                element.nodeValue;
+                node.nodeValue;
+
+
 
 
 
             const clean =
                 old.trim();
+
+
 
 
 
@@ -208,11 +198,12 @@ window.Translator = {
 
 
 
-                element.nodeValue =
+                node.nodeValue =
                     old.replace(
                         clean,
                         translated
                     );
+
 
 
             }
@@ -236,7 +227,7 @@ window.Translator = {
 
 
         if(
-            element.nodeType !== Node.ELEMENT_NODE
+            node.nodeType !== Node.ELEMENT_NODE
         ){
 
             return;
@@ -249,21 +240,47 @@ window.Translator = {
 
 
 
-        // children
+
+        // пропускаем уже обработанные
+
+        if(
+            this.translatedNodes.has(node)
+        ){
+
+            return;
+
+        }
+
+
+
+
+
+
+
+
+        this.translatedNodes.add(node);
+
+
+
+
+
+
+
+
+        // дети
+
 
         [
-            ...element.childNodes
+            ...node.childNodes
 
-        ].forEach(child => {
+        ].forEach(
+            child=>{
 
+                this.translateNode(child);
 
+            }
 
-            this.translateElement(child);
-
-
-
-        });
-
+        );
 
 
 
@@ -272,10 +289,31 @@ window.Translator = {
 
 
 
-        // attributes
+
+        this.translateAttributes(node);
 
 
-        const attributes = [
+
+
+
+
+
+
+    },
+
+
+
+
+
+
+
+
+
+    translateAttributes(element){
+
+
+
+        const attrs = [
 
 
             "title",
@@ -292,9 +330,7 @@ window.Translator = {
 
             "data-description",
 
-            "data-text",
-
-            "data-name"
+            "data-text"
 
 
         ];
@@ -305,56 +341,51 @@ window.Translator = {
 
 
 
-        attributes.forEach(attr => {
+
+        attrs.forEach(attr=>{
 
 
 
             if(
-                !element.hasAttribute(attr)
-            ){
-
-                return;
-
-            }
-
-
-
-
-
-
-
-            const old =
-                element.getAttribute(attr);
-
-
-
-
-
-            const translated =
-                this.translateText(old);
-
-
-
-
-
-
-            if(
-                translated !== old
+                element.hasAttribute(attr)
             ){
 
 
 
-                element.setAttribute(
-                    attr,
-                    translated
-                );
+                const old =
+                    element.getAttribute(attr);
+
+
+
+
+
+                const translated =
+                    this.translateText(old);
+
+
+
+
+
+
+                if(
+                    old !== translated
+                ){
+
+
+
+                    element.setAttribute(
+                        attr,
+                        translated
+                    );
+
+
+
+                }
+
 
 
 
             }
-
-
-
 
 
 
@@ -366,31 +397,17 @@ window.Translator = {
 
 
 
-
-
-        // input/button value
-
-
         if(
 
-
-            element.tagName === "INPUT"
-
-
-            ||
+            element.tagName === "INPUT" ||
 
             element.tagName === "BUTTON"
-
 
         ){
 
 
 
-
-
-            if(
-                element.value
-            ){
+            if(element.value){
 
 
 
@@ -400,8 +417,10 @@ window.Translator = {
 
 
 
+
                 const translated =
                     this.translateText(old);
+
 
 
 
@@ -422,9 +441,8 @@ window.Translator = {
             }
 
 
+
         }
-
-
 
 
 
@@ -450,24 +468,9 @@ window.Translator = {
 
 
 
-
-        if(
-            !document.body
-        ){
-
-            return;
-
-        }
-
-
-
-
-
-
-        this.translateElement(
+        this.translateNode(
             document.body
         );
-
 
 
 
@@ -475,9 +478,4 @@ window.Translator = {
 
 
 
-
-
-
 };
-
-

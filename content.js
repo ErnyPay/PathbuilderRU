@@ -7,62 +7,30 @@ console.log(
 
 
 
-(async function(){
 
 
-    const dictionaries = [
+(async()=>{
 
-        "ui",
 
-        "classes",
 
-        "ancestries",
-
-        "heritages",
-
-        "backgrounds",
-
-        "feats",
-
-        "feat_descriptions",
-
-        "spells",
-
-        "spell_descriptions",
-
-        "items",
-
-        "item_descriptions",
-
-        "traits",
-
-        "skills",
-
-        "actions",
-
-        "condition"
-
-    ];
+    try{
 
 
 
 
 
-    try {
-
-
-
-        if (
+        if(
             !window.Dictionary
-        ) {
+        ){
+
 
 
             console.error(
-                "[PathbuilderRU] Dictionary not found"
+                "[PathbuilderRU] Dictionary missing"
             );
 
-
             return;
+
 
         }
 
@@ -71,9 +39,8 @@ console.log(
 
 
 
-        await window.Dictionary.load(
-            dictionaries
-        );
+        await window.Dictionary.load();
+
 
 
 
@@ -89,15 +56,16 @@ console.log(
 
 
 
-        if (
+
+        if(
             !window.Translator
-        ) {
+        ){
+
 
 
             console.error(
-                "[PathbuilderRU] Translator not found"
+                "[PathbuilderRU] Translator missing"
             );
-
 
             return;
 
@@ -116,6 +84,7 @@ console.log(
 
 
 
+
         console.log(
             "[PathbuilderRU] Translator initialized"
         );
@@ -126,21 +95,18 @@ console.log(
 
 
 
-        setTimeout(() => {
+        // первая обработка страницы
+
+
+        window.Translator.translatePage();
 
 
 
-            window.Translator.translatePage();
 
 
-
-            console.log(
-                "[PathbuilderRU] Initial translation complete"
-            );
-
-
-
-        },500);
+        console.log(
+            "[PathbuilderRU] Initial translation complete"
+        );
 
 
 
@@ -148,20 +114,24 @@ console.log(
 
 
 
-        if (
-            window.ObserverRU
-        ) {
 
-
-            window.ObserverRU.start();
+        if(
+            window.Observer
+        ){
 
 
 
-        } else {
+            window.Observer.start();
+
+
+
+
+        }
+        else{
 
 
             console.warn(
-                "[PathbuilderRU] Observer missing"
+                "[PathbuilderRU] Observer not found"
             );
 
 
@@ -173,7 +143,10 @@ console.log(
 
 
 
-    } catch(e) {
+
+    }
+
+    catch(e){
 
 
 
@@ -185,7 +158,6 @@ console.log(
 
 
     }
-
 
 
 
