@@ -24,7 +24,7 @@ window.Translator = {
         if (!window.Dictionary) return text;
 
 
-        const result =
+        let result =
             window.Dictionary.translate(text);
 
 
@@ -32,9 +32,9 @@ window.Translator = {
 
             console.log(
                 "[RU]",
-                text,
+                text.substring(0,80),
                 "→",
-                result
+                result.substring(0,80)
             );
 
         }
@@ -46,27 +46,24 @@ window.Translator = {
 
 
 
-    translateElement(element) {
+    translateNode(node) {
 
 
-        if (!element) return;
+        if (!node) return;
 
 
-
-        // TEXT NODE
 
         if (
-            element.nodeType === Node.TEXT_NODE
+            node.nodeType === Node.TEXT_NODE
         ) {
 
 
-            const oldText =
-                element.nodeValue;
+            let old =
+                node.nodeValue;
 
 
-
-            const clean =
-                oldText.trim();
+            let clean =
+                old.trim();
 
 
 
@@ -74,7 +71,7 @@ window.Translator = {
 
 
 
-            const translated =
+            let translated =
                 this.translateText(clean);
 
 
@@ -84,14 +81,14 @@ window.Translator = {
             ) {
 
 
-                element.nodeValue =
-                    oldText.replace(
+                node.nodeValue =
+                    old.replace(
                         clean,
                         translated
                     );
 
-
             }
+
 
 
             return;
@@ -100,190 +97,120 @@ window.Translator = {
 
 
 
-        // не элемент
+
 
         if (
-            element.nodeType !== Node.ELEMENT_NODE
-        ) {
-
-            return;
-
-        }
-
-
-
-
-        // дочерние элементы
-
-        [...element.childNodes]
-            .forEach(child => {
-
-                this.translateElement(child);
-
-            });
+            node.nodeType !== Node.ELEMENT_NODE
+        ) return;
 
 
 
 
 
-        // TITLE
 
-        if (
-            element.hasAttribute("title")
-        ) {
+        // переводим весь текст внутри
 
+        [...node.childNodes]
+        .forEach(child=>{
 
-            const old =
-                element.getAttribute(
-                    "title"
-                );
+            this.translateNode(child);
+
+        });
 
 
-            const translated =
+
+
+
+        // title
+
+        this.translateAttribute(
+            node,
+            "title"
+        );
+
+
+
+        // aria
+
+        this.translateAttribute(
+            node,
+            "aria-label"
+        );
+
+
+
+        // placeholder
+
+        this.translateAttribute(
+            node,
+            "placeholder"
+        );
+
+
+
+        // value кнопок
+
+        if(
+            node.value
+        ){
+
+            let old =
+                node.value;
+
+
+            let translated =
                 this.translateText(old);
 
 
 
-            if (
-                old !== translated
-            ) {
+            if(old!==translated){
 
-
-                element.setAttribute(
-                    "title",
-                    translated
-                );
-
+                node.value =
+                    translated;
 
             }
-
 
         }
 
 
 
+        // DATA ATTRIBUTES
+        // тут лежат описания React
 
 
-        // ARIA LABEL
-
-        if (
-            element.hasAttribute("aria-label")
-        ) {
+        [...node.attributes]
+        .forEach(attr=>{
 
 
-            const old =
-                element.getAttribute(
-                    "aria-label"
-                );
+            if(
+                attr.name.startsWith("data-")
+            ){
 
 
-
-            const translated =
-                this.translateText(old);
-
+                let old =
+                    attr.value;
 
 
-            if (
-                old !== translated
-            ) {
-
-
-                element.setAttribute(
-                    "aria-label",
-                    translated
-                );
-
-
-            }
-
-
-        }
-
-
-
-
-
-        // PLACEHOLDER
-
-        if (
-            element.hasAttribute("placeholder")
-        ) {
-
-
-            const old =
-                element.getAttribute(
-                    "placeholder"
-                );
-
-
-
-            const translated =
-                this.translateText(old);
-
-
-
-            if (
-                old !== translated
-            ) {
-
-
-                element.setAttribute(
-                    "placeholder",
-                    translated
-                );
-
-
-            }
-
-
-        }
-
-
-
-
-
-
-
-        // INPUT / BUTTON VALUE
-
-        if (
-            element.tagName === "INPUT" ||
-            element.tagName === "BUTTON"
-        ) {
-
-
-
-            if (
-                element.value
-            ) {
-
-
-                const old =
-                    element.value;
-
-
-
-                const translated =
+                let translated =
                     this.translateText(old);
 
 
 
-                if (
-                    old !== translated
-                ) {
+                if(
+                    old!==translated
+                ){
 
-
-                    element.value =
-                        translated;
-
+                    node.setAttribute(
+                        attr.name,
+                        translated
+                    );
 
                 }
-
 
             }
 
 
-        }
+        });
 
 
 
@@ -293,8 +220,49 @@ window.Translator = {
 
 
 
+    translateAttribute(
+        element,
+        attribute
+    ){
 
-    translatePage() {
+
+        if(
+            !element.hasAttribute(attribute)
+        )
+        return;
+
+
+
+        let old =
+            element.getAttribute(attribute);
+
+
+
+        let translated =
+            this.translateText(old);
+
+
+
+        if(
+            old!==translated
+        ){
+
+            element.setAttribute(
+                attribute,
+                translated
+            );
+
+        }
+
+
+    },
+
+
+
+
+
+
+    translatePage(){
 
 
         console.log(
@@ -302,7 +270,8 @@ window.Translator = {
         );
 
 
-        this.translateElement(
+
+        this.translateNode(
             document.body
         );
 
