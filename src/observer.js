@@ -6,20 +6,29 @@ const Observer = {
 
     start() {
 
-        if (this.observer) {
-            this.observer.disconnect();
-        }
+        if (this.observer)
+            return;
 
         this.observer = new MutationObserver((mutations) => {
 
             for (const mutation of mutations) {
 
+                // Новые элементы
                 for (const node of mutation.addedNodes) {
+
                     Translator.translateNode(node);
+
                 }
 
-                if (mutation.type === "characterData") {
-                    Translator.translateTextNode(mutation.target);
+                // Изменение текста
+                if (
+                    mutation.type === "characterData"
+                ) {
+
+                    Translator.translateTextNode(
+                        mutation.target
+                    );
+
                 }
 
             }
@@ -27,17 +36,27 @@ const Observer = {
         });
 
         this.observer.observe(document.body, {
+
             childList: true,
             subtree: true,
             characterData: true
+
         });
 
         console.log("[Observer] Started");
 
-        // Повторный проход каждые 2 секунды
-        setInterval(() => {
-            Translator.translateNode(document.body);
-        }, 2000);
+    },
+
+    stop() {
+
+        if (!this.observer)
+            return;
+
+        this.observer.disconnect();
+
+        this.observer = null;
+
+        console.log("[Observer] Stopped");
 
     }
 

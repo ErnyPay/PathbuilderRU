@@ -2,41 +2,52 @@
 
 const Missing = {
 
-    list: new Set(),
+    found: new Set(),
 
-    add(text) {
+    scan() {
 
-        if (!text) return;
+        const walker = document.createTreeWalker(
+            document.body,
+            NodeFilter.SHOW_TEXT
+        );
 
-        text = text.trim();
+        while (walker.nextNode()) {
 
-        if (text.length < 2) return;
+            const text = walker.currentNode.nodeValue.trim();
 
-        if (text.length > 120) return;
+            if (!text)
+                continue;
 
-        if (/^\d+$/.test(text)) return;
+            if (Dictionary.translate(text))
+                continue;
 
-        if (Dictionary.translate(text)) return;
+            if (text.length < 2)
+                continue;
 
-        this.list.add(text);
+            if (/^[0-9]+$/.test(text))
+                continue;
+
+            this.found.add(text);
+
+        }
+
+        console.log(
+            "[Missing]",
+            this.found.size,
+            "unknown strings"
+        );
 
     },
 
     export() {
 
-        const result = {};
-
-        [...this.list]
-            .sort()
-            .forEach(text => {
-
-                result[text] = "";
-
-            });
-
-        console.log(result);
-
-        return result;
+        console.log(
+            JSON.stringify(
+                [...this.found].sort(),
+                null,
+                2
+            )
+        );
 
     }
 

@@ -30,28 +30,47 @@ const Dictionary = {
             const url = chrome.runtime.getURL("dictionaries/" + file);
 
             console.log("[Dictionary] Loading:", file);
-            console.log("[Dictionary] URL:", url);
 
             try {
 
                 const response = await fetch(url);
 
-                console.log("[Dictionary] Status:", response.status);
-
                 if (!response.ok) {
-                    console.warn("[Dictionary] Не найден:", file);
+                    console.warn("[Dictionary] Missing:", file);
                     continue;
                 }
 
-                const json = await response.json();
+                const text = await response.text();
+
+                if (text.trim().length === 0) {
+                    console.warn("[Dictionary] EMPTY FILE:", file);
+                    continue;
+                }
+
+                let json;
+
+                try {
+                    json = JSON.parse(text);
+                }
+                catch (e) {
+                    console.error("[Dictionary] INVALID JSON:", file);
+                    console.error(text);
+                    continue;
+                }
 
                 Object.assign(this.dictionaries, json);
 
                 total += Object.keys(json).length;
 
-                console.log("[Dictionary]", file, Object.keys(json).length);
+                console.log(
+                    "[Dictionary]",
+                    file,
+                    Object.keys(json).length,
+                    "entries"
+                );
 
-            } catch (e) {
+            }
+            catch (e) {
 
                 console.error("[Dictionary ERROR]", file);
                 console.error(e);
@@ -60,13 +79,17 @@ const Dictionary = {
 
         }
 
-        console.log("[Dictionary] Total:", total);
+        console.log(
+            "[Dictionary] TOTAL:",
+            total
+        );
 
     },
 
     translate(text) {
 
-        if (!text) return null;
+        if (!text)
+            return null;
 
         return this.dictionaries[text] ?? null;
 
