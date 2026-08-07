@@ -1,145 +1,120 @@
 console.log("[PathbuilderRU] translator.js loaded");
 
 
-window.translator = {
+window.PathbuilderTranslator = {
 
     initialized: false,
 
 
     init() {
 
+        if (this.initialized) {
+            return;
+        }
+
+
         this.initialized = true;
+
 
         console.log(
             "[PathbuilderRU] Translator initialized"
         );
 
-    },
 
-
-    translateText(text) {
-
-        if (!text)
-            return text;
-
-
-        if (!window.PathbuilderDictionary)
-            return text;
-
-
-        return window.PathbuilderDictionary.translate(text);
+        this.translatePage();
 
     },
 
 
-    translateElement(element) {
+    translatePage() {
 
+        if (!window.PathbuilderDictionary) {
 
-        if (!element)
+            console.warn(
+                "[PathbuilderRU] Dictionary unavailable"
+            );
+
             return;
+        }
 
 
-        // перевод текста внутри элемента
-        if (
-            element.childNodes &&
-            element.childNodes.length
-        ) {
+        const walker =
+            document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode(node) {
+
+                        if (!node.nodeValue.trim()) {
+
+                            return NodeFilter.FILTER_REJECT;
+
+                        }
 
 
-            element.childNodes.forEach(node => {
-
-
-                if (
-                    node.nodeType === Node.TEXT_NODE
-                ) {
-
-
-                    let original =
-                    node.nodeValue.trim();
-
-
-                    if (!original)
-                        return;
-
-
-                    let translated =
-                    this.translateText(original);
-
-
-                    if (
-                        translated !== original
-                    ) {
-
-                        console.log(
-                            "[RU]",
-                            original,
-                            "→",
-                            translated
-                        );
-
-
-                        node.nodeValue =
-                        node.nodeValue.replace(
-                            original,
-                            translated
-                        );
+                        return NodeFilter.FILTER_ACCEPT;
 
                     }
-
                 }
+            );
 
 
-            });
+        const nodes = [];
+
+
+        let node;
+
+
+        while (node = walker.nextNode()) {
+
+            nodes.push(node);
 
         }
 
 
 
-        // перевод title
-        if (element.title) {
-
-            let translated =
-            this.translateText(
-                element.title
-            );
+        for (const textNode of nodes) {
 
 
-            if (
-                translated !== element.title
-            ) {
+            const original =
+                textNode.nodeValue;
 
-                element.title =
-                translated;
 
+            const clean =
+                original.trim();
+
+
+
+            if (!clean) {
+                continue;
             }
 
-        }
 
 
+            const translated =
+                window.PathbuilderDictionary.translate(
+                    clean
+                );
 
-        // перевод aria-label
-        if (
-            element.getAttribute &&
-            element.hasAttribute("aria-label")
-        ) {
-
-
-            let label =
-            element.getAttribute(
-                "aria-label"
-            );
-
-
-            let translated =
-            this.translateText(label);
 
 
             if (
-                translated !== label
+                translated &&
+                translated !== clean
             ) {
 
-                element.setAttribute(
-                    "aria-label",
+
+                textNode.nodeValue =
+                    original.replace(
+                        clean,
+                        translated
+                    );
+
+
+                console.log(
+                    "[RU]",
+                    clean,
+                    "→",
                     translated
                 );
 
@@ -148,33 +123,7 @@ window.translator = {
         }
 
 
-
-    },
-
-
-    translatePage() {
-
-
-        console.log(
-            "[PathbuilderRU] Translating page"
-        );
-
-
-        document
-        .querySelectorAll("*")
-        .forEach(element => {
-
-
-            this.translateElement(
-                element
-            );
-
-
-        });
-
-
     }
-
 
 };
 
@@ -182,5 +131,9 @@ window.translator = {
 
 console.log(
     "[PathbuilderRU] translator object:",
-    window.translator
+    window.PathbuilderTranslator
 );
+window.PathbuilderTranslator = translator;
+
+
+console.log("[PathbuilderRU] translator object:", window.PathbuilderTranslator);

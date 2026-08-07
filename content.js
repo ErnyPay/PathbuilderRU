@@ -19,7 +19,7 @@ console.log(
 
 
 
-        await Translator.init();
+        await window.translator.init();
 
 
 
@@ -29,18 +29,15 @@ console.log(
 
 
 
+        window.translator.translatePage();
+
+
+
         if(
             window.PathbuilderObserver
         ){
 
             window.PathbuilderObserver.start();
-
-        }
-        else{
-
-            console.error(
-                "[PathbuilderRU] Observer missing"
-            );
 
         }
 
