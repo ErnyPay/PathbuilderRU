@@ -1,32 +1,27 @@
 console.log("[PathbuilderRU] Starting...");
 
 
-(async()=>{
+(async () => {
 
 
-    await window.PathbuilderDictionary.load();
+    await Dictionary.load();
 
 
-    console.log("[PathbuilderRU] Dictionary loaded");
+    console.log(
+        "[PathbuilderRU] Dictionary loaded"
+    );
 
 
-
-    window.PathbuilderTranslator.init();
-
-
-    console.log("[PathbuilderRU] Initial translation complete");
+    PathbuilderTranslator.init();
 
 
+    console.log(
+        "[PathbuilderRU] Initial translation complete"
+    );
 
-    window.PathbuilderTranslator.translatePage();
 
+    Observer.start();
 
-
-    if(window.PathbuilderObserver){
-
-        window.PathbuilderObserver.start();
-
-    }
 
 
 })();

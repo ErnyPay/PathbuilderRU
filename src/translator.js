@@ -12,116 +12,71 @@ window.PathbuilderTranslator = {
             return;
         }
 
-
         this.initialized = true;
 
-
-        console.log(
-            "[PathbuilderRU] Translator initialized"
-        );
-
+        console.log("[PathbuilderRU] Translator initialized");
 
         this.translatePage();
-
     },
 
 
     translatePage() {
 
-        if (!window.PathbuilderDictionary) {
-
-            console.warn(
-                "[PathbuilderRU] Dictionary unavailable"
-            );
-
-            return;
-        }
+        const elements = document.querySelectorAll(
+            "body *"
+        );
 
 
-        const walker =
-            document.createTreeWalker(
-                document.body,
-                NodeFilter.SHOW_TEXT,
-                {
-                    acceptNode(node) {
+        elements.forEach(element => {
 
-                        if (!node.nodeValue.trim()) {
-
-                            return NodeFilter.FILTER_REJECT;
-
-                        }
+            if (!element.childNodes.length) {
+                return;
+            }
 
 
-                        return NodeFilter.FILTER_ACCEPT;
+            element.childNodes.forEach(node => {
 
+                if (node.nodeType !== Node.TEXT_NODE) {
+                    return;
+                }
+
+
+                const original = node.textContent.trim();
+
+
+                if (!original) {
+                    return;
+                }
+
+
+                if (window.PathbuilderDictionary &&
+                    window.PathbuilderDictionary[original]) {
+
+
+                    const translated =
+                        window.PathbuilderDictionary[original];
+
+
+                    if (node.textContent !== translated) {
+
+                        console.log(
+                            "[RU]",
+                            original,
+                            "→",
+                            translated
+                        );
+
+                        node.textContent =
+                            node.textContent.replace(
+                                original,
+                                translated
+                            );
                     }
                 }
-            );
 
+            });
 
-        const nodes = [];
-
-
-        let node;
-
-
-        while (node = walker.nextNode()) {
-
-            nodes.push(node);
-
-        }
-
-
-
-        for (const textNode of nodes) {
-
-
-            const original =
-                textNode.nodeValue;
-
-
-            const clean =
-                original.trim();
-
-
-
-            if (!clean) {
-                continue;
-            }
-
-
-
-            const translated =
-                window.PathbuilderDictionary.translate(
-                    clean
-                );
-
-
-
-            if (
-                translated &&
-                translated !== clean
-            ) {
-
-
-                textNode.nodeValue =
-                    original.replace(
-                        clean,
-                        translated
-                    );
-
-
-                console.log(
-                    "[RU]",
-                    clean,
-                    "→",
-                    translated
-                );
-
-            }
-
-        }
-
+        });
 
     }
 
@@ -132,11 +87,4 @@ window.PathbuilderTranslator = {
 console.log(
     "[PathbuilderRU] translator object:",
     window.PathbuilderTranslator
-);
-window.PathbuilderTranslator = translator;
-
-
-console.log(
-"[PathbuilderRU] translator object:",
-translator
 );
