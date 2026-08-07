@@ -2,77 +2,46 @@
 
 
 console.log(
-    "[PathbuilderRU] dictionary.js loaded"
+"[PathbuilderRU] dictionary.js loaded"
 );
 
 
 
-window.Dictionary = {
+window.PathbuilderDictionary = {
 
 
-    entries: {},
+    data:{},
 
-    loaded: false,
 
-    loading: false,
+    loaded:false,
 
 
 
     async load(){
 
 
-        if(this.loaded){
-            return;
-        }
-
-
-        if(this.loading){
-            return;
-        }
-
-
-        this.loading = true;
-
-
         console.log(
-            "[Dictionary] Start loading"
+            "[Dictionary] Loading..."
         );
 
 
 
-        const files = [
+        const files=[
 
 
             "ui",
-
             "classes",
-
             "ancestries",
-
             "heritages",
-
             "backgrounds",
-
             "feats",
-
             "feat_descriptions",
-
             "spells",
-
-            "spell_descriptions",
-
             "items",
-
-            "item_descriptions",
-
             "traits",
-
             "skills",
-
             "actions",
-
             "condition",
-
             "phrases"
 
 
@@ -81,35 +50,25 @@ window.Dictionary = {
 
 
 
-        let total = 0;
 
+        for(const file of files){
 
-
-
-        for(
-            const file of files
-        ){
 
 
             try{
 
 
-                console.log(
-                    "[Dictionary] Loading:",
-                    file
+                const url =
+
+                chrome.runtime.getURL(
+
+                    "dictionaries/" + file + ".json"
+
                 );
 
 
 
-                let url =
-                    chrome.runtime.getURL(
-                        "dictionaries/" + file + ".json"
-                    );
-
-
-
-                let response =
-                    await fetch(url);
+                const response = await fetch(url);
 
 
 
@@ -120,6 +79,7 @@ window.Dictionary = {
                         file
                     );
 
+
                     continue;
 
                 }
@@ -127,113 +87,44 @@ window.Dictionary = {
 
 
 
-                let json =
+                const json =
                     await response.json();
 
 
 
+                this.data[file]=json;
 
-                let count = 0;
-
-
-
-
-                for(
-                    const key in json
-                ){
-
-
-                    let value =
-                        json[key];
-
-
-
-                    /*
-                        Поддержка:
-
-                        {
-                          "en":"",
-                          "ru":""
-                        }
-
-                    */
-
-
-                    if(
-                        typeof value === "object" &&
-                        value !== null
-                    ){
-
-
-                        if(value.ru){
-
-
-                            this.entries[key.trim()]
-                                =
-                            value.ru;
-
-
-                            count++;
-
-                        }
-
-
-                    }
-
-
-
-                    else if(
-                        typeof value === "string"
-                    ){
-
-
-                        this.entries[key.trim()]
-                            =
-                        value;
-
-
-                        count++;
-
-                    }
-
-
-
-                }
-
-
-
-
-                total += count;
 
 
 
                 console.log(
 
                     "[Dictionary]",
+
                     file,
-                    count,
-                    "entries"
+
+                    Object.keys(json).length
 
                 );
 
 
 
             }
-
-            catch(error){
+            catch(e){
 
 
                 console.error(
 
-                    "[Dictionary] Error:",
+                    "[Dictionary] Error",
+
                     file,
-                    error
+
+                    e
 
                 );
 
 
             }
-
 
 
         }
@@ -242,29 +133,21 @@ window.Dictionary = {
 
 
 
-
-        this.loaded = true;
-
-        this.loading = false;
+        this.loaded=true;
 
 
 
         console.log(
 
-            "[Dictionary] TOTAL:",
-            total
+            "[Dictionary] READY",
+
+            this.data
 
         );
 
-
-
-        console.log(
-            "[PathbuilderRU] Dictionary ready"
-        );
 
 
     },
-
 
 
 
@@ -277,118 +160,27 @@ window.Dictionary = {
 
 
 
-        if(
-            !text
-        ){
-
+        if(!text || !this.loaded)
             return text;
 
-        }
+
+
+        let result=text;
 
 
 
-        let clean =
-            text.trim();
-
-
-
-
-        if(
-            !clean
+        for(
+            const group of Object.values(this.data)
         ){
-
-            return text;
-
-        }
-
-
-
-
-
-
-
-        /*
-            1.
-            Точное совпадение
-        */
-
-
-        if(
-            this.entries.hasOwnProperty(clean)
-        ){
-
-            return this.entries[clean];
-
-        }
-
-
-
-
-
-
-
-
-
-        /*
-            2.
-            По предложениям
-        */
-
-
-        if(
-            clean.length > 80
-        ){
-
-
-
-            let sentences =
-                clean.match(
-                    /[^.!?]+[.!?]+/g
-                );
-
 
 
 
             if(
-                sentences &&
-                sentences.length > 1
+                group[result]
             ){
 
 
-
-                let result =
-                    sentences.map(
-                        sentence => {
-
-
-                            let s =
-                                sentence.trim();
-
-
-
-                            return (
-                                this.entries[s]
-                                ||
-                                s
-                            );
-
-
-                        }
-                    )
-                    .join(" ");
-
-
-
-
-
-                if(
-                    result !== clean
-                ){
-
-                    return result;
-
-                }
-
+                return group[result];
 
 
             }
@@ -400,89 +192,14 @@ window.Dictionary = {
 
 
 
-
-
-
-
-
-        /*
-            3.
-            Перевод отдельных строк
-        */
-
-
-        if(
-            clean.includes("\n")
-        ){
-
-
-            let lines =
-                clean.split("\n");
-
-
-
-            let result =
-                lines.map(
-                    line =>
-                    this.translateLine(line)
-                )
-                .join("\n");
-
-
-
-            return result;
-
-
-        }
-
-
-
-
-
-
-
-        return clean;
-
-
-
-    },
-
-
-
-
-
-
-
-
-
-    translateLine(line){
-
-
-        let clean =
-            line.trim();
-
-
-
-        if(
-            !clean
-        ){
-
-            return line;
-
-        }
-
-
-
-
-        return (
-            this.entries[clean]
-            ||
-            clean
-        );
+        return result;
 
 
 
     }
+
+
+
 
 
 

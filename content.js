@@ -2,163 +2,112 @@
 
 
 console.log(
-    "[PathbuilderRU] Starting..."
+    "[PathbuilderRU] content.js loaded"
 );
-
-
 
 
 
 (async()=>{
 
 
+try{
 
-    try{
 
+    console.log(
+        "[PathbuilderRU] Starting..."
+    );
 
 
 
-
-        if(
-            !window.Dictionary
-        ){
-
-
-
-            console.error(
-                "[PathbuilderRU] Dictionary missing"
-            );
-
-            return;
-
-
-        }
-
-
-
-
-
-
-        await window.Dictionary.load();
-
-
-
-
-
-
-        console.log(
-            "[PathbuilderRU] Dictionary loaded"
-        );
-
-
-
-
-
-
-
-
-        if(
-            !window.Translator
-        ){
-
-
-
-            console.error(
-                "[PathbuilderRU] Translator missing"
-            );
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-        window.Translator.init();
-
-
-
-
-
-
-        console.log(
-            "[PathbuilderRU] Translator initialized"
-        );
-
-
-
-
-
-
-
-        // первая обработка страницы
-
-
-        window.Translator.translatePage();
-
-
-
-
-
-        console.log(
-            "[PathbuilderRU] Initial translation complete"
-        );
-
-
-
-
-
-
-
-
-        if(
-            window.Observer
-        ){
-
-
-
-            window.Observer.start();
-
-
-
-
-        }
-        else{
-
-
-            console.warn(
-                "[PathbuilderRU] Observer not found"
-            );
-
-
-        }
-
-
-
-
-
-
-
-
-    }
-
-    catch(e){
-
+    if(!window.PathbuilderRUConfig){
 
 
         console.error(
-            "[PathbuilderRU] Startup error",
-            e
+            "[PathbuilderRU] Config missing"
         );
 
+
+        return;
+
+    }
+
+
+
+
+
+    await window.PathbuilderDictionary.load();
+
+
+
+    console.log(
+        "[PathbuilderRU] Dictionary loaded"
+    );
+
+
+
+
+
+    window.PathbuilderTranslator.init();
+
+
+
+    console.log(
+        "[PathbuilderRU] Translator initialized"
+    );
+
+
+
+
+
+
+    window.PathbuilderTranslator.translatePage();
+
+
+
+
+    console.log(
+        "[PathbuilderRU] Initial translation complete"
+    );
+
+
+
+
+
+
+    if(window.PathbuilderObserver){
+
+
+        window.PathbuilderObserver.start();
+
+
+    }
+    else{
+
+
+        console.error(
+            "[PathbuilderRU] Observer missing"
+        );
 
 
     }
 
+
+
+
+}
+catch(e){
+
+
+    console.error(
+
+        "[PathbuilderRU] Startup error",
+
+        e
+
+    );
+
+
+}
 
 
 
