@@ -1,127 +1,224 @@
 console.log("[PathbuilderRU] translator.js loaded");
 
 
-const Translator = {
+window.Translator = {
+
+    initialized: false,
 
 
-    initialized:false,
-
-
-    init(){
-
+    init() {
 
         this.initialized = true;
 
-
-        console.log(
-            "[PathbuilderRU] Translator initialized"
-        );
-
+        console.log("[PathbuilderRU] Translator initialized");
 
     },
 
 
-
-    translateText(text){
-
+    translateText(text) {
 
         if (!text) return text;
 
-
-        if (
-            window.Dictionary &&
-            typeof window.Dictionary.translate === "function"
-        ){
-
-            const result =
-                window.Dictionary.translate(text);
+        if (!window.Dictionary) return text;
 
 
-            if(result && result !== text){
+        const result = window.Dictionary.translate(text);
 
-                console.log(
-                    "[RU]",
-                    text,
-                    "→",
-                    result
-                );
 
-                return result;
+        if (result !== text) {
 
-            }
+            console.log(
+                "[RU]",
+                text,
+                "→",
+                result
+            );
 
         }
 
 
-        return text;
+        return result;
 
     },
 
 
 
-    translateElement(element){
+    translateElement(element) {
 
 
-        if(!element) return;
+        if (!element) return;
+
+
+        // обычный текст
+        if (
+            element.nodeType === Node.TEXT_NODE
+        ) {
+
+            const oldText = element.nodeValue;
+
+            const newText =
+                this.translateText(oldText.trim());
+
+
+            if (
+                oldText !== newText &&
+                newText
+            ) {
+
+                element.nodeValue =
+                    oldText.replace(
+                        oldText.trim(),
+                        newText
+                    );
+
+            }
+
+
+            return;
+        }
 
 
 
-        const walker =
-            document.createTreeWalker(
-                element,
-                NodeFilter.SHOW_TEXT
-            );
+        if (
+            element.nodeType !== Node.ELEMENT_NODE
+        ) {
+            return;
+        }
 
 
 
-        const nodes = [];
+        // текст внутри элемента
+        if (element.childNodes.length) {
 
+            [...element.childNodes]
+                .forEach(child => {
 
+                    this.translateElement(child);
 
-        while(walker.nextNode()){
-
-            nodes.push(
-                walker.currentNode
-            );
+                });
 
         }
 
 
 
-        for(const node of nodes){
 
+        // title
+        if (
+            element.hasAttribute("title")
+        ) {
 
-            let text =
-                node.nodeValue.trim();
-
-
-
-            if(!text) continue;
-
+            const old =
+                element.getAttribute("title");
 
 
             const translated =
-                this.translateText(text);
+                this.translateText(old);
 
 
+            if(old !== translated){
 
-            if(translated !== text){
-
-
-                node.nodeValue =
-                    node.nodeValue.replace(
-                        text,
-                        translated
-                    );
-
+                element.setAttribute(
+                    "title",
+                    translated
+                );
 
             }
 
+        }
+
+
+
+        // aria-label
+        if (
+            element.hasAttribute("aria-label")
+        ) {
+
+
+            const old =
+                element.getAttribute(
+                    "aria-label"
+                );
+
+
+            const translated =
+                this.translateText(old);
+
+
+            if(old !== translated){
+
+                element.setAttribute(
+                    "aria-label",
+                    translated
+                );
+
+            }
+
+        }
+
+
+
+
+        // placeholder
+        if (
+            element.hasAttribute("placeholder")
+        ) {
+
+
+            const old =
+                element.getAttribute(
+                    "placeholder"
+                );
+
+
+            const translated =
+                this.translateText(old);
+
+
+            if(old !== translated){
+
+                element.setAttribute(
+                    "placeholder",
+                    translated
+                );
+
+            }
+
+        }
+
+
+
+        // value у кнопок
+        if (
+            element.tagName === "INPUT" ||
+            element.tagName === "BUTTON"
+        ) {
+
+
+            if(element.value){
+
+
+                const old =
+                    element.value;
+
+
+                const translated =
+                    this.translateText(old);
+
+
+                if(old !== translated){
+
+                    element.value =
+                        translated;
+
+                }
+
+            }
 
         }
 
 
     },
+
 
 
 
@@ -141,15 +238,5 @@ const Translator = {
     }
 
 
+
 };
-
-
-
-window.Translator = Translator;
-
-
-
-console.log(
-    "[PathbuilderRU] translator object:",
-    window.Translator
-);
