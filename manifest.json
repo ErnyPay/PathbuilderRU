@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
 
-  "name": "PathbuilderRU",
+  "name": "Pathbuilder RU Translator",
+
   "version": "1.0.0",
 
-  "description": "Russian translation for Pathbuilder 2e",
+  "description": "Русский перевод Pathbuilder 2e",
 
   "permissions": [
     "storage"
@@ -14,36 +15,29 @@
     "https://pathbuilder2e.com/*"
   ],
 
-
   "content_scripts": [
     {
       "matches": [
         "https://pathbuilder2e.com/*"
       ],
-
       "js": [
-        "config.js",
         "dictionary.js",
         "translator.js",
         "observer.js",
         "content.js"
       ],
-
       "run_at": "document_idle"
     }
   ],
-
 
   "web_accessible_resources": [
     {
       "resources": [
         "dictionaries/*.json"
       ],
-
       "matches": [
         "https://pathbuilder2e.com/*"
       ]
     }
   ]
-
 }
