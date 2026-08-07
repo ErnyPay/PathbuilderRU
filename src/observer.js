@@ -1,63 +1,92 @@
-'use strict';
+console.log("[PathbuilderRU] observer.js loaded");
 
-const Observer = {
+
+window.PathbuilderObserver = {
+
 
     observer: null,
 
+
     start() {
 
-        if (this.observer)
+        if (this.observer) {
             return;
+        }
 
-        this.observer = new MutationObserver((mutations) => {
 
-            for (const mutation of mutations) {
+        console.log(
+            "[PathbuilderRU] Observer started"
+        );
 
-                // Новые элементы
-                for (const node of mutation.addedNodes) {
 
-                    Translator.translateNode(node);
+
+        this.observer =
+            new MutationObserver(
+                (mutations) => {
+
+                    let needTranslate = false;
+
+
+
+                    for (const mutation of mutations) {
+
+
+                        if (
+                            mutation.addedNodes.length > 0
+                        ) {
+
+                            needTranslate = true;
+                            break;
+
+                        }
+
+                    }
+
+
+
+                    if (needTranslate) {
+
+                        setTimeout(
+                            () => {
+
+                                if (
+                                    window.PathbuilderTranslator
+                                ) {
+
+                                    window.PathbuilderTranslator
+                                        .translatePage();
+
+                                }
+
+                            },
+                            100
+                        );
+
+                    }
+
 
                 }
+            );
 
-                // Изменение текста
-                if (
-                    mutation.type === "characterData"
-                ) {
 
-                    Translator.translateTextNode(
-                        mutation.target
-                    );
 
-                }
-
+        this.observer.observe(
+            document.body,
+            {
+                childList: true,
+                subtree: true
             }
+        );
 
-        });
-
-        this.observer.observe(document.body, {
-
-            childList: true,
-            subtree: true,
-            characterData: true
-
-        });
-
-        console.log("[Observer] Started");
-
-    },
-
-    stop() {
-
-        if (!this.observer)
-            return;
-
-        this.observer.disconnect();
-
-        this.observer = null;
-
-        console.log("[Observer] Stopped");
 
     }
 
+
 };
+
+
+
+console.log(
+    "[PathbuilderRU] observer object:",
+    window.PathbuilderObserver
+);
