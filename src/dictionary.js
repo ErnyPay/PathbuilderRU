@@ -1,98 +1,123 @@
-'use strict';
+class Dictionary {
+    constructor() {
+        this.dictionary = {};
+        this.files = [
+            "ui.json",
+            "classes.json",
+            "ancestries.json",
+            "heritages.json",
+            "backgrounds.json",
+            "feats.json",
+            "spells.json",
+            "items.json",
+            "traits.json",
+            "skills.json",
+            "actions.json",
+            "conditions.json"
+        ];
+    }
 
-const Dictionary = {
-
-    dictionaries: {},
-
-    files: [
-        "ui.json",
-        "classes.json",
-        "ancestries.json",
-        "heritages.json",
-        "backgrounds.json",
-        "feats.json",
-        "spells.json",
-        "items.json",
-        "traits.json",
-        "skills.json",
-        "actions.json",
-        "conditions.json"
-    ],
 
     async load() {
-
-        this.dictionaries = {};
 
         let total = 0;
 
         for (const file of this.files) {
 
-            const url = chrome.runtime.getURL("dictionaries/" + file);
-
-            console.log("[Dictionary] Loading:", file);
-
             try {
 
-                const response = await fetch(url);
+                console.log(
+                    "[Dictionary] Loading:",
+                    file
+                );
 
-                if (!response.ok) {
-                    console.warn("[Dictionary] Missing:", file);
-                    continue;
+
+                const url =
+                    chrome.runtime.getURL(
+                        "dictionaries/" + file
+                    );
+
+
+                const response =
+                    await fetch(url);
+
+
+                const data =
+                    await response.json();
+
+
+                let count = 0;
+
+
+                for (const [key,value] of Object.entries(data)) {
+
+                    if (!this.dictionary[key]) {
+
+                        this.dictionary[key] = value;
+                        count++;
+                    }
+
+                    else {
+
+                        console.warn(
+                            "[Dictionary] Duplicate:",
+                            key
+                        );
+
+                    }
                 }
 
-                const text = await response.text();
 
-                if (text.trim().length === 0) {
-                    console.warn("[Dictionary] EMPTY FILE:", file);
-                    continue;
-                }
+                total += count;
 
-                let json;
-
-                try {
-                    json = JSON.parse(text);
-                }
-                catch (e) {
-                    console.error("[Dictionary] INVALID JSON:", file);
-                    console.error(text);
-                    continue;
-                }
-
-                Object.assign(this.dictionaries, json);
-
-                total += Object.keys(json).length;
 
                 console.log(
                     "[Dictionary]",
                     file,
-                    Object.keys(json).length,
+                    count,
                     "entries"
                 );
 
-            }
-            catch (e) {
-
-                console.error("[Dictionary ERROR]", file);
-                console.error(e);
 
             }
 
+            catch(error) {
+
+                console.error(
+                    "[Dictionary] Failed:",
+                    file,
+                    error
+                );
+
+            }
         }
+
 
         console.log(
             "[Dictionary] TOTAL:",
-            total
+            Object.keys(this.dictionary).length
         );
 
-    },
+
+        return this.dictionary;
+    }
+
+
 
     translate(text) {
 
         if (!text)
-            return null;
+            return text;
 
-        return this.dictionaries[text] ?? null;
+
+        return this.dictionary[text]
+            || text;
 
     }
 
-};
+}
+
+
+
+window.PathbuilderDictionary =
+    new Dictionary();

@@ -875,5 +875,674 @@
 
   "Perfected Perception": "Совершенное восприятие",
 
-  "Miracle": "Чудо"
+  "Miracle": "Чудо",
+  "Acid Splash": "Кислотный всплеск",
+
+  "Detect Magic": "Обнаружение магии",
+
+  "Daze": "Оглушение",
+
+  "Electric Arc": "Электрическая дуга",
+
+  "Gouging Claw": "Раздирающий коготь",
+
+  "Ignition": "Воспламенение",
+
+  "Light": "Свет",
+
+  "Mage Hand": "Рука мага",
+
+  "Message": "Сообщение",
+
+  "Prestidigitation": "Малая магия",
+
+  "Produce Flame": "Создать пламя",
+
+  "Read Aura": "Чтение ауры",
+
+  "Ray of Frost": "Луч холода",
+
+  "Shield": "Щит",
+
+  "Telekinetic Hand": "Телекинетическая рука",
+
+  "Void Warp": "Искажение пустоты",
+
+  "Vitality Lash": "Удар жизненной силы",
+
+  "Ancient Dust": "Древняя пыль",
+
+  "Bane": "Проклятие",
+
+  "Bless": "Благословение",
+
+  "Burning Hands": "Горящие руки",
+
+  "Charm": "Очарование",
+
+  "Color Spray": "Радужный всплеск",
+
+  "Command": "Приказ",
+
+  "Fear": "Страх",
+
+  "Fleet Step": "Шаг скорости",
+
+  "Grease": "Смазка",
+
+  "Heal": "Исцеление",
+
+  "Harm": "Вред",
+
+  "Magic Missile": "Волшебная стрела",
+
+  "Mystic Armor": "Мистическая броня",
+
+  "Phantom Pain": "Фантомная боль",
+
+  "Ray of Enfeeblement": "Луч ослабления",
+
+  "Runic Weapon": "Руническое оружие",
+
+  "Sleep": "Сон",
+
+  "Summon Animal": "Призыв животного",
+
+  "Summon Fey": "Призыв феи",
+
+  "Summon Undead": "Призыв нежити",
+
+  "True Strike": "Истинный удар",
+
+  "Alarm": "Сигнализация",
+
+  "Blur": "Размытость",
+
+  "Darkness": "Тьма",
+
+  "Dispel Magic": "Рассеивание магии",
+
+  "Enlarge": "Увеличение",
+
+  "Glitterdust": "Сверкающая пыль",
+
+  "Invisibility": "Невидимость",
+
+  "Knock": "Стук",
+
+  "Mirror Image": "Зеркальное отражение",
+
+  "Resist Energy": "Сопротивление энергии",
+
+  "See the Unseen": "Видеть невидимое",
+
+  "Shrink": "Уменьшение",
+
+  "Sound Burst": "Звуковой взрыв",
+
+  "Spiritual Weapon": "Духовное оружие",
+
+  "Web": "Паутина",
+
+  "Weapon of Judgment": "Оружие суда",
+
+  "Warding Aggression": "Оберегающая агрессия",
+  "Aqueous Orb": "Водяная сфера",
+
+  "Barkskin": "Кора",
+
+  "Biting Words": "Кусающиеся слова",
+
+  "Calm Emotions": "Успокоение эмоций",
+
+  "Cleanse Affliction": "Очищение недуга",
+
+  "Comprehend Language": "Понимание языка",
+
+  "Darkvision": "Тёмное зрение",
+
+  "Disguise Magic": "Маскировка магии",
+
+  "Dispel Magic": "Рассеивание магии",
+
+  "Draw Ire": "Навлечение гнева",
+
+  "False Life": "Ложная жизнь",
+
+  "Flaming Sphere": "Пылающая сфера",
+
+  "Fly": "Полёт",
+
+  "Hideous Laughter": "Ужасный смех",
+
+  "Humanoid Form": "Гуманоидная форма",
+
+  "Loose Time's Arrow": "Стрела потерянного времени",
+
+  "Mirror Image": "Зеркальные образы",
+
+  "Paralyze": "Паралич",
+
+  "Restoration": "Восстановление",
+
+  "See Invisibility": "Видеть невидимое",
+
+  "Shatter": "Разрушение",
+
+  "Silence": "Тишина",
+
+  "Sound Body": "Звуковое тело",
+
+  "Spider Climb": "Паучье лазание",
+
+  "Telekinetic Maneuver": "Телекинетический манёвр",
+
+  "Touch of Idiocy": "Прикосновение глупости",
+
+  "Vomit Swarm": "Рвотный рой",
+
+  "Water Breathing": "Дыхание под водой",
+
+
+  "Blink": "Мигание",
+
+  "Clairvoyance": "Ясновидение",
+
+  "Crashing Wave": "Разбивающаяся волна",
+
+  "Fireball": "Огненный шар",
+
+  "Haste": "Ускорение",
+
+  "Heroism": "Героизм",
+
+  "Hypnotize": "Гипноз",
+
+  "Lightning Bolt": "Молния",
+
+  "Locate": "Обнаружение местонахождения",
+
+  "Magnetic Acceleration": "Магнитное ускорение",
+
+  "Slow": "Замедление",
+
+  "Stinking Cloud": "Вонючее облако",
+
+  "Wall of Wind": "Стена ветра",
+
+  "Wall of Water": "Стена воды",
+
+  "Vampiric Touch": "Вампирическое касание",
+
+  "Remove Disease": "Удаление болезни",
+
+  "Remove Curse": "Снятие проклятия",
+
+  "Talking Corpse": "Говорящий труп",
+
+  "Disrupting Weapons": "Разрушающее оружие",
+
+
+  "Black Tentacles": "Чёрные щупальца",
+
+  "Confusion": "Замешательство",
+
+  "Control Water": "Управление водой",
+
+  "Creation": "Создание",
+
+  "Dimension Door": "Дверь измерений",
+
+  "Divine Wrath": "Божественный гнев",
+
+  "Fly": "Полёт",
+
+  "Hallucination": "Галлюцинация",
+
+  "Phantasmal Killer": "Фантомный убийца",
+
+  "Resilient Sphere": "Устойчивая сфера",
+
+  "Sending": "Послание",
+
+  "Scrying": "Наблюдение",
+
+  "Shadow Siphon": "Теневой сифон",
+
+  "Synesthesia": "Синестезия",
+
+  "Telekinetic Haul": "Телекинетическая тяга",
+
+  "Wall of Fire": "Стена огня",
+
+  "Wall of Ice": "Ледяная стена",
+
+  "Weapon Storm": "Шторм оружия",
+
+  "Vital Beacon": "Жизненный маяк",
+  "Chain Lightning": "Цепная молния",
+
+  "Disintegrate": "Дезинтеграция",
+
+  "Dragon Form": "Форма дракона",
+
+  "Flesh to Stone": "Превращение в камень",
+
+  "Freezing Rain": "Ледяной дождь",
+
+  "Globe of Invulnerability": "Сфера неуязвимости",
+
+  "Haste": "Ускорение",
+
+  "Heroism": "Героизм",
+
+  "Massacre": "Резня",
+
+  "Mislead": "Обманное отражение",
+
+  "Possession": "Одержимость",
+
+  "Remagic": "Повторная магия",
+
+  "Repulsion": "Отталкивание",
+
+  "Scintillating Safeguard": "Сверкающая защита",
+
+  "Spellwrack": "Разрушение заклинаний",
+
+  "True Seeing": "Истинное зрение",
+
+  "Vampiric Exsanguination": "Вампирское истощение",
+
+  "Wall of Force": "Стена силы",
+
+  "Zealous Conviction": "Ревностное убеждение",
+
+
+  "Banishment": "Изгнание",
+
+  "Contingency": "Условие",
+
+  "Dominate": "Подчинение",
+
+  "Eclipse Burst": "Вспышка затмения",
+
+  "Ethereal Jaunt": "Эфирный переход",
+
+  "Foresight": "Предвидение",
+
+  "Heroism": "Героизм",
+
+  "Magnificent Mansion": "Великолепный особняк",
+
+  "Prismatic Wall": "Призматическая стена",
+
+  "Regenerate": "Регенерация",
+
+  "Resilient Sphere": "Стойкая сфера",
+
+  "Reverse Gravity": "Обратная гравитация",
+
+  "Teleport": "Телепортация",
+
+  "Unfettered Movement": "Свободное движение",
+
+
+  "Antimagic Field": "Антимагическое поле",
+
+  "Disappearance": "Исчезновение",
+
+  "Energy Aegis": "Энергетический эгис",
+
+  "Ethereal Form": "Эфирная форма",
+
+  "Frightful Presence": "Ужасающее присутствие",
+
+  "Maze": "Лабиринт",
+
+  "Monstrosity Form": "Форма чудовища",
+
+  "Power Word Blind": "Слово силы: ослепление",
+
+  "Prismatic Sphere": "Призматическая сфера",
+
+  "Shadow Army": "Теневая армия",
+
+  "Spell Turning": "Отражение заклинания",
+
+
+  "Avatar": "Аватар",
+
+  "Disjunction": "Разъединение",
+
+  "Gate": "Врата",
+
+  "Mass Heal": "Массовое исцеление",
+
+  "Mass Harm": "Массовый вред",
+
+  "Miracle": "Чудо",
+
+  "Power Word Kill": "Слово силы: убийство",
+
+  "Prismatic Wall": "Призматическая стена",
+
+  "Retrocognition": "Ретрокогниция",
+
+  "Storm of Vengeance": "Шторм возмездия",
+
+
+  "Time Stop": "Остановка времени",
+
+  "Wish": "Желание",
+
+  "Weird": "Ужас",
+
+  "Alter Reality": "Изменение реальности",
+
+  "Cataclysm": "Катаклизм",
+
+  "Implosion": "Имплозия",
+
+  "Meteor Swarm": "Метеоритный рой",
+
+  "Nature Incarnate": "Воплощение природы",
+
+  "Possibility": "Возможность",
+
+  "Remake": "Переделка",
+
+  "Summon Kaiju": "Призыв кайдзю",
+
+  "Uncontrollable Dance": "Неконтролируемый танец",
+  "Lesson of Dreams": "Урок снов",
+
+  "Lesson of Life": "Урок жизни",
+
+  "Lesson of Vengeance": "Урок мести",
+
+  "Lesson of Elements": "Урок стихий",
+
+  "Lesson of Protection": "Урок защиты",
+
+  "Lesson of Shadow": "Урок теней",
+
+  "Hex": "Порча",
+
+  "Cackle": "Хихиканье",
+
+  "Evil Eye": "Злой глаз",
+
+  "Life Boost": "Усиление жизни",
+
+  "Blood Ward": "Кровавый оберег",
+
+  "Phase Familiar": "Фазовый фамильяр",
+
+  "Wilding Word": "Слово дикости",
+
+  "Malicious Shadow": "Злобная тень",
+
+  "Living Vessel": "Живой сосуд",
+
+  "Patron's Puppet": "Кукла покровителя",
+
+  "Unraveling Blast": "Разрушающий взрыв",
+
+  "Spirit Familiar": "Духовный фамильяр",
+
+
+  "Force Bolt": "Силовой заряд",
+
+  "Hand of the Apprentice": "Рука ученика",
+
+  "Elemental Tempest": "Стихийная буря",
+
+  "Dimensional Anchor": "Измерительный якорь",
+
+  "Universal Versatility": "Всеобщая универсальность",
+
+
+  "Psi Burst": "Пси-всплеск",
+
+  "Amp": "Усиление",
+
+  "Amped Guidance": "Усиленное руководство",
+
+  "Amped Message": "Усиленное сообщение",
+
+  "Amped Shield": "Усиленный щит",
+
+  "Amped Ignition": "Усиленное воспламенение",
+
+  "Conscious Mind": "Сознательный разум",
+
+  "Unleash Psyche": "Высвободить психику",
+
+  "Violent Unleash": "Жестокое высвобождение",
+
+
+  "Evolution Surge": "Всплеск эволюции",
+
+  "Boost Eidolon": "Усиление эйдолона",
+
+  "Reinforce Eidolon": "Укрепить эйдолона",
+
+  "Lifelink Surge": "Всплеск связи жизни",
+
+  "Tandem Movement": "Совместное движение",
+
+  "Eidolon's Wrath": "Гнев эйдолона",
+
+  "Transposition": "Перестановка",
+
+  "Angelic Halo": "Ангельский ореол",
+
+  "Dread Striker": "Ужасающий удар",
+
+
+  "Spellstrike": "Заклинательный удар",
+
+  "Force Fang": "Силовой клык",
+
+  "Arcane Cascade": "Чародейский каскад",
+
+  "Cascade Countermeasure": "Контрмера каскада",
+
+  "Dimensional Assault": "Измерительный штурм",
+
+  "Hasted Assault": "Ускоренный штурм",
+
+
+  "Lay on Hands": "Возложение рук",
+
+  "Touch of the Void": "Прикосновение пустоты",
+
+  "Harmful Font": "Вредоносный источник",
+
+  "Healing Font": "Источник исцеления",
+
+  "Protective Ward": "Защитный оберег",
+
+  "Raise Symbol": "Воздвигнуть символ",
+
+  "Dazzling Flash": "Ослепительная вспышка",
+
+  "Channeled Succor": "Направленная помощь",
+
+
+  "Goodberry": "Добрая ягода",
+
+  "Wild Shape": "Дикая форма",
+
+  "Animal Feature": "Особенность животного",
+
+  "Fire Ray": "Огненный луч",
+
+  "Tempest Surge": "Всплеск бури",
+
+  "Stone Shape": "Форма камня",
+
+  "Heal Animal": "Исцеление животного",
+
+  "Impaling Briars": "Пронзающие шипы",
+
+
+  "Elemental Blast": "Стихийный удар",
+
+  "Kinetic Aura": "Кинетическая аура",
+
+  "Channel Elements": "Направить стихии",
+
+  "Elemental Overlap": "Перекрытие стихий",
+
+  "Extract Element": "Извлечь стихию",
+
+  "Overflow": "Переполнение",
+
+  "Thermal Nimbus": "Тепловой нимб",
+
+  "Winter Sleet": "Зимний мокрый снег",
+
+  "Ravel of Thorns": "Клубок шипов",
+  "Animate Dead": "Оживление мёртвых",
+
+  "Create Undead": "Создать нежить",
+
+  "Create Water": "Создать воду",
+
+  "Create Food": "Создать пищу",
+
+  "Resurrect": "Воскрешение",
+
+  "Raise Dead": "Поднять мёртвого",
+
+  "Reincarnate": "Перерождение",
+
+  "Astral Projection": "Астральная проекция",
+
+  "Planar Binding": "Планарное связывание",
+
+  "Planar Ally": "Планарный союзник",
+
+  "Elemental Servitor": "Слуга стихии",
+
+  "Rune Trap": "Руническая ловушка",
+
+  "Awaken Animal": "Пробуждение животного",
+
+  "Awaken Object": "Пробуждение объекта",
+
+  "Consecrate": "Освящение",
+
+  "Desecrate": "Осквернение",
+
+  "Geas": "Задание",
+
+  "Legendary Gifts": "Легендарные дары",
+
+  "Commune": "Общение",
+
+  "Contact Other Plane": "Контакт с другим планом",
+
+  "Control Weather": "Управление погодой",
+
+  "Earthquake": "Землетрясение",
+
+  "Miraculous Possibility": "Чудесная возможность",
+
+  "Resilient Eidolon": "Стойкий эйдолон",
+
+  "Summon Animal": "Призыв животного",
+
+  "Summon Construct": "Призыв конструкта",
+
+  "Summon Dragon": "Призыв дракона",
+
+  "Summon Elemental": "Призыв элементаля",
+
+  "Summon Fey": "Призыв феи",
+
+  "Summon Fiend": "Призыв исчадия",
+
+  "Summon Giant": "Призыв великана",
+
+  "Summon Monitor": "Призыв наблюдателя",
+
+  "Summon Plant or Fungus": "Призыв растения или гриба",
+
+  "Summon Celestial": "Призыв небожителя",
+
+  "Summon Undead": "Призыв нежити",
+
+  "Summon Kaiju": "Призыв кайдзю",
+
+  "Summon Entity": "Призыв сущности",
+
+  "Bind Undead": "Связать нежить",
+
+  "Control Undead": "Контроль нежити",
+
+  "Create Greater Undead": "Создать высшую нежить",
+
+  "Final Sacrifice": "Последняя жертва",
+
+  "Ghostly Tragedy": "Призрачная трагедия",
+
+  "Vampiric Maiden": "Вампирская дева",
+
+  "Talking Corpse": "Говорящий труп",
+
+  "Spirit Blast": "Взрыв духа",
+
+  "Spiritual Guardian": "Духовный страж",
+
+  "Haunting Hymn": "Призрачный гимн",
+
+  "Phantom Orchestra": "Фантомный оркестр",
+
+  "Resurrection": "Воскрешение",
+
+  "Remove Affliction": "Удаление недуга",
+
+  "Remove Disease": "Удаление болезни",
+
+  "Remove Curse": "Снятие проклятия",
+
+  "Restoration": "Восстановление",
+
+  "Cleanse Affliction": "Очищение недуга",
+
+  "Soothe": "Успокоение",
+
+  "Vitality Lash": "Удар жизненной силы",
+
+  "Harm": "Вред",
+
+  "Heal": "Исцеление",
+
+  "Vampiric Exsanguination": "Вампирское истощение",
+
+  "Blood Vendetta": "Кровная месть",
+
+  "Darkness": "Тьма",
+
+  "Light": "Свет",
+
+  "Continual Flame": "Вечное пламя",
+
+  "Detect Alignment": "Обнаружение мировоззрения",
+
+  "Discern Location": "Определение местоположения",
+
+  "Dream Council": "Совет во сне",
+
+  "Ethereal Jaunt": "Эфирный переход",
+
+  "Plane Shift": "Переход между планами",
+
+  "Interplanar Teleport": "Межплановая телепортация",
+
+  "Gate": "Врата"
+
 }

@@ -1,84 +1,80 @@
-'use strict';
-
-console.log("[PathbuilderRU] Starting...");
-
-
-// Создаем единое пространство расширения
-window.PathbuilderRU = window.PathbuilderRU || {};
-
-
-// Кэш переведенных узлов
-window.PathbuilderRU.Cache =
-    window.PathbuilderRU.Cache || new Set();
-
-
-// Список неизвестных переводов
-window.PathbuilderRU.Missing =
-    window.PathbuilderRU.Missing || new Set();
-
-
-
 (async () => {
 
-    try {
-
-        await Dictionary.load();
-
-        console.log(
-            "[PathbuilderRU] Dictionary loaded"
-        );
+    console.log("[PathbuilderRU] Starting...");
 
 
-        Translator.translateNode(
-            document.body
-        );
+    // Загружаем словарь
+    await PathbuilderDictionary.load();
 
+
+    console.log(
+        "[PathbuilderRU] Dictionary loaded"
+    );
+
+
+    // Запускаем переводчик
+    if (window.PathbuilderTranslator) {
+
+        window.PathbuilderTranslator.init();
 
         console.log(
             "[PathbuilderRU] Initial translation complete"
         );
 
+    }
 
-    } catch (e) {
+    else {
 
         console.error(
-            "[PathbuilderRU] ERROR:",
-            e
+            "[PathbuilderRU] Translator not found"
         );
 
     }
 
-})();
 
 
+    // Повторный перевод после динамической загрузки UI
+    const observer =
+        new MutationObserver(
+            (mutations) => {
 
-// Отслеживаем динамические изменения Pathbuilder
-const observer = new MutationObserver(
-    mutations => {
-
-        for (const mutation of mutations) {
-
-            for (const node of mutation.addedNodes) {
-
-                if (!node)
-                    continue;
+                let changed = false;
 
 
-                Translator.translateNode(node);
+                for (const mutation of mutations) {
+
+                    if (
+                        mutation.addedNodes.length
+                    ) {
+
+                        changed = true;
+                        break;
+
+                    }
+
+                }
+
+
+                if (changed) {
+
+                    window.PathbuilderTranslator
+                        ?.translatePage();
+
+                }
 
             }
+        );
 
+
+
+    observer.observe(
+        document.body,
+        {
+            childList:true,
+            subtree:true
         }
-
-    }
-);
+    );
 
 
 
-observer.observe(
-    document.body,
-    {
-        childList: true,
-        subtree: true
-    }
-);
+})();
