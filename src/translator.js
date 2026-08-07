@@ -55,51 +55,43 @@ const Translator = {
     translateElement(element){
 
 
-        if(
-            !element ||
-            element.nodeType !== Node.TEXT_NODE
-        ){
-
-            return;
-
-        }
+        if (!element) return;
 
 
-
-        let oldText =
-            element.textContent.trim();
-
-
-
-        if(!oldText)
-            return;
+        const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT
+        );
 
 
-
-        let newText =
-            this.translateText(oldText);
+        const nodes = [];
 
 
+        while (walker.nextNode()) {
 
-        if(
-            newText !== oldText
-        ){
-
-            element.textContent =
-                element.textContent.replace(
-                    oldText,
-                    newText
-                );
-
-
-            console.log(
-                "[RU]",
-                oldText,
-                "→",
-                newText
-            );
+        nodes.push(walker.currentNode);
 
         }
+
+
+
+        for (const node of nodes) {
+
+
+        const text = node.nodeValue.trim();
+
+
+        if (!text) continue;
+
+
+        if (text.length < 2) continue;
+
+
+        if (
+            node.parentElement &&
+            node.parentElement.dataset.ruTranslated === "true"
+        ) {
+            continue;
 
 
     },
