@@ -1,28 +1,93 @@
-console.log("[PathbuilderRU] translator.js loaded");
+'use strict';
+
+
+console.log(
+    "[PathbuilderRU] translator.js loaded"
+);
+
 
 
 window.Translator = {
 
-    initialized: false,
 
 
-    init() {
+    initialized:false,
+
+
+    translatedNodes:new WeakSet(),
+
+
+    translatedTexts:new Map(),
+
+
+
+
+
+    init(){
+
 
         this.initialized = true;
+
 
         console.log(
             "[PathbuilderRU] Translator initialized"
         );
 
+
     },
 
 
 
-    translateText(text) {
 
-        if (!text) return text;
 
-        if (!window.Dictionary) return text;
+
+
+
+
+    translateText(text){
+
+
+
+        if(
+            !text
+        ){
+
+            return text;
+
+        }
+
+
+
+
+        if(
+            !window.Dictionary
+        ){
+
+            return text;
+
+        }
+
+
+
+
+
+        const cached =
+            this.translatedTexts.get(text);
+
+
+
+        if(
+            cached
+        ){
+
+            return cached;
+
+        }
+
+
+
+
+
 
 
         const result =
@@ -30,7 +95,14 @@ window.Translator = {
 
 
 
-        if (result !== text) {
+
+
+
+
+        if(
+            result !== text
+        ){
+
 
             console.log(
                 "[RU]",
@@ -39,91 +111,85 @@ window.Translator = {
                 result
             );
 
+
         }
+
+
+
+
+
+
+        this.translatedTexts.set(
+            text,
+            result
+        );
+
+
+
 
 
         return result;
 
+
+
     },
 
 
 
 
 
-    translateDescription(text, type) {
-
-        if (!text) return text;
-
-        if (!window.Dictionary) return text;
 
 
 
-        let dictionaryName =
-            type + "_descriptions";
+
+    translateElement(element){
 
 
 
-        if (
-            window.Dictionary.dictionaries &&
-            window.Dictionary.dictionaries[dictionaryName]
-        ) {
+        if(
+            !element
+        ){
 
-
-            const dict =
-                window.Dictionary.dictionaries[dictionaryName];
-
-
-
-            if (dict[text]) {
-
-
-                console.log(
-                    "[RU DESCRIPTION]",
-                    text
-                );
-
-
-                return dict[text];
-
-            }
+            return;
 
         }
 
 
-        return text;
-
-    },
 
 
 
-
-
-
-    translateElement(element) {
-
-
-        if (!element) return;
 
 
 
         // TEXT NODE
 
-        if (
+        if(
             element.nodeType === Node.TEXT_NODE
-        ) {
+        ){
 
 
-            const oldText =
+
+            const old =
                 element.nodeValue;
 
 
 
             const clean =
-                oldText.trim();
+                old.trim();
 
 
 
-            if (!clean) return;
+
+            if(
+                !clean
+            ){
+
+                return;
+
+            }
+
+
+
 
 
 
@@ -132,22 +198,32 @@ window.Translator = {
 
 
 
-            if (
+
+
+
+
+            if(
                 translated !== clean
-            ) {
+            ){
+
 
 
                 element.nodeValue =
-                    oldText.replace(
+                    old.replace(
                         clean,
                         translated
                     );
+
 
             }
 
 
 
+
+
+
             return;
+
 
         }
 
@@ -157,9 +233,11 @@ window.Translator = {
 
 
 
-        if (
+
+
+        if(
             element.nodeType !== Node.ELEMENT_NODE
-        ) {
+        ){
 
             return;
 
@@ -171,14 +249,18 @@ window.Translator = {
 
 
 
-        // CHILDREN
+        // children
 
         [
             ...element.childNodes
 
         ].forEach(child => {
 
+
+
             this.translateElement(child);
+
+
 
         });
 
@@ -190,7 +272,7 @@ window.Translator = {
 
 
 
-        // ATTRIBUTES
+        // attributes
 
 
         const attributes = [
@@ -210,10 +292,14 @@ window.Translator = {
 
             "data-description",
 
-            "data-text"
+            "data-text",
+
+            "data-name"
 
 
         ];
+
+
 
 
 
@@ -223,59 +309,53 @@ window.Translator = {
 
 
 
-            if (
-                element.hasAttribute(attr)
-            ) {
+            if(
+                !element.hasAttribute(attr)
+            ){
 
+                return;
 
-
-                const old =
-                    element.getAttribute(attr);
-
-
-
-                let translated =
-                    this.translateText(old);
-
-
-
-
-                translated =
-                    this.translateDescription(
-                        translated,
-                        "feat"
-                    );
+            }
 
 
 
 
 
-                if (
-                    old !== translated
-                ) {
+
+
+            const old =
+                element.getAttribute(attr);
 
 
 
-                    element.setAttribute(
-                        attr,
-                        translated
-                    );
+
+
+            const translated =
+                this.translateText(old);
 
 
 
-                    console.log(
-                        "[RU ATTR]",
-                        attr,
-                        old,
-                        "→",
-                        translated
-                    );
 
 
-                }
+
+            if(
+                translated !== old
+            ){
+
+
+
+                element.setAttribute(
+                    attr,
+                    translated
+                );
+
 
 
             }
+
+
+
+
 
 
         });
@@ -288,21 +368,29 @@ window.Translator = {
 
 
 
-        // INPUT / BUTTON VALUE
+        // input/button value
 
 
+        if(
 
-        if (
 
-            element.tagName === "INPUT" ||
+            element.tagName === "INPUT"
+
+
+            ||
 
             element.tagName === "BUTTON"
 
-        ) {
+
+        ){
 
 
 
-            if(element.value){
+
+
+            if(
+                element.value
+            ){
 
 
 
@@ -311,8 +399,10 @@ window.Translator = {
 
 
 
+
                 const translated =
                     this.translateText(old);
+
 
 
 
@@ -328,6 +418,7 @@ window.Translator = {
                 }
 
 
+
             }
 
 
@@ -336,67 +427,6 @@ window.Translator = {
 
 
 
-
-        // PATHBUILDER DESCRIPTION BLOCKS
-
-        this.translateFeatDescriptions(element);
-
-
-
-    },
-
-
-
-
-
-
-
-
-
-    translateFeatDescriptions(element){
-
-
-        if(!window.Dictionary) return;
-
-
-
-        const descriptions =
-            window.Dictionary.dictionaries.feat_descriptions;
-
-
-
-        if(!descriptions) return;
-
-
-
-
-
-        const text =
-            element.innerText;
-
-
-
-        if(!text) return;
-
-
-
-
-
-        if(descriptions[text]){
-
-
-            element.innerText =
-                descriptions[text];
-
-
-
-            console.log(
-                "[RU FEAT DESCRIPTION]",
-                text
-            );
-
-
-        }
 
 
     },
@@ -412,9 +442,25 @@ window.Translator = {
     translatePage(){
 
 
+
         console.log(
             "[PathbuilderRU] Translating page"
         );
+
+
+
+
+
+        if(
+            !document.body
+        ){
+
+            return;
+
+        }
+
+
+
 
 
 
@@ -423,7 +469,15 @@ window.Translator = {
         );
 
 
+
+
     }
 
 
+
+
+
+
 };
+
+

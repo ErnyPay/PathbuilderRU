@@ -1,101 +1,26 @@
-console.log("[PathbuilderRU] dictionary.js loaded");
+'use strict';
+
+
+console.log(
+    "[PathbuilderRU] dictionary.js loaded"
+);
+
 
 
 window.Dictionary = {
 
 
-    dictionaries: {},
+
+    dictionaries:{},
 
 
-    loaded: false,
-
-
-
-    async load(name) {
-
-
-        console.log(
-            "[Dictionary] Loading:",
-            name
-        );
-
-
-
-        try {
-
-
-            const response =
-                await fetch(
-                    chrome.runtime.getURL(
-                        "dictionaries/" + name + ".json"
-                    )
-                );
-
-
-
-            if (!response.ok) {
-
-
-                console.warn(
-                    "[Dictionary] Missing:",
-                    name
-                );
-
-
-                this.dictionaries[name] = {};
-
-                return;
-
-            }
-
-
-
-
-            const json =
-                await response.json();
-
-
-
-            this.dictionaries[name] =
-                json || {};
-
-
-
-            console.log(
-                "[Dictionary]",
-                name,
-                Object.keys(
-                    this.dictionaries[name]
-                ).length,
-                "entries"
-            );
-
-
-
-        } catch(error) {
-
-
-            console.error(
-                "[Dictionary] Failed:",
-                name,
-                error
-            );
-
-
-            this.dictionaries[name] = {};
-
-        }
-
-
-    },
+    loaded:false,
 
 
 
 
 
-
-
-    async init() {
+    async load(files){
 
 
         console.log(
@@ -104,63 +29,95 @@ window.Dictionary = {
 
 
 
-        const files = [
 
-
-
-            "ui",
-
-            "classes",
-
-            "ancestries",
-
-            "heritages",
-
-            "backgrounds",
-
-
-            "feats",
-
-            "feat_descriptions",
-
-
-            "spells",
-
-            "spell_descriptions",
-
-
-            "items",
-
-            "item_descriptions",
-
-
-            "traits",
-
-            "skills",
-
-            "actions",
-
-            "condition"
-
-
-
-        ];
-
-
-
-
-
-        for (
+        for(
             const file of files
-        ) {
+        ){
 
 
-            await this.load(file);
+            try{
+
+
+                console.log(
+                    "[Dictionary] Loading:",
+                    file
+                );
+
+
+
+                const url =
+                    chrome.runtime.getURL(
+                        "dictionaries/" + file + ".json"
+                    );
+
+
+
+                const response =
+                    await fetch(url);
+
+
+
+                if(
+                    !response.ok
+                ){
+
+                    console.warn(
+                        "[Dictionary] Missing:",
+                        file
+                    );
+
+                    continue;
+
+                }
+
+
+
+
+
+                const json =
+                    await response.json();
+
+
+
+
+                this.dictionaries[file] =
+                    json;
+
+
+
+                console.log(
+                    "[Dictionary]",
+                    file,
+                    Object.keys(json).length,
+                    "entries"
+                );
+
+
+
+
+            }
+            catch(e){
+
+
+                console.error(
+                    "[Dictionary] Failed:",
+                    file,
+                    e
+                );
+
+
+            }
 
 
         }
 
 
+
+
+
+
+
+        this.loaded = true;
 
 
 
@@ -171,14 +128,12 @@ window.Dictionary = {
 
         Object.values(
             this.dictionaries
-        ).forEach(dict => {
+        ).forEach(d=>{
 
-
-            total +=
-                Object.keys(dict).length;
-
+            total += Object.keys(d).length;
 
         });
+
 
 
 
@@ -190,12 +145,12 @@ window.Dictionary = {
 
 
 
-        this.loaded = true;
-
-
         console.log(
             "[PathbuilderRU] Dictionary ready"
         );
+
+
+
 
     },
 
@@ -206,38 +161,133 @@ window.Dictionary = {
 
 
 
-    translate(text) {
 
-
-        if (!text) return text;
-
-
-
-        let result =
-            text;
+    translate(text){
 
 
 
-        for (
+        if(
+            !text
+        ){
+
+            return text;
+
+        }
+
+
+
+
+
+
+
+        // специальные исправления PF2e
+
+
+        const overrides = {
+
+
+
+            "Exemplar":
+                "Избранник",
+
+
+
+            "Feat":
+                "Черта",
+
+
+
+            "Feats":
+                "Черты",
+
+
+
+            "Heritage":
+                "Наследие",
+
+
+
+            "Ancestry":
+                "Родословие",
+
+
+
+            "Background":
+                "Предыстория",
+
+
+
+            "Class":
+                "Класс",
+
+
+
+            "Level":
+                "Уровень",
+
+
+
+            "Skill":
+                "Навык",
+
+
+
+            "General":
+                "Общий",
+
+
+
+            "Ward Medic":
+                "Палатный медик",
+
+
+
+            "Battle Medicine":
+                "Боевая медицина",
+
+
+
+            "Quick Recognition":
+                "Быстрое распознавание"
+
+
+
+        };
+
+
+
+
+
+
+
+
+        if(
+            overrides[text]
+        ){
+
+            return overrides[text];
+
+        }
+
+
+
+
+
+
+
+        for(
             const dict of Object.values(
                 this.dictionaries
             )
-        ) {
+        ){
 
 
 
-            if (
-                dict[result]
-            ) {
+            if(
+                dict[text]
+            ){
 
-
-                result =
-                    dict[result];
-
-
-
-                break;
-
+                return dict[text];
 
             }
 
@@ -246,48 +296,16 @@ window.Dictionary = {
 
 
 
-        return result;
 
 
-    },
+        return text;
 
-
-
-
-
-
-
-    getDescription(
-        type,
-        name
-    ) {
-
-
-
-        const dict =
-            this.dictionaries[
-                type + "_descriptions"
-            ];
-
-
-
-        if (
-            !dict
-        ) return null;
-
-
-
-        return (
-            dict[name] || null
-        );
 
 
     }
 
 
 
+
+
 };
-
-
-
-Dictionary.init();

@@ -1,59 +1,193 @@
-console.log("[PathbuilderRU] Starting...");
+'use strict';
 
 
-(async()=>{
-
-
-try{
-
-
-    await Dictionary.load();
-
-
-    console.log(
-        "[PathbuilderRU] Dictionary loaded"
-    );
+console.log(
+    "[PathbuilderRU] Starting..."
+);
 
 
 
-    await Translator.init();
+(async function(){
 
 
-    console.log(
-        "[PathbuilderRU] Translator initialized"
-    );
+    const dictionaries = [
+
+        "ui",
+
+        "classes",
+
+        "ancestries",
+
+        "heritages",
+
+        "backgrounds",
+
+        "feats",
+
+        "feat_descriptions",
+
+        "spells",
+
+        "spell_descriptions",
+
+        "items",
+
+        "item_descriptions",
+
+        "traits",
+
+        "skills",
+
+        "actions",
+
+        "condition"
+
+    ];
 
 
 
-    Translator.translatePage();
 
 
-    console.log(
-        "[PathbuilderRU] Initial translation complete"
-    );
+    try {
 
 
 
-    if(window.Observer){
+        if (
+            !window.Dictionary
+        ) {
 
 
-        Observer.start();
+            console.error(
+                "[PathbuilderRU] Dictionary not found"
+            );
+
+
+            return;
+
+        }
+
+
+
+
+
+
+        await window.Dictionary.load(
+            dictionaries
+        );
+
+
+
+
+
+        console.log(
+            "[PathbuilderRU] Dictionary loaded"
+        );
+
+
+
+
+
+
+
+        if (
+            !window.Translator
+        ) {
+
+
+            console.error(
+                "[PathbuilderRU] Translator not found"
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+        window.Translator.init();
+
+
+
+
+
+        console.log(
+            "[PathbuilderRU] Translator initialized"
+        );
+
+
+
+
+
+
+
+        setTimeout(() => {
+
+
+
+            window.Translator.translatePage();
+
+
+
+            console.log(
+                "[PathbuilderRU] Initial translation complete"
+            );
+
+
+
+        },500);
+
+
+
+
+
+
+
+        if (
+            window.ObserverRU
+        ) {
+
+
+            window.ObserverRU.start();
+
+
+
+        } else {
+
+
+            console.warn(
+                "[PathbuilderRU] Observer missing"
+            );
+
+
+        }
+
+
+
+
+
+
+
+    } catch(e) {
+
+
+
+        console.error(
+            "[PathbuilderRU] Startup error",
+            e
+        );
+
 
 
     }
 
 
 
-}catch(error){
-
-
-    console.error(
-        "[PathbuilderRU]",
-        error
-    );
-
-
-}
 
 
 })();

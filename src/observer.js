@@ -1,122 +1,119 @@
+'use strict';
+
 console.log("[PathbuilderRU] observer.js loaded");
 
 
-const Observer = {
+window.ObserverRU = {
+
 
     observer: null,
+
     timer: null,
+
     translating: false,
 
 
     start() {
 
 
-        console.log("[PathbuilderRU] Starting MutationObserver");
+        console.log(
+            "[PathbuilderRU] Starting MutationObserver"
+        );
+
 
 
         if (this.observer) {
+
+            console.log(
+                "[PathbuilderRU] Observer already running"
+            );
+
             return;
+
         }
 
 
 
-        this.observer = new MutationObserver((mutations)=>{
+
+        this.observer = new MutationObserver(
+            mutations => {
 
 
-            if (this.translating) {
-                return;
-            }
+                if (this.translating) {
 
-
-            let changed = false;
-
-
-            for (const mutation of mutations) {
-
-
-                if (
-                    mutation.addedNodes &&
-                    mutation.addedNodes.length
-                ) {
-
-                    changed = true;
-                    break;
-
-                }
-
-            }
-
-
-
-            if (!changed) {
-                return;
-            }
-
-
-
-            clearTimeout(this.timer);
-
-
-
-            this.timer = setTimeout(async ()=>{
-
-
-                if (
-                    window.Translator &&
-                    typeof window.Translator.translatePage === "function"
-                ) {
-
-
-                    console.log(
-                        "[PathbuilderRU] Dynamic translation"
-                    );
-
-
-                    this.translating = true;
-
-
-                    try {
-
-
-                        await window.Translator.translatePage();
-
-
-                    }
-                    catch(e){
-
-                        console.error(
-                            "[PathbuilderRU] Translation error",
-                            e
-                        );
-
-                    }
-
-
-                    setTimeout(()=>{
-
-                        this.translating = false;
-
-                    },500);
-
+                    return;
 
                 }
 
 
-            },1000);
+
+                let hasChanges = false;
 
 
 
-        });
+                mutations.forEach(
+                    mutation => {
+
+
+                        if (
+                            mutation.addedNodes &&
+                            mutation.addedNodes.length
+                        ) {
+
+                            hasChanges = true;
+
+                        }
+
+
+                    }
+                );
+
+
+
+                if (!hasChanges) {
+
+                    return;
+
+                }
+
+
+
+                clearTimeout(this.timer);
+
+
+
+                this.timer = setTimeout(() => {
+
+
+                    this.translate();
+
+
+                }, 300);
+
+
+
+            }
+        );
+
+
+
 
 
 
         this.observer.observe(
+
             document.body,
+
             {
-                childList:true,
-                subtree:true
+
+                childList: true,
+
+                subtree: true
+
             }
+
         );
+
 
 
         console.log(
@@ -124,17 +121,104 @@ const Observer = {
         );
 
 
+    },
+
+
+
+
+
+
+
+    translate() {
+
+
+
+        if (
+            !window.Translator
+        ) {
+
+            return;
+
+        }
+
+
+
+        if (
+            !window.Dictionary ||
+            !window.Dictionary.ready
+        ) {
+
+            return;
+
+        }
+
+
+
+
+        if (
+            this.translating
+        ) {
+
+            return;
+
+        }
+
+
+
+
+        this.translating = true;
+
+
+
+        console.log(
+            "[PathbuilderRU] Dynamic translation"
+        );
+
+
+
+        try {
+
+
+            window.Translator.translatePage();
+
+
+
+        } catch(e) {
+
+
+            console.error(
+                "[PathbuilderRU] Translation error",
+                e
+            );
+
+
+        }
+
+
+
+        setTimeout(() => {
+
+
+            this.translating = false;
+
+
+        },500);
+
+
+
     }
+
+
+
+
 
 
 };
 
 
 
-window.Observer = Observer;
-
 
 console.log(
     "[PathbuilderRU] observer object:",
-    window.Observer
+    window.ObserverRU
 );
