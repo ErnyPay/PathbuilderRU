@@ -1,21 +1,21 @@
 'use strict';
 
-
-console.log(
-    "[PathbuilderRU] Starting..."
-);
+console.log("[PathbuilderRU] Starting...");
 
 
-// Используем существующие переменные,
-// если они уже созданы другими файлами
+// Создаем единое пространство расширения
+window.PathbuilderRU = window.PathbuilderRU || {};
 
-if (typeof Cache === "undefined") {
-    var Cache = new Set();
-}
 
-if (typeof Missing === "undefined") {
-    var Missing = new Set();
-}
+// Кэш переведенных узлов
+window.PathbuilderRU.Cache =
+    window.PathbuilderRU.Cache || new Set();
+
+
+// Список неизвестных переводов
+window.PathbuilderRU.Missing =
+    window.PathbuilderRU.Missing || new Set();
+
 
 
 (async () => {
@@ -39,8 +39,7 @@ if (typeof Missing === "undefined") {
         );
 
 
-    }
-    catch (e) {
+    } catch (e) {
 
         console.error(
             "[PathbuilderRU] ERROR:",
@@ -53,6 +52,7 @@ if (typeof Missing === "undefined") {
 
 
 
+// Отслеживаем динамические изменения Pathbuilder
 const observer = new MutationObserver(
     mutations => {
 
@@ -82,13 +82,3 @@ observer.observe(
         subtree: true
     }
 );
-
-
-
-window.PathbuilderRU = {
-
-    Cache: Cache,
-
-    Missing: Missing
-
-};

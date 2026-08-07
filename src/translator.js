@@ -1,6 +1,8 @@
 'use strict';
 
+
 const Translator = {
+
 
     translate(text) {
 
@@ -8,30 +10,57 @@ const Translator = {
 
     },
 
+
+
     translateTextNode(node) {
 
-        if (!node) return;
+        if (!node)
+            return;
 
-        if (Cache.has(node)) return;
+
+        if (PathbuilderRU.Cache.has(node))
+            return;
+
 
         const original = node.nodeValue;
 
-        if (!original) return;
+
+        if (!original)
+            return;
+
 
         const trimmed = original.trim();
 
-        Missing.add(trimmed);
 
-        if (trimmed.length === 0) return;
+        if (trimmed.length === 0)
+            return;
 
-        const translated = this.translate(trimmed);
 
-        if (!translated) return;
+        PathbuilderRU.Missing.add(trimmed);
 
-        // Сохраняем пробелы вокруг текста
-        node.nodeValue = original.replace(trimmed, translated);
 
-        Cache.add(node);
+
+        const translated =
+            this.translate(trimmed);
+
+
+
+        if (!translated)
+            return;
+
+
+
+        node.nodeValue =
+            original.replace(
+                trimmed,
+                translated
+            );
+
+
+
+        PathbuilderRU.Cache.add(node);
+
+
 
         console.log(
             "[RU]",
@@ -42,7 +71,10 @@ const Translator = {
 
     },
 
+
+
     translateAttributes(element) {
+
 
         const attrs = [
             "title",
@@ -50,20 +82,38 @@ const Translator = {
             "aria-label"
         ];
 
+
+
         for (const attr of attrs) {
+
 
             if (!element.hasAttribute(attr))
                 continue;
 
-            const value = element.getAttribute(attr);
 
-            Missing.add(value);
 
-            const translated = this.translate(value);
+            const value =
+                element.getAttribute(attr);
+
+
+
+            PathbuilderRU.Missing.add(value);
+
+
+
+            const translated =
+                this.translate(value);
+
+
 
             if (translated) {
 
-                element.setAttribute(attr, translated);
+
+                element.setAttribute(
+                    attr,
+                    translated
+                );
+
 
             }
 
@@ -71,29 +121,46 @@ const Translator = {
 
     },
 
+
+
     translateNode(node) {
 
-        if (!node) return;
+
+        if (!node)
+            return;
+
+
 
         if (node.nodeType === Node.TEXT_NODE) {
 
+
             this.translateTextNode(node);
+
 
             return;
 
         }
+
+
 
         if (node.nodeType !== Node.ELEMENT_NODE)
             return;
 
+
+
         this.translateAttributes(node);
+
+
 
         for (const child of node.childNodes) {
 
+
             this.translateNode(child);
+
 
         }
 
     }
+
 
 };
