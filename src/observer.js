@@ -6,40 +6,38 @@ const Observer = {
 
     start() {
 
-        if (this.observer)
-            return;
+        if (this.observer) {
+            this.observer.disconnect();
+        }
 
-        this.observer = new MutationObserver((mutations)=>{
+        this.observer = new MutationObserver((mutations) => {
 
             for (const mutation of mutations) {
 
-                if (mutation.type === "characterData") {
-
-                    Translator.translateTextNode(
-                        mutation.target
-                    );
-
+                for (const node of mutation.addedNodes) {
+                    Translator.translateNode(node);
                 }
 
-                for (const node of mutation.addedNodes) {
-
-                    Translator.translateNode(node);
-
+                if (mutation.type === "characterData") {
+                    Translator.translateTextNode(mutation.target);
                 }
 
             }
 
         });
 
-        this.observer.observe(document.body,{
-
-            subtree:true,
-            childList:true,
-            characterData:true
-
+        this.observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+            characterData: true
         });
 
         console.log("[Observer] Started");
+
+        // Повторный проход каждые 2 секунды
+        setInterval(() => {
+            Translator.translateNode(document.body);
+        }, 2000);
 
     }
 
