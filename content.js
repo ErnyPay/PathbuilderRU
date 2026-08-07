@@ -40,19 +40,19 @@ try{
 
 
 
-    if(
-        window.PathbuilderObserver
-    ){
+    if (
+    window.Observer &&
+    typeof window.Observer.start === "function"
+) {
 
-        window.PathbuilderObserver.start();
+    window.Observer.start();
 
-    }
-    else{
+}
+else {
 
-
-        console.error(
-            "[PathbuilderRU] Observer not found"
-        );
+    console.error(
+        "[PathbuilderRU] Observer not available"
+    );
 
 
     }
