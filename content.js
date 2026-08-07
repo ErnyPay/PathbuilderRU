@@ -2,74 +2,27 @@
 
 (async () => {
 
-    console.log('[PathbuilderRU] Starting...');
-
     const response = await fetch(
         chrome.runtime.getURL('dictionaries/ui.json')
     );
 
     const dictionary = await response.json();
 
-    function translateText(node) {
+    const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT
+    );
 
-        if (!node.nodeValue) return;
+    while (walker.nextNode()) {
 
-        const text = node.nodeValue.trim();
+        const text = walker.currentNode.nodeValue.trim();
 
-        if (dictionary[text]) {
+        if (text.length > 0) {
 
-            console.log("Перевод:", text, "->", dictionary[text]);
-
-            node.nodeValue = dictionary[text];
-
-        }
-
-    }
-
-    function translateElement(root) {
-
-        if (!root) return;
-
-        const walker = document.createTreeWalker(
-            root,
-            NodeFilter.SHOW_TEXT
-        );
-
-        while (walker.nextNode()) {
-
-            translateText(
-                walker.currentNode
-            );
+            console.log(text);
 
         }
 
     }
-
-    translateElement(document.body);
-
-    const observer = new MutationObserver((mutations)=>{
-
-        for(const mutation of mutations){
-
-            mutation.addedNodes.forEach(node=>{
-
-                if(node.nodeType===1){
-
-                    translateElement(node);
-
-                }
-
-            });
-
-        }
-
-    });
-
-    observer.observe(document.body,{
-        childList:true,
-        subtree:true
-    });
-
-    console.log("[PathbuilderRU] Translator ready");
 
 })();
